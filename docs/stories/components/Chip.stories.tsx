@@ -1,12 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Chip as ChipComponent } from "@moondesignsystem/react";
-import LinksBlock from "../shared/LinksBlock";
-import { useState } from "react";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import { Chip as ChipComponent } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
+import { createSignal } from 'solid-js';
+import LinksBlock from '../shared/LinksBlock';
 
-type Type = React.ComponentProps<typeof ChipComponent>;
+type Type = ComponentProps<typeof ChipComponent>;
 
 const meta: Meta<Type> = {
-  title: "Forms & selection controls/Chip",
+  title: 'Forms & selection controls/Chip',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -16,42 +17,42 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     size: {
-      description: "Defines Chip size",
-      options: ["sm", "md"],
-      control: "select",
+      description: 'Defines Chip size',
+      options: ['sm', 'md'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "md" },
+        defaultValue: { summary: 'md' },
       },
     },
     variant: {
-      description: "Defines Chip variant",
-      options: ["fill", "outline", "soft"],
-      control: "select",
+      description: 'Defines Chip variant',
+      options: ['fill', 'outline', 'soft'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "fill" },
+        defaultValue: { summary: 'fill' },
       },
     },
     isActive: {
-      description: "Defines if Chip is active",
-      control: "boolean",
+      description: 'Defines if Chip is active',
+      control: 'boolean',
       table: {
-        defaultValue: { summary: "false" },
+        defaultValue: { summary: 'false' },
       },
     },
   },
   render: ({ variant, size, isActive, ...props }) => {
-    const [localActive, setLocalActive] = useState(false);
-    const currentActive = isActive || localActive;
+    const [localActive, setLocalActive] = createSignal(false);
+    const currentActive = isActive || localActive();
     const chipProps = {
       ...props,
-      ...(variant !== "fill" && { variant }),
-      ...(size !== "md" && { size }),
+      ...(variant !== 'fill' && { variant }),
+      ...(size !== 'md' && { size }),
     };
     return (
       <ChipComponent
         {...chipProps}
         isActive={currentActive}
-        onClick={() => setLocalActive(!localActive)}
+        onClick={() => setLocalActive(!localActive())}
       >
         Chip
       </ChipComponent>
@@ -65,8 +66,8 @@ type Story = StoryObj<Type>;
 
 export const Chip: Story = {
   args: {
-    size: "md",
-    variant: "fill",
+    size: 'md',
+    variant: 'fill',
     isActive: false,
   },
 };

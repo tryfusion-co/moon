@@ -1,14 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import {
-  FormGroup,
-  Textarea as TextareaComponent,
-} from "@moondesignsystem/react";
-import LinksBlock from "../shared/LinksBlock";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import { FormGroup, Textarea as TextareaComponent } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
+import LinksBlock from '../shared/LinksBlock';
 
-type Type = React.ComponentProps<typeof TextareaComponent>;
+type Type = ComponentProps<typeof TextareaComponent>;
 
 const meta: Meta<Type> = {
-  title: "Forms & selection controls/Textarea",
+  title: 'Forms & selection controls/Textarea',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -18,41 +16,41 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     size: {
-      description: "Defines Textarea size",
-      options: ["sm", "md", "lg", "xl"],
-      control: "select",
+      description: 'Defines Textarea size',
+      options: ['sm', 'md', 'lg', 'xl'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "md" },
+        defaultValue: { summary: 'md' },
       },
     },
     variant: {
-      description: "Defines Textarea variant",
-      options: ["fill", "outline"],
-      control: "select",
+      description: 'Defines Textarea variant',
+      options: ['fill', 'outline'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "fill" },
+        defaultValue: { summary: 'fill' },
       },
     },
     error: {
-      description: "Defines if Textarea is in error state",
-      control: "boolean",
+      description: 'Defines if Textarea is in error state',
+      control: 'boolean',
       table: {
-        defaultValue: { summary: "false" },
+        defaultValue: { summary: 'false' },
       },
     },
     disabled: {
-      description: "Defines if Textarea is disabled",
-      control: "boolean",
+      description: 'Defines if Textarea is disabled',
+      control: 'boolean',
       table: {
-        defaultValue: { summary: "false" },
+        defaultValue: { summary: 'false' },
       },
     },
   },
   render: ({ size, variant, ...props }) => {
     const textareaProps = {
       ...props,
-      ...(size !== "md" && { size }),
-      ...(variant !== "fill" && { variant }),
+      ...(size !== 'md' && { size }),
+      ...(variant !== 'fill' && { variant }),
     };
     return <TextareaComponent {...textareaProps} />;
   },
@@ -64,24 +62,24 @@ type Story = StoryObj<Type>;
 
 export const Textarea: Story = {
   args: {
-    size: "md",
-    variant: "fill",
+    size: 'md',
+    variant: 'fill',
     error: false,
     disabled: false,
   },
 };
 
 export const TextareaWithLabelAndHint: Story = {
-  args: { size: "md", variant: "fill", error: false, disabled: false },
+  args: { size: 'md', variant: 'fill', error: false, disabled: false },
   render: ({ size, variant, ...props }) => {
     const textareaProps = {
       ...props,
-      ...(size !== "md" && { size }),
-      ...(variant !== "fill" && { variant }),
+      ...(size !== 'md' && { size }),
+      ...(variant !== 'fill' && { variant }),
     };
     return (
       <FormGroup>
-        <FormGroup.Label htmlFor="TextareaWithLabelAndHint">
+        <FormGroup.Label for="TextareaWithLabelAndHint">
           Label
         </FormGroup.Label>
         <TextareaComponent {...textareaProps} id="TextareaWithLabelAndHint" />

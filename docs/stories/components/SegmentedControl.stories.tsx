@@ -1,12 +1,13 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { SegmentedControl as SegmentedControlComponent } from "@moondesignsystem/react";
-import LinksBlock from "../shared/LinksBlock";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import { SegmentedControl as SegmentedControlComponent } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
+import { createSignal, For } from 'solid-js';
+import LinksBlock from '../shared/LinksBlock';
 
-type Type = React.ComponentProps<typeof SegmentedControlComponent>;
+type Type = ComponentProps<typeof SegmentedControlComponent>;
 
 const meta: Meta<Type> = {
-  title: "Forms & selection controls/Segmented Control",
+  title: 'Forms & selection controls/Segmented Control',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -16,32 +17,34 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     size: {
-      description: "Defines Segmented Control size",
-      options: ["sm", "md"],
-      control: "select",
+      description: 'Defines Segmented Control size',
+      options: ['sm', 'md'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "md" },
+        defaultValue: { summary: 'md' },
       },
     },
   },
   render: ({ size, activeIndex: controlledActiveIndex, ...props }) => {
-    const [localActiveIndex, setLocalActiveIndex] = useState(0);
+    const [localActiveIndex, setLocalActiveIndex] = createSignal(0);
     const segmentedControlProps = {
       ...props,
-      ...(size !== "md" && { size }),
+      ...(size !== 'md' && { size }),
       ...(controlledActiveIndex !== undefined && {
         activeIndex: controlledActiveIndex,
         setActiveIndex: setLocalActiveIndex,
       }),
     };
-    const items = new Array(3).fill("");
+    const items = new Array(3).fill('');
     return (
       <SegmentedControlComponent {...segmentedControlProps}>
-        {items.map((_, index) => (
-          <SegmentedControlComponent.Item key={index}>
-            Item {index + 1}
-          </SegmentedControlComponent.Item>
-        ))}
+        <For each={items}>
+          {(_, index) => (
+            <SegmentedControlComponent.Item>
+              Item {index() + 1}
+            </SegmentedControlComponent.Item>
+          )}
+        </For>
       </SegmentedControlComponent>
     );
   },
@@ -52,5 +55,5 @@ export default meta;
 type Story = StoryObj<Type>;
 
 export const SegmentedControl: Story = {
-  args: { size: "md" },
+  args: { size: 'md' },
 };

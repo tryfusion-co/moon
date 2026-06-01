@@ -1,13 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Carousel as CarouselComponent } from "@moondesignsystem/react";
-import LinksBlock from "../shared/LinksBlock";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import { Carousel as CarouselComponent } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
+import { For } from 'solid-js';
+import LinksBlock from '../shared/LinksBlock';
 
-type Type = React.ComponentProps<typeof CarouselComponent> & {
+type Type = ComponentProps<typeof CarouselComponent> & {
   hasControls?: boolean;
 };
 
 const meta: Meta<Type> = {
-  title: "Content display/Carousel",
+  title: 'Content display/Carousel',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -17,10 +19,10 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     hasControls: {
-      description: "Has controls or not",
-      control: { type: "boolean" },
+      description: 'Has controls or not',
+      control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: "false" },
+        defaultValue: { summary: 'false' },
       },
     },
   },
@@ -28,16 +30,18 @@ const meta: Meta<Type> = {
     const carouselProps = {
       ...props,
     };
-    const items = new Array(5).fill("");
+    const items = new Array(5).fill('');
     return (
       <CarouselComponent {...carouselProps} hasControls={hasControls}>
-        {items.map((_, index) => (
-          <CarouselComponent.Item key={index}>
-            <div className="flex items-center justify-center h-40 w-2xs bg-brand-subtle text-brand">
-              Item {index + 1}
-            </div>
-          </CarouselComponent.Item>
-        ))}
+        <For each={items}>
+          {(_, index) => (
+            <CarouselComponent.Item>
+              <div class="flex items-center justify-center h-40 w-2xs bg-brand-subtle text-brand">
+                Item {index() + 1}
+              </div>
+            </CarouselComponent.Item>
+          )}
+        </For>
       </CarouselComponent>
     );
   },

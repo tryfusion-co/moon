@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Checkbox as CheckboxComponent } from "@moondesignsystem/react";
-import LinksBlock from "../shared/LinksBlock";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import { Checkbox as CheckboxComponent } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
+import LinksBlock from '../shared/LinksBlock';
 
-type Type = React.ComponentProps<typeof CheckboxComponent>;
+type Type = ComponentProps<typeof CheckboxComponent>;
 
 const meta: Meta<Type> = {
-  title: "Forms & selection controls/Checkbox",
+  title: 'Forms & selection controls/Checkbox',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -15,14 +16,14 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     label: {
-      description: "Defines Checkbox label",
-      control: { type: "text" },
+      description: 'Defines Checkbox label',
+      control: { type: 'text' },
     },
     disabled: {
-      description: "Defines if Checkbox is disabled",
-      control: "boolean",
+      description: 'Defines if Checkbox is disabled',
+      control: 'boolean',
       table: {
-        defaultValue: { summary: "false" },
+        defaultValue: { summary: 'false' },
       },
     },
   },
@@ -42,6 +43,6 @@ type Story = StoryObj<Type>;
 export const Checkbox: Story = {
   args: {
     disabled: false,
-    label: "",
+    label: '',
   },
 };

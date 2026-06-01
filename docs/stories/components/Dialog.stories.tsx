@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Dialog as DialogComponent, Button } from "@moondesignsystem/react";
+import type { Meta, StoryObj } from "storybook-solidjs-vite";
+import { Dialog as DialogComponent, Button } from "@moondesignsystem/solid";
+import type { ComponentProps } from "solid-js";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof DialogComponent>;
+type Type = ComponentProps<typeof DialogComponent>;
 
 const meta: Meta<Type> = {
   component: () => <div>Coming soon</div>,
@@ -24,7 +25,7 @@ const meta: Meta<Type> = {
           <Button>Open Dialog</Button>
         </DialogComponent.Trigger>
         <DialogComponent.Content>
-          <div className="w-full flex items-center justify-center h-40 bg-brand-subtle text-brand">
+          <div class="w-full flex items-center justify-center h-40 bg-brand-subtle text-brand">
             Content
           </div>
         </DialogComponent.Content>
@@ -65,7 +66,7 @@ export const DialogWithHeaderAndClose: Story = {
             Dialog Title
             <DialogComponent.Close />
           </DialogComponent.Header>
-          <div className="w-full flex items-center justify-center h-40 bg-brand-subtle text-brand">
+          <div class="w-full flex items-center justify-center h-40 bg-brand-subtle text-brand">
             Content
           </div>
         </DialogComponent.Content>

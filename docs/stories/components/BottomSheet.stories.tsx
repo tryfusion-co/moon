@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import {
   BottomSheet as BottomSheetComponent,
   Button,
-} from "@moondesignsystem/react";
+} from "@moondesignsystem/solid";
+import type { ComponentProps } from "solid-js";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof BottomSheetComponent>;
+type Type = ComponentProps<typeof BottomSheetComponent>;
 
 const meta: Meta<Type> = {
   title: "Containers & layout/Bottom Sheet",
@@ -36,7 +37,7 @@ const meta: Meta<Type> = {
           <Button>Open BottomSheet</Button>
         </BottomSheetComponent.Trigger>
         <BottomSheetComponent.Content>
-          <div className="w-full flex items-center justify-center h-full bg-brand-subtle text-brand overflow-y-auto">
+          <div class="w-full flex items-center justify-center h-full bg-brand-subtle text-brand overflow-y-auto">
             Content
           </div>
         </BottomSheetComponent.Content>
@@ -78,7 +79,7 @@ export const BottomSheetWithHeaderAndClose: Story = {
             Bottom Sheet
             <BottomSheetComponent.Close />
           </BottomSheetComponent.Header>
-          <div className="w-full flex items-center justify-center h-full bg-brand-subtle text-brand overflow-y-auto">
+          <div class="w-full flex items-center justify-center h-full bg-brand-subtle text-brand overflow-y-auto">
             Content
           </div>
         </BottomSheetComponent.Content>

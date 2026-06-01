@@ -1,4 +1,21 @@
-# @moondesignsystem/react
+# @moondesignsystem/solid
+
+## 3.0.0
+
+### Major Changes
+
+- **BREAKING**: Migrated from React to SolidJS. The package has been renamed from `@moondesignsystem/react` to `@moondesignsystem/solid` and the version has been bumped to `3.0.0`.
+
+  **What changed:**
+
+  - **Package rename**: Replace `@moondesignsystem/react` with `@moondesignsystem/solid` in your `package.json`.
+  - **Peer dependency**: `react` and `react-dom` peer deps have been removed. The new peer dependency is `solid-js@^1.9.13`.
+  - **`class` replaces `className`**: All components now accept `class` instead of `className`, following SolidJS conventions. Update all JSX usages accordingly.
+  - **Public API preserved**: Component names, prop names, exported types, and Tailwind class output are identical to the React version. This is a true framework swap, not a redesign.
+  - **Drawer/BottomSheet/Dropdown triggers**: Trigger components now use a `display:contents` wrapper `<span>` to attach the open/close handler, instead of React's `cloneElement`. This introduces one additional layout-invisible DOM node per trigger. The visual and layout output is unchanged.
+  - **Chip uncontrolled toggle improved**: When `Chip` is used without a controlled `isActive` prop, clicking it now correctly toggles the active state. In the React version this was dead code (clicking never activated the chip when uncontrolled); this is an intentional behavior improvement in the Solid port.
+  - **`solid` export condition**: The package exports a `solid` condition (`dist/index.jsx`) containing raw JSX source for SolidStart/Vite consumers using `vite-plugin-solid`. Standard bundlers use the `import` condition (`dist/index.js`, pre-compiled) and require no extra configuration.
+  - **CLI bin renamed**: The CLI scaffolding binary is now `moon-solid` (was `moon-react`). Usage: `npx @moondesignsystem/solid --add button`.
 
 ## 2.5.21
 

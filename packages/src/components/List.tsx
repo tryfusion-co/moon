@@ -1,56 +1,47 @@
-import React from "react";
+import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes } from "../types";
 
 export type ListSizes = Extract<Sizes, "sm" | "md" | "lg">;
 
-type ListProps = React.ComponentProps<"ul"> & {
+type ListProps = JSX.HTMLAttributes<HTMLUListElement> & {
   size?: ListSizes;
-  children: React.ReactNode;
 };
 
-const Item = ({
-  children,
-  className,
-  ...props
-}: React.ComponentProps<"li"> & {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <li className={mergeClasses("moon-list-item", className)} {...props}>
-    {children}
-  </li>
-);
+const Item: Component<JSX.HTMLAttributes<HTMLLIElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "children"]);
+  return (
+    <li class={mergeClasses("moon-list-item", local.class)} {...rest}>
+      {local.children}
+    </li>
+  );
+};
 
-const Meta = ({
-  children,
-  className,
-  ...props
-}: React.ComponentProps<"div"> & {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <div className={mergeClasses("moon-list-item-meta", className)} {...props}>
-    {children}
-  </div>
-);
+const Meta: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "children"]);
+  return (
+    <div class={mergeClasses("moon-list-item-meta", local.class)} {...rest}>
+      {local.children}
+    </div>
+  );
+};
 
-const Root = ({ size = "md", children, className, ...props }: ListProps) => (
-  <ul
-    className={mergeClasses(
-      "moon-list",
-      size !== "md" && `moon-list-${size}`,
-      className
-    )}
-    {...props}
-  >
-    {children}
-  </ul>
-);
-
-Root.displayName = "List";
-Item.displayName = "List.Item";
-Meta.displayName = "List.Meta";
+const Root: Component<ListProps> = (props) => {
+  const merged = mergeProps({ size: "md" as ListSizes }, props);
+  const [local, rest] = splitProps(merged, ["class", "size", "children"]);
+  return (
+    <ul
+      class={mergeClasses(
+        "moon-list",
+        local.size !== "md" && `moon-list-${local.size}`,
+        local.class
+      )}
+      {...rest}
+    >
+      {local.children}
+    </ul>
+  );
+};
 
 const List = Object.assign(Root, { Item, Meta });
 

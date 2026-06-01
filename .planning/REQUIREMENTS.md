@@ -15,7 +15,7 @@ Requirements for the `@moondesignsystem/solid@3.0.0` release. Each maps to a roa
 - [x] **TOOL-04**: `tsconfig` uses `jsx: preserve` + `jsxImportSource: solid-js` (no more `react-jsx`)
 - [x] **TOOL-05**: Test runner is Vitest + `vite-plugin-solid` + `@solidjs/testing-library` + jsdom, with the `resolve.conditions` browser fix that prevents "Client-only API called on server" failures
 - [x] **TOOL-06**: ESLint uses `eslint-plugin-solid` flat config with `solid/no-destructure` enabled (blocks the #1 reactivity trap by tooling, not convention); React lint plugins removed
-- [ ] **TOOL-07**: Empty/barrel build succeeds end-to-end on the new toolchain before any component is ported (toolchain validated independently)
+- [x] **TOOL-07**: Empty/barrel build succeeds end-to-end on the new toolchain before any component is ported (toolchain validated independently)
 
 ### Foundation
 
@@ -92,7 +92,7 @@ Deferred. Tracked, not in current roadmap.
 | TOOL-04 | Phase 1: Toolchain + Foundation | Complete |
 | TOOL-05 | Phase 1: Toolchain + Foundation | Complete |
 | TOOL-06 | Phase 1: Toolchain + Foundation | Complete |
-| TOOL-07 | Phase 1: Toolchain + Foundation | Pending |
+| TOOL-07 | Phase 1: Toolchain + Foundation | Complete |
 | FND-01 | Phase 1: Toolchain + Foundation | Complete |
 | FND-02 | Phase 1: Toolchain + Foundation | Complete |
 | FND-03 | Phase 1: Toolchain + Foundation | Complete |

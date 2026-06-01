@@ -12,7 +12,7 @@ A bottom-up, in-place migration of the Moon design system from React 19 to Solid
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Toolchain + Foundation** - Swap build/test/lint pipeline to SolidJS and port framework-pure helpers, types, and icon assets
+- [x] **Phase 1: Toolchain + Foundation** - Swap build/test/lint pipeline to SolidJS and port framework-pure helpers, types, and icon assets (completed 2026-06-01)
 - [ ] **Phase 2: Stateless Atoms** - Port all 12 stateless atom components using the canonical mergeProps+splitProps pattern
 - [ ] **Phase 3: Stateful Atoms + Carousel** - Port form atoms (createSignal) and the Carousel lifecycle-complexity outlier
 - [ ] **Phase 4: Compound, Portal + Composite** - Port all compound/portal components (createContext, signal-wrapped refs, Portal) and composite components; resolve Drawer.Trigger cloneElement design decision
@@ -35,7 +35,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 - [x] 01-01-PLAN.md — Toolchain swap: deps, tsconfigs, vite/vitest/eslint configs, package rename + solid export condition, stub entry (TOOL-01..06)
 - [x] 01-02-PLAN.md — Foundation: port 5 icons to Solid, verify helpers/types React-free, verify barrel generator (FND-01..04)
-- [ ] 01-03-PLAN.md — TOOL-07 validation gate: prove build+test+lint green on stub, confirm solid/no-destructure fires (TOOL-07)
+- [x] 01-03-PLAN.md — TOOL-07 validation gate: prove build+test+lint green on stub, confirm solid/no-destructure fires (TOOL-07)
 
 ### Phase 2: Stateless Atoms
 **Goal**: All 12 stateless atom components are ported to SolidJS and passing tests, establishing the canonical mergeProps+splitProps pattern that every later phase will replicate mechanically
@@ -108,7 +108,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Toolchain + Foundation | 0/3 | Planned | - |
+| 1. Toolchain + Foundation | 3/3 | Complete   | 2026-06-01 |
 | 2. Stateless Atoms | 0/TBD | Not started | - |
 | 3. Stateful Atoms + Carousel | 0/TBD | Not started | - |
 | 4. Compound, Portal + Composite | 0/TBD | Not started | - |

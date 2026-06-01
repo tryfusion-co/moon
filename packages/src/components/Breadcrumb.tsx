@@ -1,39 +1,40 @@
-import React from "react";
+import { splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 
 type BreadcrumbProps = {
-  children: React.ReactNode;
-  className?: string;
+  children?: JSX.Element;
+  class?: string;
 };
 
-type BreadcrumpItemProps = React.ComponentProps<"li"> & {
+type BreadcrumbItemProps = JSX.LiHTMLAttributes<HTMLLIElement> & {
   isActive?: boolean;
 };
 
-const Item = ({ className, isActive, ...props }: BreadcrumpItemProps) => {
+const Item: Component<BreadcrumbItemProps> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "isActive"]);
   return (
     <li
-      className={mergeClasses(
+      class={mergeClasses(
         "moon-breadcrumb-item",
-        isActive && "moon-breadcrumb-item-active",
-        className
+        local.isActive && "moon-breadcrumb-item-active",
+        local.class
       )}
-      {...props}
+      {...rest}
     />
   );
 };
 
-const Root = ({ children, className }: BreadcrumbProps) => (
-  <nav>
-    <ol className={mergeClasses("moon-breadcrumb", className)}>{children}</ol>
-  </nav>
-);
+const Root: Component<BreadcrumbProps> = (props) => {
+  const [local] = splitProps(props, ["children", "class"]);
+  return (
+    <nav>
+      <ol class={mergeClasses("moon-breadcrumb", local.class)}>
+        {local.children}
+      </ol>
+    </nav>
+  );
+};
 
-Root.displayName = "Breadcrumb";
-Item.displayName = "Breadcrumb.Item";
-
-const Breadcrumb = Object.assign(Root, {
-  Item,
-});
+const Breadcrumb = Object.assign(Root, { Item });
 
 export default Breadcrumb;

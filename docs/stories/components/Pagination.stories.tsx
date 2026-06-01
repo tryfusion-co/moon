@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Pagination as PaginationComponent } from "@moondesignsystem/react";
-import LinksBlock from "../shared/LinksBlock";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import { Pagination as PaginationComponent } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
+import LinksBlock from '../shared/LinksBlock';
 
-type Type = React.ComponentProps<typeof PaginationComponent>;
+type Type = ComponentProps<typeof PaginationComponent>;
 
 const meta: Meta<Type> = {
-  title: "Navigation/Pagination",
+  title: 'Navigation/Pagination',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -15,10 +16,10 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     hasControls: {
-      description: "Has controls or not",
-      control: { type: "boolean" },
+      description: 'Has controls or not',
+      control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: "false" },
+        defaultValue: { summary: 'false' },
       },
     },
   },
@@ -30,7 +31,7 @@ const meta: Meta<Type> = {
       <PaginationComponent
         {...paginationProps}
         length={5}
-      ></PaginationComponent>
+      />
     );
   },
 };

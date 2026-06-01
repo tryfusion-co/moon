@@ -84,17 +84,38 @@ Deferred. Tracked, not in current roadmap.
 
 ## Traceability
 
-Populated during roadmap creation.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (to be filled by roadmapper) | — | Pending |
+| TOOL-01 | Phase 1: Toolchain + Foundation | Pending |
+| TOOL-02 | Phase 1: Toolchain + Foundation | Pending |
+| TOOL-03 | Phase 1: Toolchain + Foundation | Pending |
+| TOOL-04 | Phase 1: Toolchain + Foundation | Pending |
+| TOOL-05 | Phase 1: Toolchain + Foundation | Pending |
+| TOOL-06 | Phase 1: Toolchain + Foundation | Pending |
+| TOOL-07 | Phase 1: Toolchain + Foundation | Pending |
+| FND-01 | Phase 1: Toolchain + Foundation | Pending |
+| FND-02 | Phase 1: Toolchain + Foundation | Pending |
+| FND-03 | Phase 1: Toolchain + Foundation | Pending |
+| FND-04 | Phase 1: Toolchain + Foundation | Pending |
+| ATOM-01 | Phase 2: Stateless Atoms | Pending |
+| FORM-01 | Phase 3: Stateful Atoms + Carousel | Pending |
+| FORM-02 | Phase 3: Stateful Atoms + Carousel | Pending |
+| CMPD-01 | Phase 4: Compound, Portal + Composite | Pending |
+| CMPD-02 | Phase 4: Compound, Portal + Composite | Pending |
+| COMP-01 | Phase 4: Compound, Portal + Composite | Pending |
+| TEST-01 | Phase 5: Tests | Pending |
+| TEST-02 | Phase 5: Tests | Pending |
+| STORY-01 | Phase 6: Storybook | Pending |
+| STORY-02 | Phase 6: Storybook | Pending |
+| CLI-01 | Phase 7: CLI + Release | Pending |
+| REL-01 | Phase 7: CLI + Release | Pending |
+| REL-02 | Phase 7: CLI + Release | Pending |
 
 **Coverage:**
 - v1 requirements: 24 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 24 ⚠️
+- Mapped to phases: 24
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-06-01*
-*Last updated: 2026-06-01 after initial definition*
+*Last updated: 2026-06-01 after roadmap creation*

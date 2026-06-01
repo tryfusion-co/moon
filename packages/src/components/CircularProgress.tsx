@@ -1,3 +1,4 @@
+import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes } from "../types";
 
@@ -6,29 +7,26 @@ export type CircularProgressSizes = Extract<
   "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
 >;
 
-type CircularProgressType = React.ComponentProps<"div"> & {
+type CircularProgressProps = JSX.HTMLAttributes<HTMLDivElement> & {
   size?: CircularProgressSizes;
-  className?: string;
+  class?: string;
   value?: number;
 };
 
-const CircularProgress = ({
-  size = "md",
-  className,
-  value = 0,
-  ...props
-}: CircularProgressType) => (
-  <div
-    className={mergeClasses(
-      "moon-circular-progress",
-      size !== "md" && `moon-circular-progress-${size}`,
-      className
-    )}
-    data-value={value}
-    {...props}
-  />
-);
-
-CircularProgress.displayName = "CircularProgress";
+const CircularProgress: Component<CircularProgressProps> = (props) => {
+  const merged = mergeProps({ size: "md", value: 0 } as const, props);
+  const [local, rest] = splitProps(merged, ["size", "class", "value"]);
+  return (
+    <div
+      class={mergeClasses(
+        "moon-circular-progress",
+        local.size !== "md" && `moon-circular-progress-${local.size}`,
+        local.class
+      )}
+      data-value={local.value}
+      {...rest}
+    />
+  );
+};
 
 export default CircularProgress;

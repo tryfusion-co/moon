@@ -12,7 +12,7 @@ type LinearProgressProps = {
 };
 
 const LinearProgress: Component<LinearProgressProps> = (props) => {
-  const merged = mergeProps({ value: 0, size: "2xs" } as const, props);
+  const merged = mergeProps({ size: "2xs" } as const, props);
   const [local] = splitProps(merged, ["class", "value", "size", "label"]);
   return (
     <Show

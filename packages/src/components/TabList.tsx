@@ -1,91 +1,106 @@
-import React, { useState } from "react";
+import {
+  createContext,
+  useContext,
+  createSignal,
+  mergeProps,
+  splitProps,
+  type Component,
+  type JSX,
+} from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes } from "../types";
 
 export type TabListSizes = Extract<Sizes, "sm" | "md">;
 
+type TabListContextType = {
+  activeIndex: () => number;
+  handleTabChange: (i: number) => void;
+  register: () => number;
+};
+
+const TabListContext = createContext<TabListContextType>();
+
+function useTabListContext() {
+  const c = useContext(TabListContext);
+  if (!c)
+    throw new Error(
+      "TabList components must be used within <TabList> wrapper"
+    );
+  return c;
+}
+
 type TabListProps = {
-  children: React.ReactNode;
+  children?: JSX.Element;
   size?: TabListSizes;
   defaultActiveIndex?: number;
-  className?: string;
+  class?: string;
   onTabChange?: (index: number) => void;
 };
 
-type TabProps = React.ComponentProps<"button"> & {
-  children: React.ReactNode;
-  className?: string;
-  isActive?: boolean;
-  tabIndex: number;
-  onTabChange: (index: number) => void;
+type TabProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
+  children?: JSX.Element;
+  class?: string;
+  index?: number;
 };
 
-const Item = ({
-  children,
-  className,
-  isActive,
-  tabIndex,
-  onTabChange,
-  ...props
-}: TabProps) => (
-  <li>
-    <button
-      role="tab"
-      aria-selected={isActive}
-      className={mergeClasses(
-        "moon-tab-list-item",
-        isActive && "moon-tab-list-item-active",
-        className
-      )}
-      onClick={() => onTabChange(tabIndex)}
-      tabIndex={isActive ? 0 : -1}
-      {...props}
-    >
-      {children}
-    </button>
-  </li>
-);
-
-const Root = ({
-  children,
-  size = "md",
-  defaultActiveIndex = 0,
-  className,
-  onTabChange,
-}: TabListProps) => {
-  const [activeIndex, setActiveIndex] = useState(defaultActiveIndex);
-  const handleTabChange = (index: number) => {
-    setActiveIndex(index);
-    onTabChange?.(index);
-  };
-  const items = React.Children.toArray(children);
+const Item: Component<TabProps> = (props) => {
+  const ctx = useTabListContext();
+  const [local, rest] = splitProps(props, ["children", "class", "index"]);
+  const index = local.index !== undefined ? local.index : ctx.register();
+  const isActive = () => ctx.activeIndex() === index;
   return (
-    <ul
-      role="tablist"
-      className={mergeClasses(
-        "moon-tab-list",
-        size !== "md" && `moon-tab-list-${size}`,
-        className
-      )}
-    >
-      {items.map((child, index) => {
-        if (React.isValidElement(child) && child.type === Item) {
-          return React.cloneElement(child, {
-            ...(child.props as any),
-            key: index,
-            isActive: activeIndex === index,
-            tabIndex: index,
-            onTabChange: handleTabChange,
-          } as any);
-        }
-        return child;
-      })}
-    </ul>
+    <li>
+      <button
+        role="tab"
+        aria-selected={isActive()}
+        class={mergeClasses(
+          "moon-tab-list-item",
+          isActive() && "moon-tab-list-item-active",
+          local.class
+        )}
+        onClick={() => ctx.handleTabChange(index)}
+        tabIndex={isActive() ? 0 : -1}
+        {...rest}
+      >
+        {local.children}
+      </button>
+    </li>
   );
 };
 
-Root.displayName = "TabList";
-Item.displayName = "TabList.Item";
+const Root: Component<TabListProps> = (props) => {
+  const merged = mergeProps({ size: "md" as TabListSizes, defaultActiveIndex: 0 }, props);
+  const [local] = splitProps(merged, [
+    "children",
+    "size",
+    "defaultActiveIndex",
+    "class",
+    "onTabChange",
+  ]);
+  const [internal, setInternal] = createSignal(local.defaultActiveIndex);
+  const handleTabChange = (i: number) => {
+    setInternal(i);
+    local.onTabChange?.(i);
+  };
+  // NOTE: register() assumes static children only (counter is never reset).
+  // For dynamic children use explicit `index` props on each Item.
+  let counter = 0;
+  const register = () => counter++;
+  return (
+    <TabListContext.Provider value={{ activeIndex: internal, handleTabChange, register }}>
+      <ul
+        role="tablist"
+        class={mergeClasses(
+          "moon-tab-list",
+          local.size !== "md" && `moon-tab-list-${local.size}`,
+          local.class
+        )}
+      >
+        {local.children}
+      </ul>
+    </TabListContext.Provider>
+  );
+};
 
 const TabList = Object.assign(Root, { Item });
 

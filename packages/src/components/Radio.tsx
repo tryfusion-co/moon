@@ -7,7 +7,7 @@ import {
 } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 
-type RadioGroupCtx = { name: string };
+type RadioGroupCtx = { name: () => string };
 const RadioGroupContext = createContext<RadioGroupCtx>();
 
 type RadioProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type"> & {
@@ -24,7 +24,7 @@ type RadioGroupProps = {
 const Root: Component<RadioProps> = (props) => {
   const [local, rest] = splitProps(props, ["class", "label", "name"]);
   const group = useContext(RadioGroupContext);
-  const name = () => group?.name ?? (local.name as string | undefined);
+  const name = () => group?.name() ?? (local.name as string | undefined);
   if (local.label) {
     return (
       <label class={local.class}>
@@ -51,7 +51,7 @@ const Root: Component<RadioProps> = (props) => {
 const Group: Component<RadioGroupProps> = (props) => {
   const [local] = splitProps(props, ["children", "class", "name"]);
   return (
-    <RadioGroupContext.Provider value={{ name: local.name }}>
+    <RadioGroupContext.Provider value={{ name: () => local.name }}>
       <div
         role="radiogroup"
         class={mergeClasses("moon-radio-group", local.class)}

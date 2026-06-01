@@ -30,6 +30,8 @@ const Chip: Component<ChipProps> = (props) => {
     }
     if (typeof local.onClick === "function") {
       local.onClick(e);
+    } else if (Array.isArray(local.onClick)) {
+      local.onClick[0](local.onClick[1], e);
     }
   };
   return (
@@ -38,7 +40,8 @@ const Chip: Component<ChipProps> = (props) => {
         "moon-chip",
         local.size !== "md" && `moon-chip-${local.size}`,
         local.variant !== "fill" && `moon-chip-${local.variant}`,
-        currentActive() && "moon-chip-active"
+        currentActive() && "moon-chip-active",
+        local.class
       )}
       onClick={handleClick}
       {...rest}

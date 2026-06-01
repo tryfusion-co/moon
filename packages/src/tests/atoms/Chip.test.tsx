@@ -46,4 +46,22 @@ describe("Chip", () => {
     fireEvent.click(btn);
     expect(spy).toHaveBeenCalledTimes(1);
   });
+
+  it("appends caller class prop as last segment", () => {
+    const { container } = render(() => <Chip class="extra">x</Chip>);
+    const btn = container.querySelector("button")!;
+    expect(btn.className).toBe("moon-chip extra");
+  });
+
+  it("calls tuple-form onClick handler with bound data and event", () => {
+    const handler = vi.fn();
+    const data = { id: 1 };
+    const { container } = render(() => (
+      <Chip onClick={[handler, data]}>x</Chip>
+    ));
+    const btn = container.querySelector("button")!;
+    fireEvent.click(btn);
+    expect(handler).toHaveBeenCalledTimes(1);
+    expect(handler.mock.calls[0][0]).toBe(data);
+  });
 });

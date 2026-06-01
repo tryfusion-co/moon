@@ -23,7 +23,19 @@ export default [
       "cli/**",
       "bin/**",
       // Unported React components — linted per-phase during Phases 2-4
-      "src/components/**",
+      "src/components/**/*",
+      "!src/components/Button.tsx",
+      "!src/components/IconButton.tsx",
+      "!src/components/Badge.tsx",
+      "!src/components/Tag.tsx",
+      "!src/components/Chip.tsx",
+      "!src/components/Avatar.tsx",
+      "!src/components/Loader.tsx",
+      "!src/components/CircularProgress.tsx",
+      "!src/components/LinearProgress.tsx",
+      "!src/components/Placeholder.tsx",
+      "!src/components/Alert.tsx",
+      "!src/components/Breadcrumb.tsx",
       // CJS scripts use Node globals (__dirname, console, process)
       "scripts/**",
       // Legacy React test files — migrated to @solidjs/testing-library in Phase 07

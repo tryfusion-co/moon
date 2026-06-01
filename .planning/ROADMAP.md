@@ -89,10 +89,16 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Depends on**: Phase 4
 **Requirements**: TEST-01, TEST-02
 **Success Criteria** (what must be TRUE):
-  1. `vitest run` reports 18 test files passing with zero failures and zero skips
+  1. `vitest run` reports the full consolidated suite (34 single-source component tests + toolchain) passing with zero failures and zero skips
   2. Every test uses the `render(() => <Component />)` function-wrapper form required by @solidjs/testing-library; no `jest.*` references remain — all replaced by `vi.*`
-  3. All test filenames are PascalCase (e.g., `Accordion.test.tsx`); no lowercase-initial test files exist in the test directory
-**Plans**: TBD
+  3. All test filenames are PascalCase (e.g., `Accordion.test.tsx`); no lowercase-initial test files exist; exactly ONE Solid test per component (no duplicate legacy+atom pairs)
+**Consolidation**: ONE authoritative Solid test per component in `src/tests/atoms/` — 19 legacy React tests migrated+merged into their atom counterparts (parity >= legacy), 15 atom-only tests verified, flat legacy files deleted, accordion->Accordion normalized.
+**Plans**: 5 plans
+- [ ] 05-01-PLAN.md — Merge Accordion/Alert/Badge/BottomSheet/Breadcrumb (legacy) + verify Authenticator/Avatar/Carousel/Checkbox [Wave 1]
+- [ ] 05-02-PLAN.md — Merge Button/CircularProgress/Dialog/Drawer/Dropdown (legacy, portals) + verify Chip/FormGroup/Input/LinearProgress [Wave 1]
+- [ ] 05-03-PLAN.md — Merge IconButton/List/Menu/Pagination/Snackbar (legacy) + verify Loader/Placeholder/Radio/SegmentedControl [Wave 1]
+- [ ] 05-04-PLAN.md — Merge Table/TabList/Tag/Tooltip (legacy) + verify Select(onChange parity)/Switch/Textarea [Wave 1]
+- [ ] 05-05-PLAN.md — Remove legacy ignores (vitest+eslint), full green gate (vitest+eslint+build), human-verify [Wave 2]
 
 ### Phase 6: Storybook
 **Goal**: All 37 Storybook stories are ported to storybook-solidjs-vite with Storybook 10; a single Button story spike validates the renderer and addons before bulk porting, and `build-storybook` completes successfully
@@ -127,6 +133,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 2. Stateless Atoms | 5/5 | Complete   | 2026-06-01 |
 | 3. Stateful Atoms + Carousel | 5/5 | Complete   | 2026-06-01 |
 | 4. Compound, Portal + Composite | 5/5 | Complete   | 2026-06-01 |
-| 5. Tests | 0/TBD | Not started | - |
+| 5. Tests | 0/5 | Not started | - |
 | 6. Storybook | 0/TBD | Not started | - |
 | 7. CLI + Release | 0/TBD | Not started | - |

@@ -4,6 +4,7 @@ import {
   createSignal,
   mergeProps,
   splitProps,
+  untrack,
   type Component,
   type JSX,
 } from "solid-js";
@@ -47,7 +48,7 @@ type SegmentProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 const Item: Component<SegmentProps> = (props) => {
   const ctx = useSegmentedControlContext();
   const [local, rest] = splitProps(props, ["children", "class", "index"]);
-  const index = local.index !== undefined ? local.index : ctx.register();
+  const index = untrack(() => local.index !== undefined ? local.index : ctx.register());
   const isActive = () => ctx.activeIndex() === index;
   return (
     <button
@@ -92,7 +93,7 @@ const Root: Component<SegmentedControlProps> = (props) => {
   const register = () => counter++;
   return (
     <SegmentedControlContext.Provider
-      value={{ activeIndex, setActiveIndex, size: local.size, register }}
+      value={{ activeIndex, setActiveIndex, size: untrack(() => local.size), register }}
     >
       <div
         role="tablist"

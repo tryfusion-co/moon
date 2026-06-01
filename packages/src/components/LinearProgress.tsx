@@ -26,7 +26,7 @@ const LinearProgress: Component<LinearProgressProps> = (props) => {
             local.size !== "2xs" && `moon-linear-progress-${local.size}`,
             local.class
           )}
-        ></progress>
+        />
       }
     >
       {(label) => (
@@ -38,7 +38,7 @@ const LinearProgress: Component<LinearProgressProps> = (props) => {
               "moon-linear-progress",
               local.size !== "2xs" && `moon-linear-progress-${local.size}`
             )}
-          ></progress>
+          />
           <span>{label()}</span>
         </label>
       )}

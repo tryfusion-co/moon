@@ -1,4 +1,4 @@
-import { createSignal, mergeProps, splitProps, Index, type Component } from "solid-js";
+import { createSignal, mergeProps, splitProps, untrack, Index, type Component } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Variants, Sizes } from "../types";
 
@@ -43,7 +43,7 @@ const Authenticator: Component<AuthenticatorProps> = (props) => {
     "class",
   ]);
 
-  const [internalValue, setInternalValue] = createSignal(local.value);
+  const [internalValue, setInternalValue] = createSignal(untrack(() => local.value));
   let inputs: HTMLInputElement[] = [];
 
   const handleChange = (index: number, char: string) => {

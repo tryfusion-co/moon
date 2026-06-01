@@ -70,7 +70,7 @@ const Content: Component<DrawerContentProps> = (props) => {
       <dialog class={mergeClasses("moon-drawer", local.class)} ref={setDrawerRef}>
         <div class="moon-drawer-box">{local.children}</div>
         <form method="dialog" class="moon-backdrop">
-          <button></button>
+          <button />
         </form>
       </dialog>
     </Portal>

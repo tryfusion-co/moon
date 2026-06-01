@@ -2,6 +2,7 @@ import {
   createContext,
   useContext,
   splitProps,
+  Show,
   type Component,
   type JSX,
 } from "solid-js";
@@ -25,26 +26,30 @@ const Root: Component<RadioProps> = (props) => {
   const [local, rest] = splitProps(props, ["class", "label", "name"]);
   const group = useContext(RadioGroupContext);
   const name = () => group?.name() ?? (local.name as string | undefined);
-  if (local.label) {
-    return (
-      <label class={local.class}>
+  return (
+    <Show
+      when={local.label}
+      fallback={
         <input
           type="radio"
-          class="moon-radio"
+          class={mergeClasses("moon-radio", local.class)}
           name={name()}
           {...rest}
         />
-        <span>{local.label}</span>
-      </label>
-    );
-  }
-  return (
-    <input
-      type="radio"
-      class={mergeClasses("moon-radio", local.class)}
-      name={name()}
-      {...rest}
-    />
+      }
+    >
+      {(label) => (
+        <label class={local.class}>
+          <input
+            type="radio"
+            class="moon-radio"
+            name={name()}
+            {...rest}
+          />
+          <span>{label()}</span>
+        </label>
+      )}
+    </Show>
   );
 };
 

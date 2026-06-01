@@ -1,4 +1,4 @@
-import { splitProps, type Component, type JSX } from "solid-js";
+import { Show, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 
 // Public prop name `onChange` is preserved for API parity with the React version.
@@ -15,27 +15,31 @@ type CheckboxProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type" | "o
 const Checkbox: Component<CheckboxProps> = (props) => {
   const [local, rest] = splitProps(props, ["class", "label", "onChange"]);
 
-  const handleInput: JSX.EventHandler<HTMLInputElement, InputEvent> = (e) => {
+  const handleInput: JSX.EventHandler<HTMLInputElement, Event> = (e) => {
     if (typeof local.onChange === "function") {
-      local.onChange(e as any);
+      local.onChange(e);
     }
   };
 
-  if (local.label) {
-    return (
-      <label class={local.class}>
-        <input type="checkbox" class="moon-checkbox" onInput={handleInput} {...rest} />
-        <span>{local.label}</span>
-      </label>
-    );
-  }
   return (
-    <input
-      type="checkbox"
-      class={mergeClasses("moon-checkbox", local.class)}
-      onInput={handleInput}
-      {...rest}
-    />
+    <Show
+      when={local.label}
+      fallback={
+        <input
+          type="checkbox"
+          class={mergeClasses("moon-checkbox", local.class)}
+          onInput={handleInput}
+          {...rest}
+        />
+      }
+    >
+      {(label) => (
+        <label class={local.class}>
+          <input type="checkbox" class="moon-checkbox" onInput={handleInput} {...rest} />
+          <span>{label()}</span>
+        </label>
+      )}
+    </Show>
   );
 };
 

@@ -44,7 +44,7 @@ const Content: Component<DialogProps> = (props) => {
       <dialog class={mergeClasses("moon-dialog")} ref={setDialogRef}>
         <div class="moon-dialog-box">{local.children}</div>
         <form method="dialog" class="moon-backdrop">
-          <button></button>
+          <button />
         </form>
       </dialog>
     </Portal>

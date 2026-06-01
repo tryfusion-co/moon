@@ -2,6 +2,7 @@ import {
   createSignal,
   mergeProps,
   splitProps,
+  untrack,
   Index,
   Show,
   type Component,
@@ -56,7 +57,7 @@ const Item: Component<PaginationItemProps> = (props) => {
 type ControlProps = JSX.HTMLAttributes<HTMLLIElement> & {
   direction: Directions;
   disabled?: boolean;
-  onClick?: JSX.EventHandlerUnion<HTMLLIElement, MouseEvent>;
+  onClick?: (_e: MouseEvent) => void;
 };
 
 const Control: Component<ControlProps> = (props) => {
@@ -78,7 +79,7 @@ const Control: Component<ControlProps> = (props) => {
         local.disabled && "moon-pagination-control-disabled",
         local.class
       )}
-      onClick={local.disabled ? undefined : local.onClick}
+      onClick={(e) => { if (!local.disabled) local.onClick?.(e); }}
       aria-label={local.direction === "previous" ? "Previous" : "Next"}
       {...(local.disabled ? { "aria-disabled": "true" } : {})}
       {...rest}
@@ -104,7 +105,7 @@ const Pagination: Component<PaginationProps> = (props) => {
     "onPageChange",
     "renderItem",
   ]);
-  const [currentPage, setCurrentPage] = createSignal(local.activePage);
+  const [currentPage, setCurrentPage] = createSignal(untrack(() => local.activePage));
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     local.onPageChange?.(page);

@@ -43,9 +43,9 @@ const Root: Component<SelectProps> = (props) => {
   const merged = mergeProps({ size: "md" as SelectSizes, variant: "fill" as SelectVariants, error: false }, props);
   const [local, rest] = splitProps(merged, ["children", "size", "variant", "error", "class", "onChange"]);
 
-  const handleInput: JSX.EventHandler<HTMLSelectElement, InputEvent> = (e) => {
+  const handleInput: JSX.EventHandler<HTMLSelectElement, Event> = (e) => {
     if (typeof local.onChange === "function") {
-      local.onChange(e as any);
+      local.onChange(e);
     }
   };
 

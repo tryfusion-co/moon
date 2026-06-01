@@ -17,7 +17,7 @@ type AlertRootProps = JSX.HTMLAttributes<HTMLDivElement> &
   };
 
 type ActionProps = AlertProps & {
-  onClick?: JSX.EventHandlerUnion<HTMLElement, MouseEvent>;
+  onClick?: (_e: MouseEvent) => void;
 };
 
 const Close: Component<ActionProps> = (props) => {
@@ -25,7 +25,7 @@ const Close: Component<ActionProps> = (props) => {
   return (
     <p
       class={mergeClasses("moon-alert-close", local.class)}
-      onClick={local.onClick}
+      onClick={(e) => local.onClick?.(e)}
     >
       {local.children ? local.children : <CloseIcon />}
     </p>
@@ -53,7 +53,7 @@ const Action: Component<ActionProps> = (props) => {
   return (
     <button
       class={mergeClasses("moon-alert-action", local.class)}
-      onClick={local.onClick}
+      onClick={(e) => local.onClick?.(e)}
     >
       {local.children}
     </button>

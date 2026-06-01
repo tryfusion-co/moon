@@ -74,12 +74,12 @@ const Content: Component<ComponentProps> = (props) => {
       >
         <div class="moon-bottom-sheet-box">
           <Show when={hasHandle()}>
-            <div class="moon-bottom-sheet-handle"></div>
+            <div class="moon-bottom-sheet-handle" />
           </Show>
           {local.children}
         </div>
         <form method="dialog" class="moon-backdrop">
-          <button></button>
+          <button />
         </form>
       </dialog>
     </Portal>

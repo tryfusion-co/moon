@@ -4,6 +4,7 @@ import {
   createSignal,
   mergeProps,
   splitProps,
+  untrack,
   type Component,
   type JSX,
 } from "solid-js";
@@ -46,7 +47,7 @@ type TabProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 const Item: Component<TabProps> = (props) => {
   const ctx = useTabListContext();
   const [local, rest] = splitProps(props, ["children", "class", "index"]);
-  const index = local.index !== undefined ? local.index : ctx.register();
+  const index = untrack(() => local.index !== undefined ? local.index : ctx.register());
   const isActive = () => ctx.activeIndex() === index;
   return (
     <li>

@@ -1,4 +1,4 @@
-import { render } from "@solidjs/testing-library";
+import { render, fireEvent } from "@solidjs/testing-library";
 import { describe, it, expect } from "vitest";
 import Accordion from "../../components/Accordion";
 
@@ -149,6 +149,54 @@ describe("Accordion", () => {
       ));
       const div = container.querySelector(".moon-accordion-item-meta");
       expect(div).not.toBeNull();
+    });
+  });
+
+  describe("toggle open-state via click (legacy coverage)", () => {
+    it("clicking the summary toggles details.open from false to true", () => {
+      const { container } = render(() => (
+        <Accordion>
+          <Accordion.Item>
+            <Accordion.Header>Toggle</Accordion.Header>
+            <Accordion.Content>Hidden content</Accordion.Content>
+          </Accordion.Item>
+        </Accordion>
+      ));
+      const summary = container.querySelector("summary")!;
+      const details = summary.closest("details") as HTMLDetailsElement;
+      expect(details.open).toBe(false);
+      fireEvent.click(summary);
+      expect(details.open).toBe(true);
+    });
+
+    it("clicking the summary twice closes the accordion", () => {
+      const { container } = render(() => (
+        <Accordion>
+          <Accordion.Item>
+            <Accordion.Header>Toggle</Accordion.Header>
+            <Accordion.Content>Hidden content</Accordion.Content>
+          </Accordion.Item>
+        </Accordion>
+      ));
+      const summary = container.querySelector("summary")!;
+      const details = summary.closest("details") as HTMLDetailsElement;
+      fireEvent.click(summary);
+      expect(details.open).toBe(true);
+      fireEvent.click(summary);
+      expect(details.open).toBe(false);
+    });
+
+    it("size=lg adds moon-accordion-lg modifier", () => {
+      const { container } = render(() => (
+        <Accordion size="lg">
+          <Accordion.Item>
+            <Accordion.Header>Size</Accordion.Header>
+            <Accordion.Content>Content</Accordion.Content>
+          </Accordion.Item>
+        </Accordion>
+      ));
+      const div = container.querySelector("div")!;
+      expect(div.className).toContain("moon-accordion-lg");
     });
   });
 });

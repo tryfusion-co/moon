@@ -10,15 +10,15 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "ES2022",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
     "declaration": true,
     "sourceMap": true,
-    "outDir": "dist",
-    "composite": true
+    "outDir": "dist"
   },
   "include": ["src", "cli"],
   "exclude": ["node_modules", "dist"]

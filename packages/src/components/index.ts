@@ -60,3 +60,4 @@ export type { TagSizes, TagVariants } from "./Tag";
 export { default as Textarea } from "./Textarea";
 export type { TextareaSizes, TextareaVariants } from "./Textarea";
 export { default as Tooltip } from "./Tooltip";
+export type { TooltipPositions } from "./Tooltip";

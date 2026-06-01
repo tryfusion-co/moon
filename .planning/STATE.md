@@ -4,14 +4,14 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 6 COMPLETE. All 6 plans done. Storybook fully migrated to storybook-solidjs-vite@10, all 33 component stories + gettingStarted.mdx Solid CSF, build-storybook EXIT 0 (Storybook 10.4.1, 267 modules transformed), Table on @tanstack/solid-table. STORY-01 + STORY-02 complete. Approved on green-build evidence (headless, no browser visual check). Phase 7 (CLI + Release) is next.
-last_updated: "2026-06-01T15:47:50.077Z"
-last_activity: 2026-06-01
+last_updated: "2026-06-01T16:03:03.504Z"
+last_activity: 2026-06-01 -- Phase 07 execution started
 progress:
   total_phases: 7
   completed_phases: 6
-  total_plans: 29
+  total_plans: 32
   completed_plans: 29
-  percent: 100
+  percent: 91
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-01)
 
 **Core value:** Every existing Moon component renders and behaves identically under SolidJS — same public API, same Tailwind class output, same DOM — so consuming apps get a true framework swap, not a redesign.
-**Current focus:** Phase 07 — CLI + Release
+**Current focus:** Phase 07 — cli-release
 
 ## Current Position
 
-Phase: 06 (storybook) — COMPLETE
-Plan: 6 of 6 (all plans complete)
-Status: Phase 6 done — ready for Phase 7 (CLI + Release)
-Last activity: 2026-06-01
+Phase: 07 (cli-release) — EXECUTING
+Plan: 1 of 3
+Status: Executing Phase 07
+Last activity: 2026-06-01 -- Phase 07 execution started
 
 Progress: [██████████] 100%
 

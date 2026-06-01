@@ -36,6 +36,14 @@ export default [
       "!src/components/Placeholder.tsx",
       "!src/components/Alert.tsx",
       "!src/components/Breadcrumb.tsx",
+      "!src/components/Carousel.tsx",
+      "!src/components/Checkbox.tsx",
+      "!src/components/FormGroup.tsx",
+      "!src/components/Input.tsx",
+      "!src/components/Radio.tsx",
+      "!src/components/SegmentedControl.tsx",
+      "!src/components/Switch.tsx",
+      "!src/components/Textarea.tsx",
       // CJS scripts use Node globals (__dirname, console, process)
       "scripts/**",
       // Legacy React test files — migrated to @solidjs/testing-library in Phase 07

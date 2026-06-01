@@ -37,7 +37,7 @@
     "./src"
   ],
   "scripts": {
-    "barrels": "node scripts/generate-barrel.js",
+    "barrels": "node scripts/generate-barrel.cjs",
     "prebuild": "npm run barrels",
     "dev": "vite",
     "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly",

@@ -14,7 +14,7 @@ export type SegmentedControlSizes = Extract<Sizes, "sm" | "md">;
 
 type SegmentedControlContextType = {
   activeIndex: () => number;
-  setActiveIndex: (idx: number) => void;
+  setActiveIndex: (_idx: number) => void;
   size: SegmentedControlSizes;
   register: () => number;
 };
@@ -34,7 +34,7 @@ type SegmentedControlProps = {
   children?: JSX.Element;
   size?: SegmentedControlSizes;
   activeIndex?: number;
-  setActiveIndex?: (idx: number) => void;
+  setActiveIndex?: (_idx: number) => void;
   class?: string;
 };
 

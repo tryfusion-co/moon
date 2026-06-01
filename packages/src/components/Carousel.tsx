@@ -18,7 +18,7 @@ const Item: Component<{ children?: JSX.Element; class?: string }> = (props) => {
 type ControlProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
   direction: ScrollDirections;
   disabled?: boolean;
-  onScrollDirection: (direction: ScrollDirections) => void;
+  onScrollDirection: (_direction: ScrollDirections) => void;
   class?: string;
 };
 

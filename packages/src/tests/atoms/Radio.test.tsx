@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@solidjs/testing-library";
+import { render } from "@solidjs/testing-library";
 import { describe, it, expect } from "vitest";
 import Radio from "../../components/Radio";
 

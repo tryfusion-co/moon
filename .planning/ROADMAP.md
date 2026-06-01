@@ -32,7 +32,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. `eslint-plugin-solid/no-destructure` fires on a deliberate destructure test case, confirming the rule is active before any component is touched
   4. `packages/src/assets/icons/` renders identical SVG output as Solid `Component<JSX.SvgSVGAttributes<SVGSVGElement>>` — no React FC imports remain
   5. `packages/src/helpers/` and `packages/src/types/` compile with zero React imports; barrel generator produces a valid Solid barrel
-**Plans**: TBD
+**Plans**: 3 plans
+- [ ] 01-01-PLAN.md — Toolchain swap: deps, tsconfigs, vite/vitest/eslint configs, package rename + solid export condition, stub entry (TOOL-01..06)
+- [ ] 01-02-PLAN.md — Foundation: port 5 icons to Solid, verify helpers/types React-free, verify barrel generator (FND-01..04)
+- [ ] 01-03-PLAN.md — TOOL-07 validation gate: prove build+test+lint green on stub, confirm solid/no-destructure fires (TOOL-07)
 
 ### Phase 2: Stateless Atoms
 **Goal**: All 12 stateless atom components are ported to SolidJS and passing tests, establishing the canonical mergeProps+splitProps pattern that every later phase will replicate mechanically
@@ -105,7 +108,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Toolchain + Foundation | 0/TBD | Not started | - |
+| 1. Toolchain + Foundation | 0/3 | Planned | - |
 | 2. Stateless Atoms | 0/TBD | Not started | - |
 | 3. Stateful Atoms + Carousel | 0/TBD | Not started | - |
 | 4. Compound, Portal + Composite | 0/TBD | Not started | - |

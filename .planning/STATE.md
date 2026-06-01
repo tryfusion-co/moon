@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-05-PLAN.md
-last_updated: "2026-06-01T14:08:16.532Z"
+stopped_at: Phase 4 complete — ready for Phase 5 (tests)
+last_updated: "2026-06-01T14:30:00.000Z"
 last_activity: 2026-06-01
 progress:
   total_phases: 7
@@ -21,14 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-01)
 
 **Core value:** Every existing Moon component renders and behaves identically under SolidJS — same public API, same Tailwind class output, same DOM — so consuming apps get a true framework swap, not a redesign.
-**Current focus:** Phase 04 — compound-portal-composite
+**Current focus:** Phase 05 — tests (all 37 components source-complete; rewrite legacy React test suite for @solidjs/testing-library)
 
 ## Current Position
 
-Phase: 04 (compound-portal-composite) — EXECUTING
-Plan: 2 of 5
-Phase: 04 (compound-portal-composite) — NEXT
-Status: Ready to execute
+Phase: 04 (compound-portal-composite) — COMPLETE (all 5/5 plans done)
+Phase: 05 (tests) — NEXT
+Status: Ready to execute Phase 5
 Last activity: 2026-06-01
 
 Progress: [██████████] 100%
@@ -68,9 +67,10 @@ Recent decisions affecting current work:
 - Pre-Phase 1: Target `solid-js@^1.9.13`; `eslint-plugin-solid@~0.14.5` (tilde-pinned, pre-1.0)
 - Pre-Phase 4: Drawer.Trigger `React.cloneElement` replacement must be decided and documented before Phase 4 begins
 - [Phase ?]: D-12: Phase 01 validation gate (TOOL-07) proven green — vite build emits .js+.jsx+.d.ts, vitest passes real Solid render(), eslint green, solid/no-destructure confirmed active
-- [Phase ?]: Improved generate-barrel.cjs to auto-detect export type aliases (TooltipPositions) preventing prebuild hook from wiping hand-adds
-- [Phase ?]: Kept explicit named re-exports in src/index.ts matching Phase 1-3 convention
-- [Phase ?]: Function-type param names use _ prefix to satisfy no-unused-vars in type signatures
+- [Phase 04-05]: Improved generate-barrel.cjs to auto-detect export type aliases (TooltipPositions) preventing prebuild hook from wiping hand-adds
+- [Phase 04-05]: Kept explicit named re-exports in src/index.ts matching Phase 1-3 convention
+- [Phase 04-05]: Function-type param names use _ prefix to satisfy no-unused-vars in type signatures
+- [Phase 04-05 / Phase 5 flag]: Select kept native onChange (not onInput); verify blur-vs-keystroke parity gap vs React source during Phase 5
 
 ### Pending Todos
 
@@ -79,8 +79,9 @@ None yet.
 ### Blockers/Concerns
 
 - **Phase 6 (Storybook) — SPIKE RISK**: `storybook-solidjs-vite` community adapter compatibility with Storybook 10 (@addon-vitest, Chromatic) is unverified at runtime. Button story spike required before porting all 37 stories. Fallback: pin Storybook 9.x.
-- **Phase 4 — DESIGN DECISION**: Drawer.Trigger cloneElement replacement (wrapper span / display:contents / documented DOM change) must be chosen before Phase 4 execution starts. Cannot be deferred.
-- **Phase 5 polish (cosmetic, non-blocking)**: 12 ESLint warnings remain from Phase 3 gate — 2x `solid/reactivity` in Alert.tsx, 2x `solid/self-closing-comp` in LinearProgress.tsx, 4x `solid/reactivity`/`solid/components-return-once` in Checkbox.tsx + Radio.tsx, 3x `solid/reactivity` in SegmentedControl.tsx. Zero errors; zero `solid/no-destructure` violations. Optional cleanup in Phase 5.
+- **Phase 4 — DESIGN DECISION**: RESOLVED — Drawer.Trigger + BottomSheet.Trigger `cloneElement` → `display:contents` span. Recorded in PROJECT.md Key Decisions.
+- **Phase 5 polish (cosmetic, non-blocking)**: 21 ESLint warnings remain across Phase 3-4 components (up from 12 after Phase 4 gate) — `solid/reactivity` and `solid/self-closing-comp`. Zero errors; zero `solid/no-destructure` violations. Optional cleanup in Phase 5.
+- **Phase 5 verification required — Select onChange parity gap**: Select component kept native `onChange` (not bridged to `onInput`). If React's Select `onChange` fires live on each keystroke, this is a blur-vs-keystroke parity gap (same category as Checkbox CR-02 fix). Must verify behavioral parity against React source during Phase 5 test authoring. Do NOT fix until behavioral analysis confirms gap exists.
 
 ## Deferred Items
 
@@ -91,6 +92,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-01T14:08:16.520Z
-Stopped at: Completed 04-05-PLAN.md
+Last session: 2026-06-01T14:30:00.000Z
+Stopped at: Phase 4 complete — ALL 37 components ported (34 .tsx source files; 37 counts compound sub-components). All 5/5 Phase 4 plans done. Phase 5 (tests) is next.
 Resume file: None

@@ -129,11 +129,26 @@ Each task was committed atomically:
 ## User Setup Required
 None - no external service configuration required.
 
+## Checkpoint Resolution
+
+**Checkpoint type:** human-verify
+**Status:** APPROVED (auto-mode, evidence complete)
+**Evidence reviewed:** `npm run build` exit 0 (34 component files dual .js + raw .jsx + .d.ts), `npx vitest run` 252/252 pass, `npx eslint .` 0 errors (21 cosmetic warnings), `src/index.ts` exports all components + types + TooltipPositions, grep sweep 34/34 React-free.
+**Phase 4 gate:** PASSED
+
+## Known Non-Blocking Items (Phase 5 Optional Polish)
+
+### ESLint Cosmetic Warnings (21 total, 0 errors)
+21 cosmetic ESLint warnings remain across Phase 3-4 components: `solid/reactivity` and `solid/self-closing-comp` violations. These are non-blocking (zero errors). Cleanup deferred to Phase 5 polish.
+
+### Select onChange Parity Flag (Phase 5 verification required)
+Select component kept native `onChange` (not bridged to `onInput`). If the React Select's `onChange` tracked value live (on every keystroke), this may be a blur-vs-keystroke parity gap similar to the Checkbox CR-02 fix. **Must verify during Phase 5 test parity.** Do NOT fix now — requires behavioral analysis against the React source first.
+
 ## Next Phase Readiness
-- Phase 4 complete: all 34 SolidJS components ported, exported, linted, built (dual .js + preserved-JSX .jsx + .d.ts), and tested
+- Phase 4 complete: all 37 components (34 .tsx source files; 37 counts compound sub-components) ported, exported, linted, built (dual .js + preserved-JSX .jsx + .d.ts), and tested
 - src/index.ts is the complete public API surface for @moondesignsystem/solid
 - Ready for Phase 5: legacy React test migration to @solidjs/testing-library
-- No blockers
+- Concern flagged for Phase 5: Select onChange parity gap (see above)
 
 ---
 *Phase: 04-compound-portal-composite*

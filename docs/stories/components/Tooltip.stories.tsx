@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Tooltip as TooltipComponent, Button } from "@moondesignsystem/react";
+import type { Meta, StoryObj } from "storybook-solidjs-vite";
+import { Tooltip as TooltipComponent, Button } from "@moondesignsystem/solid";
+import type { ComponentProps } from "solid-js";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof TooltipComponent>;
+type Type = ComponentProps<typeof TooltipComponent>;
 
 const meta: Meta<Type> = {
   title: "Messaging & feedback/Tooltip",

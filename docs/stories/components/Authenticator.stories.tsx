@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import {
   Authenticator as AuthenticatorComponent,
   FormGroup,
-} from "@moondesignsystem/react";
+} from "@moondesignsystem/solid";
+import type { ComponentProps } from "solid-js";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof AuthenticatorComponent>;
+type Type = ComponentProps<typeof AuthenticatorComponent>;
 
 const meta: Meta<Type> = {
   title: "Forms & selection controls/Authenticator",

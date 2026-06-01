@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "storybook-solidjs-vite";
 import LinksBlock from "../shared/LinksBlock";
-import { Radio as RadioComponent } from "@moondesignsystem/react";
+import { Radio as RadioComponent } from "@moondesignsystem/solid";
+import type { ComponentProps } from "solid-js";
 
-type Type = React.ComponentProps<typeof RadioComponent>;
+type Type = ComponentProps<typeof RadioComponent>;
 
 const meta: Meta<Type> = {
   title: "Forms & selection controls/Radio",

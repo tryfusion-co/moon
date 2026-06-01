@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Loader as LoaderComponent } from "@moondesignsystem/react";
+import type { Meta, StoryObj } from "storybook-solidjs-vite";
+import { Loader as LoaderComponent } from "@moondesignsystem/solid";
+import type { ComponentProps } from "solid-js";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof LoaderComponent>;
+type Type = ComponentProps<typeof LoaderComponent>;
 
 const meta: Meta<Type> = {
   title: "Indicators & status/Loader",

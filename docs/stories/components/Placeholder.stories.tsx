@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Placeholder as PlaceholderComponent } from "@moondesignsystem/react";
+import type { Meta, StoryObj } from "storybook-solidjs-vite";
+import { Placeholder as PlaceholderComponent } from "@moondesignsystem/solid";
+import type { ComponentProps } from "solid-js";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof PlaceholderComponent>;
+type Type = ComponentProps<typeof PlaceholderComponent>;
 
 const meta: Meta<Type> = {
   title: "Indicators & status/Placeholder",
@@ -18,7 +19,7 @@ const meta: Meta<Type> = {
       ...props,
     };
     return (
-      <div className="w-40 h-20">
+      <div class="w-40 h-20">
         <PlaceholderComponent {...placeholderProps} />
       </div>
     );

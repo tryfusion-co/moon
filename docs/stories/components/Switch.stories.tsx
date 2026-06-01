@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Switch as SwitchComponent } from "@moondesignsystem/react";
-import LinksBlock from "../shared/LinksBlock";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import { Switch as SwitchComponent } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
+import LinksBlock from '../shared/LinksBlock';
 
-type Type = React.ComponentProps<typeof SwitchComponent>;
+type Type = ComponentProps<typeof SwitchComponent>;
 
 const meta: Meta<Type> = {
-  title: "Forms & selection controls/Switch",
+  title: 'Forms & selection controls/Switch',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -15,18 +16,18 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     size: {
-      description: "Defines Switch size",
-      options: ["2xs", "xs", "sm"],
-      control: "select",
+      description: 'Defines Switch size',
+      options: ['2xs', 'xs', 'sm'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "sm" },
+        defaultValue: { summary: 'sm' },
       },
     },
   },
   render: ({ size, ...props }) => {
     const switchProps = {
       ...props,
-      ...(size !== "sm" && { size }),
+      ...(size !== 'sm' && { size }),
     };
     return <SwitchComponent {...switchProps} />;
   },
@@ -37,5 +38,5 @@ export default meta;
 type Story = StoryObj<Type>;
 
 export const Switch: Story = {
-  args: { size: "sm" },
+  args: { size: 'sm' },
 };

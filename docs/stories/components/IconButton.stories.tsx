@@ -1,12 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { IconButton } from "@moondesignsystem/react";
-import LinksBlock from "../shared/LinksBlock";
-import StarIcon from "../shared/icons/StarIcon";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import { IconButton } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
+import LinksBlock from '../shared/LinksBlock';
+import StarIcon from '../shared/icons/StarIcon';
 
-type Type = React.ComponentProps<typeof IconButton>;
+type Type = ComponentProps<typeof IconButton>;
 
 const meta: Meta<Type> = {
-  title: "Actions/Icon Button",
+  title: 'Actions/Icon Button',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -16,50 +17,50 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     size: {
-      description: "Defines IconButton size",
-      options: ["xs", "sm", "md", "lg", "xl"],
-      control: "select",
+      description: 'Defines IconButton size',
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "md" },
+        defaultValue: { summary: 'md' },
       },
     },
     disabled: {
-      description: "Disables IconButton when set to true",
-      control: { type: "boolean" },
+      description: 'Disables IconButton when set to true',
+      control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: "false" },
+        defaultValue: { summary: 'false' },
       },
     },
     isRounded: {
-      description: "Defines if IconButton has rounded corners",
-      control: { type: "boolean" },
+      description: 'Defines if IconButton has rounded corners',
+      control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: "false" },
+        defaultValue: { summary: 'false' },
       },
     },
     variant: {
-      description: "Defines IconButton variant",
-      options: ["fill", "outline", "soft", "ghost"],
-      control: "select",
+      description: 'Defines IconButton variant',
+      options: ['fill', 'outline', 'soft', 'ghost'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "fill" },
+        defaultValue: { summary: 'fill' },
       },
     },
     context: {
-      description: "Defines IconButton context",
-      options: ["brand", "neutral", "positive", "negative", "caution", "info"],
-      control: "select",
+      description: 'Defines IconButton context',
+      options: ['brand', 'neutral', 'positive', 'negative', 'caution', 'info'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "brand" },
+        defaultValue: { summary: 'brand' },
       },
     },
   },
   render: ({ variant, size, context, ...props }) => {
     const buttonProps = {
       ...props,
-      ...(variant !== "fill" && { variant }),
-      ...(context !== "brand" && { context }),
-      ...(size !== "md" && { size }),
+      ...(variant !== 'fill' && { variant }),
+      ...(context !== 'brand' && { context }),
+      ...(size !== 'md' && { size }),
     };
     return (
       <IconButton {...buttonProps}>
@@ -75,9 +76,9 @@ type Story = StoryObj<Type>;
 
 export const IconButtonStory: Story = {
   args: {
-    size: "md",
-    variant: "fill",
-    context: "brand",
+    size: 'md',
+    variant: 'fill',
+    context: 'brand',
     disabled: false,
     isRounded: false,
   },

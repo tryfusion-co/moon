@@ -1,4 +1,4 @@
-import React from "react";
+import { mergeProps, splitProps, Show, type Component } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes } from "../types";
 
@@ -6,45 +6,44 @@ export type LinearProgressSizes = Extract<Sizes, "5xs" | "4xs" | "3xs" | "2xs">;
 
 type LinearProgressProps = {
   label?: string;
-  className?: string;
+  class?: string;
   size?: LinearProgressSizes;
   value: number;
 };
 
-const LinearProgress = ({
-  className,
-  value = 0,
-  size = "2xs",
-  label,
-}: LinearProgressProps) => {
-  if (label) {
-    return (
-      <label className={className}>
+const LinearProgress: Component<LinearProgressProps> = (props) => {
+  const merged = mergeProps({ value: 0, size: "2xs" } as const, props);
+  const [local] = splitProps(merged, ["class", "value", "size", "label"]);
+  return (
+    <Show
+      when={local.label}
+      fallback={
         <progress
-          value={String(value)}
+          value={String(local.value)}
           max="100"
-          className={mergeClasses(
+          class={mergeClasses(
             "moon-linear-progress",
-            size !== "2xs" && `moon-linear-progress-${size}`
+            local.size !== "2xs" && `moon-linear-progress-${local.size}`,
+            local.class
           )}
         ></progress>
-        <span>{label}</span>
-      </label>
-    );
-  }
-  return (
-    <progress
-      value={String(value)}
-      max="100"
-      className={mergeClasses(
-        "moon-linear-progress",
-        size !== "2xs" && `moon-linear-progress-${size}`,
-        className
+      }
+    >
+      {(label) => (
+        <label class={local.class}>
+          <progress
+            value={String(local.value)}
+            max="100"
+            class={mergeClasses(
+              "moon-linear-progress",
+              local.size !== "2xs" && `moon-linear-progress-${local.size}`
+            )}
+          ></progress>
+          <span>{label()}</span>
+        </label>
       )}
-    ></progress>
+    </Show>
   );
 };
-
-LinearProgress.displayName = "LinearProgress";
 
 export default LinearProgress;

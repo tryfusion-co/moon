@@ -23,7 +23,20 @@ findings:
   warning: 4
   info: 1
   total: 9
-status: issues_found
+status: fixed
+fix_applied_at: 2026-06-01T10:17:00Z
+findings_fixed:
+  - CR-01
+  - CR-04
+findings_rejected_parity:
+  - CR-02
+  - CR-03
+  - WR-01
+  - WR-02
+  - WR-03
+  - WR-04
+findings_acknowledged:
+  - IN-01
 ---
 
 # Phase 4: Code Review Report
@@ -43,7 +56,7 @@ Four critical issues were found: a `onChange`-vs-`onInput` parity regression in 
 
 ## Critical Issues
 
-### CR-01: Select — `onChange` fires on blur, not on every selection (parity regression)
+### CR-01: Select — `onChange` fires on blur, not on every selection (parity regression) — **FIXED (06946d3)**
 
 **File:** `packages/src/components/Select.tsx:41-53`  
 **Issue:** `Select` spreads `{...rest}` onto a native `<select>` without remapping `onChange` to `onInput`. In SolidJS, `onChange` on a DOM element binds to the native `change` event (fires on blur/commit). In React, `onChange` on `<select>` fires on every option selection (mapped to the native `input` event). A consumer who passes `onChange` expecting live selection feedback (the React contract) gets deferred blur-only notifications instead. This is the identical regression documented and fixed for `Checkbox` in the Checkbox component.
@@ -84,7 +97,7 @@ const Root: Component<SelectProps> = (props) => {
 
 ---
 
-### CR-02: Pagination — `isRTL()` queries the wrong element in multi-instance documents
+### CR-02: Pagination — `isRTL()` queries the wrong element in multi-instance documents — **REJECTED (parity: React original uses identical `document.querySelector(".moon-pagination")` global query)**
 
 **File:** `packages/src/components/Pagination.tsx:69-73`  
 **Issue:** `document.querySelector(".moon-pagination")` always returns the **first** matching element in the document. If two or more `<Pagination>` components are rendered simultaneously (e.g., table top/bottom controls, or two separate pages in a test), every instance reads the computed direction of the first one. Additionally, `isRTL()` is called per-render as a plain function (not a signal or memo), so direction changes after mount are not reactive. The function is also duplicated per `Control` instance.
@@ -115,7 +128,7 @@ Alternatively, hoist the direction computation to the Pagination root and pass i
 
 ---
 
-### CR-03: Dialog.Trigger — `<p>` wrapper is an invalid HTML container for interactive children
+### CR-03: Dialog.Trigger — `<p>` wrapper is an invalid HTML container for interactive children — **REJECTED (parity: React Dialog.Trigger was `<p onClick>{children}</p>`; CONTEXT decision keeps Dialog.Trigger as `<p>`)**
 
 **File:** `packages/src/components/Dialog.tsx:35`  
 **Issue:** `Dialog.Trigger` wraps its children in a `<p>` element. A `<p>` is a paragraph (phrasing content model) and cannot legally contain block-level descendants such as `<button>`, `<div>`, or another `<p>`. Browsers will break the DOM tree when they encounter such nesting — the outer `<p>` is implicitly closed before the block child, stripping it from the trigger's subtree and breaking the `onClick` handler chain. Drawer.Trigger and BottomSheet.Trigger both correctly use `<span style={{display:"contents"}}>` for this exact reason.
@@ -147,7 +160,7 @@ const Trigger: Component<DialogProps> = (props) => {
 
 ---
 
-### CR-04: Drawer/BottomSheet — `Close` `onClick` prop cast silently drops event argument
+### CR-04: Drawer/BottomSheet — `Close` `onClick` prop cast silently drops event argument — **FIXED (36d0ab8)**
 
 **File:** `packages/src/components/Drawer.tsx:89`, `packages/src/components/BottomSheet.tsx:98`  
 **Issue:** Both `Close` components accept `onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>`, which may be a function that expects a `MouseEvent` argument. The internal handler casts it to `(() => void) | undefined` and calls it with no arguments:
@@ -191,7 +204,7 @@ onClick={(e) => {
 
 ## Warnings
 
-### WR-01: Snackbar Root — native HTML attributes silently swallowed (no `{...rest}` spread)
+### WR-01: Snackbar Root — native HTML attributes silently swallowed (no `{...rest}` spread) — **REJECTED (parity: React SnackbarProps had no ComponentProps spread on root either)**
 
 **File:** `packages/src/components/Snackbar.tsx:46-62`  
 **Issue:** The Root component splits only `["isOpen", "children", "variant", "context"]` from merged props but the root `SnackbarProps` type does not extend `JSX.HTMLAttributes`. However, all three sub-components (Action, Meta, Group) do accept and spread `{...rest}`. If a consumer needs to attach `id`, `data-testid`, `aria-live`, or `role` to the root snackbar element, there is no way to do so — the props are simply absent from the type. The snackbar is typically used with `aria-live` for accessibility.
@@ -221,7 +234,7 @@ const Root: Component<SnackbarProps> = (props) => {
 
 ---
 
-### WR-02: Pagination — uncontrolled regression when `activePage` prop changes
+### WR-02: Pagination — uncontrolled regression when `activePage` prop changes — **REJECTED (parity: React used `useState(activePage)` one-shot init with no useEffect sync — same non-reactive behavior)**
 
 **File:** `packages/src/components/Pagination.tsx:107`  
 **Issue:** `createSignal(local.activePage)` captures the initial value of `activePage` once. If a parent component controls the active page (e.g., syncing with URL state) and passes a new `activePage` value, the internal `currentPage` signal is never updated — the component stays on the stale page. The React version's `activePage` prop is similarly uncontrolled, but controlled integration is a common usage pattern.
@@ -242,7 +255,7 @@ createEffect(() => setCurrentPage(local.activePage));
 
 ---
 
-### WR-03: Tooltip.Trigger — `<p>` wrapper is semantically inappropriate
+### WR-03: Tooltip.Trigger — `<p>` wrapper is semantically inappropriate — **REJECTED (parity: React Tooltip used `<p>` similarly)**
 
 **File:** `packages/src/components/Tooltip.tsx:21`  
 **Issue:** `Tooltip.Trigger` wraps children in a `<p>` (paragraph) element. While less severe than the Dialog case (Tooltip.Trigger content is more likely to be inline text), a `<p>` around arbitrary children still creates the same HTML invalidity risk when the child is block-level. It also imposes `display: block` and paragraph margins that likely conflict with tooltip positioning. No other trigger wrapper in this codebase uses `<p>`.
@@ -262,7 +275,7 @@ const Trigger: Component<TooltipChildProps> = (props) => {
 
 ---
 
-### WR-04: Authenticator — `internalValue` not synced when controlled `value` prop changes
+### WR-04: Authenticator — `internalValue` not synced when controlled `value` prop changes — **REJECTED (parity: React used `useState(value)` one-shot init, no sync)**
 
 **File:** `packages/src/components/Authenticator.tsx:46`  
 **Issue:** `createSignal(local.value)` is initialized from the `value` prop once. If the parent resets the OTP value (e.g., on form submission or error), the displayed inputs keep the stale internal value. The `onChange` callback is present (suggesting controlled usage is intended), but there is no mechanism to push external `value` changes back into `internalValue`.
@@ -284,7 +297,7 @@ createEffect(() => setInternalValue(local.value));
 
 ## Info
 
-### IN-01: TabList `register()` counter — caveat not enforced at type level
+### IN-01: TabList `register()` counter — caveat not enforced at type level — **ACKNOWLEDGED (documented in code comment; matches React Children.map static assumption)**
 
 **File:** `packages/src/components/TabList.tsx:85-88`  
 **Issue:** The comment on line 85 correctly documents that `register()` only works correctly for static children, but this constraint is not enforced or communicated at the API level. If a consumer renders `<TabList.Item>` inside a `<Show>` or `<For>`, indices will be assigned during initial render and then become stale as items appear/disappear. The counter resets only on component remount. This is a documentation/API design gap rather than an immediate bug.

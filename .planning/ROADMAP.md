@@ -112,11 +112,11 @@ Decimal phases appear between their surrounding integers in numeric order.
 **UI hint**: yes
 **Plans**: 6 plans
 - [x] 06-01-PLAN.md — SPIKE (Wave 1, BLOCKING): deps/main.ts/preview.ts swap + LinksBlock + Button story + build-storybook green (human-verify) [STORY-01]
-- [ ] 06-02-PLAN.md — Wave 2: 8 stories (Accordion/Alert/Avatar/Badge/Breadcrumb/IconButton/List/Menu) + StarIcon/UserIcon [STORY-02]
-- [ ] 06-03-PLAN.md — Wave 2: 8 stories incl stateful useState→createSignal (Chip/SegmentedControl/Snackbar) + Carousel/Checkbox/Input/Textarea/Switch [STORY-02]
-- [ ] 06-04-PLAN.md — Wave 2: 8 portal/className stories (Dialog/Drawer/BottomSheet/Dropdown/Tooltip/Placeholder/Radio/Loader) [STORY-02]
-- [ ] 06-05-PLAN.md — Wave 2: 6 stories (CircularProgress/LinearProgress/Tag/Pagination/TabList/Select) + Version + gettingStarted.mdx [STORY-02]
-- [ ] 06-06-PLAN.md — Wave 3 final gate: Table→@tanstack/solid-table + full build-storybook green (all 37) + React-remnant sweep (human-verify) [STORY-02]
+- [x] 06-02-PLAN.md — Wave 2: 8 stories (Accordion/Alert/Avatar/Badge/Breadcrumb/IconButton/List/Menu) + StarIcon/UserIcon [STORY-02]
+- [x] 06-03-PLAN.md — Wave 2: 8 stories incl stateful useState→createSignal (Chip/SegmentedControl/Snackbar) + Carousel/Checkbox/Input/Textarea/Switch [STORY-02]
+- [x] 06-04-PLAN.md — Wave 2: 8 portal/className stories (Dialog/Drawer/BottomSheet/Dropdown/Tooltip/Placeholder/Radio/Loader) [STORY-02]
+- [x] 06-05-PLAN.md — Wave 2: 6 stories (CircularProgress/LinearProgress/Tag/Pagination/TabList/Select) + Version + gettingStarted.mdx [STORY-02]
+- [x] 06-06-PLAN.md — Wave 3 final gate: Table→@tanstack/solid-table + full build-storybook green (all 37) + React-remnant sweep (human-verify) [STORY-02]
 
 ### Phase 7: CLI + Release
 **Goal**: The CLI scaffolder emits Solid templates under the renamed bin, README and CHANGELOG are updated for the 3.0.0 major release, and `npm publish --dry-run` passes with the `solid` export condition verified in a smoke consumer

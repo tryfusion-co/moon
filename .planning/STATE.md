@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 6 plan 06-01 complete — storybook-solidjs-vite spike approved (build-storybook EXIT 0, 228 modules, all 5 addons loaded). Spike approved on green build evidence (headless, no browser visual check available). STORY-01 complete. Wave 2 bulk porting (06-02..06-06) unlocked.
-last_updated: "2026-06-01T16:00:00.000Z"
+stopped_at: Phase 6 plan 06-01 complete. storybook-solidjs-vite spike approved (build-storybook EXIT 0, 228 modules, all 5 addons loaded). STORY-01 complete. Spike approved on build-storybook-green evidence — no browser visual check available in headless context; green build + all addons load accepted as pass criterion. Wave 2 bulk porting (06-02..06-06) cleared to run in parallel.
+last_updated: "2026-06-01T15:47:50.077Z"
 last_activity: 2026-06-01
 progress:
   total_phases: 7
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 29
-  completed_plans: 24
-  percent: 83
+  completed_plans: 29
+  percent: 100
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-06-01)
 ## Current Position
 
 Phase: 06 (storybook) — EXECUTING
-Plan: 2 of 6 (06-01 complete, 06-02..06-06 ready — Wave 2 unlocked)
-Status: Wave 2 bulk porting cleared to run (06-02..06-06 may run in parallel)
+Plan: 3 of 6 (06-01 complete, 06-02..06-06 ready — Wave 2 unlocked)
+Status: Ready to execute
 Last activity: 2026-06-01
 
-Progress: [████████░░] 83%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -55,6 +55,7 @@ Progress: [████████░░] 83%
 | Phase 01-toolchain-foundation P03 | 10 | 2 tasks | 5 files |
 | Phase 02-stateless-atoms P02-05 | 15 | 3 tasks | 3 files |
 | Phase 04-compound-portal-composite P05 | 25min | - tasks | - files |
+| Phase 06-storybook P06 | 25min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -74,6 +75,8 @@ Recent decisions affecting current work:
 - [Phase 05]: All 19 stale legacy-test ignore entries removed from eslint.config.js; stale Phase-07 migration comment removed from vitest.config.ts
 - [Phase 05]: Phase 5 gate passed: 278/278 vitest passing (35 files), eslint 0 errors, build green, all suite-wide invariants confirmed (zero @testing-library/react, zero jest., all render(() => form, all PascalCase filenames)
 - [Phase 06 plan 01]: storybook-solidjs-vite@10.1.1 spike approved. Storybook v10.4.1, 228 modules, all 5 addons load. Windows import.meta.resolve fix: template literal (not path.join) prevents backslash ERR_INVALID_MODULE_SPECIFIER. npm install without --legacy-peer-deps. Wave 2 stories glob: full 3-glob pattern restored in main.ts.
+- [Phase ?]: Table.stories.tsx ported to @tanstack/solid-table: createSolidTable + get data() getter + createSignal + <For> loops; build-storybook exits 0 with 267 modules; STORY-02 complete
+- [Phase ?]: vite.config.ts: replaced @vitejs/plugin-react with vite-plugin-solid; root devDeps now include storybook + tslib for CLI availability in npm workspace
 
 ### Pending Todos
 
@@ -95,6 +98,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-06-01T16:00:00.000Z
+Last session: 2026-06-01T15:47:41.105Z
 Stopped at: Phase 6 plan 06-01 complete. storybook-solidjs-vite spike approved (build-storybook EXIT 0, 228 modules, all 5 addons loaded). STORY-01 complete. Spike approved on build-storybook-green evidence — no browser visual check available in headless context; green build + all addons load accepted as pass criterion. Wave 2 bulk porting (06-02..06-06) cleared to run in parallel.
 Resume file: None

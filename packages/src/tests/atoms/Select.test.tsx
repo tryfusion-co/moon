@@ -1,5 +1,5 @@
-import { render } from "@solidjs/testing-library";
-import { describe, it, expect } from "vitest";
+import { fireEvent, render } from "@solidjs/testing-library";
+import { describe, it, expect, vi } from "vitest";
 import Select from "../../components/Select";
 
 describe("Select", () => {
@@ -72,6 +72,29 @@ describe("Select", () => {
     ));
     const sel = container.querySelector("select");
     expect(sel!.getAttribute("name")).toBe("my-select");
+  });
+
+  it("calls onChange callback when input event fires on the select (onInput bridge)", () => {
+    const spy = vi.fn();
+    const { container } = render(() => (
+      <Select onChange={spy}>
+        <Select.Option value="a">A</Select.Option>
+        <Select.Option value="b">B</Select.Option>
+      </Select>
+    ));
+    const sel = container.querySelector("select")!;
+    fireEvent.input(sel);
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not throw when onChange is not provided and input event fires", () => {
+    const { container } = render(() => (
+      <Select>
+        <Select.Option value="a">A</Select.Option>
+      </Select>
+    ));
+    const sel = container.querySelector("select")!;
+    expect(() => fireEvent.input(sel)).not.toThrow();
   });
 
   describe("Select.Option", () => {

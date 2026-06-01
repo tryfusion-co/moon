@@ -6,12 +6,17 @@ export type SelectSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
 export type SelectVariants = Extract<Variants, "fill" | "outline">;
 
-type SelectProps = JSX.SelectHTMLAttributes<HTMLSelectElement> & {
+// Public prop name `onChange` is preserved for API parity with the React version.
+// Internally, we bind `onInput` instead of `onChange` on the DOM select element,
+// because React's onChange fires on every selection (mapped to the native `input` event),
+// while Solid's onChange fires only on blur/commit (native `change` event).
+type SelectProps = Omit<JSX.SelectHTMLAttributes<HTMLSelectElement>, "onChange"> & {
   size?: SelectSizes;
   variant?: SelectVariants;
   error?: boolean;
   children?: JSX.Element;
   class?: string;
+  onChange?: JSX.EventHandler<HTMLSelectElement, Event>;
 };
 
 type OptionProps = JSX.OptionHTMLAttributes<HTMLOptionElement> & {
@@ -36,7 +41,14 @@ const OptionGroup: Component<OptionGroupProps> = (props) => {
 
 const Root: Component<SelectProps> = (props) => {
   const merged = mergeProps({ size: "md" as SelectSizes, variant: "fill" as SelectVariants, error: false }, props);
-  const [local, rest] = splitProps(merged, ["children", "size", "variant", "error", "class"]);
+  const [local, rest] = splitProps(merged, ["children", "size", "variant", "error", "class", "onChange"]);
+
+  const handleInput: JSX.EventHandler<HTMLSelectElement, InputEvent> = (e) => {
+    if (typeof local.onChange === "function") {
+      local.onChange(e as any);
+    }
+  };
+
   return (
     <select
       class={mergeClasses(
@@ -46,6 +58,7 @@ const Root: Component<SelectProps> = (props) => {
         local.error && "moon-select-error",
         local.class
       )}
+      onInput={handleInput}
       {...rest}
     >
       {local.children}

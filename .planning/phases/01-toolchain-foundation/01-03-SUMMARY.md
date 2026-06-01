@@ -161,4 +161,16 @@ None — the plan explicitly targets the stub entry (`src/_stub.ts`, `src/index.
 | Commit 37d5649 (task 1) | FOUND |
 | Commit ab245d9 (task 2) | FOUND |
 
+## Checkpoint Resolution
+
+**Task 3 — checkpoint:human-verify — APPROVED (auto-mode)**
+The Phase 1 exit gate was approved by the user on 2026-06-01. Evidence reviewed:
+- `vite build` EXIT 0 — `dist/index.js` + `dist/index.jsx` + `dist/index.d.ts` emitted
+- `vitest run` EXIT 0 — real Solid render(), no client-on-server error
+- `eslint .` EXIT 0 — green on stub + foundation source
+- `solid/no-destructure` fired on deliberate probe (exit=1), probe deleted, eslint green again
+- `package.json` shows `@moondesignsystem/solid@3.0.0` with `solid` export condition pointing to `dist/index.jsx`
+
+Phase 1 (TOOL-01..07, FND-01..04) is complete and verified.
+
 ## Self-Check: PASSED

@@ -15,7 +15,7 @@ import mergeClasses from "../helpers/mergeClasses";
 
 type BottomSheetContextType = {
   bottomSheetRef: Accessor<HTMLDialogElement | undefined>;
-  setBottomSheetRef: (el: HTMLDialogElement) => void;
+  setBottomSheetRef: (_el: HTMLDialogElement) => void;
   hasHandle: () => boolean;
 };
 

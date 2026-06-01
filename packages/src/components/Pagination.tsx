@@ -17,13 +17,13 @@ type PaginationProps = {
   class?: string;
   activePage?: number;
   hasControls?: boolean;
-  onPageChange?: (page: number) => void;
-  renderItem?: (index: number) => JSX.Element;
+  onPageChange?: (_page: number) => void;
+  renderItem?: (_index: number) => JSX.Element;
 };
 
 type PaginationItemProps = JSX.HTMLAttributes<HTMLLIElement> & {
   pageIndex: number;
-  onPageChange: (page: number) => void;
+  onPageChange: (_page: number) => void;
   currentPage: number;
   children?: JSX.Element;
 };

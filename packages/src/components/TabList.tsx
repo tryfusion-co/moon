@@ -14,7 +14,7 @@ export type TabListSizes = Extract<Sizes, "sm" | "md">;
 
 type TabListContextType = {
   activeIndex: () => number;
-  handleTabChange: (i: number) => void;
+  handleTabChange: (_i: number) => void;
   register: () => number;
 };
 
@@ -34,7 +34,7 @@ type TabListProps = {
   size?: TabListSizes;
   defaultActiveIndex?: number;
   class?: string;
-  onTabChange?: (index: number) => void;
+  onTabChange?: (_index: number) => void;
 };
 
 type TabProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {

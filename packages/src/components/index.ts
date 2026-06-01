@@ -19,6 +19,7 @@ export { default as Breadcrumb } from "./Breadcrumb";
 export { default as Button } from "./Button";
 export type { ButtonSizes, ButtonVariants } from "./Button";
 export { default as Carousel } from "./Carousel";
+export type { ScrollDirections } from "./Carousel";
 export { default as Checkbox } from "./Checkbox";
 export { default as Chip } from "./Chip";
 export type { ChipSizes, ChipVariants } from "./Chip";

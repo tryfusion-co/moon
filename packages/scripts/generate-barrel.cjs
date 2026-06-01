@@ -28,19 +28,32 @@ function getExportedTypes(filePath, componentName) {
   const content = fs.readFileSync(filePath, "utf8");
   const exports = [];
 
-  // Look for exported types that match component patterns
+  // Scan for all top-level exported type aliases: export type TypeName = ...
+  // This catches non-standard names like TooltipPositions (= Positions alias)
+  const exportTypeAliasRegex = /^export\s+type\s+([A-Z]\w+)\s*=/gm;
+  let aliasMatch;
+  while ((aliasMatch = exportTypeAliasRegex.exec(content)) !== null) {
+    const typeName = aliasMatch[1];
+    if (!exports.includes(typeName)) {
+      exports.push(typeName);
+    }
+  }
+
+  // Look for exported types that match component patterns (Sizes/Variants inline declarations)
   const typePatterns = [`${componentName}Sizes`, `${componentName}Variants`];
 
   typePatterns.forEach((typeName) => {
-    const regex = new RegExp(
-      `export\\s+(type\\s+)?.*${typeName.replace(
-        /[.*+?^${}()|[\]\\]/g,
-        "\\$&"
-      )}`,
-      "m"
-    );
-    if (regex.test(content)) {
-      exports.push(typeName);
+    if (!exports.includes(typeName)) {
+      const regex = new RegExp(
+        `export\\s+(type\\s+)?.*${typeName.replace(
+          /[.*+?^${}()|[\]\\]/g,
+          "\\$&"
+        )}`,
+        "m"
+      );
+      if (regex.test(content)) {
+        exports.push(typeName);
+      }
     }
   });
 
@@ -56,7 +69,9 @@ function getExportedTypes(filePath, componentName) {
         new RegExp(`(${componentName}\\w+)`, "g")
       );
       if (componentMatch) {
-        exports.push(...componentMatch);
+        componentMatch.forEach((name) => {
+          if (!exports.includes(name)) exports.push(name);
+        });
       }
     });
   }

@@ -13,7 +13,7 @@ import mergeClasses from "../helpers/mergeClasses";
 
 type DialogContextType = {
   dialogRef: Accessor<HTMLDialogElement | undefined>;
-  setDialogRef: (el: HTMLDialogElement) => void;
+  setDialogRef: (_el: HTMLDialogElement) => void;
 };
 
 const DialogContext = createContext<DialogContextType>();

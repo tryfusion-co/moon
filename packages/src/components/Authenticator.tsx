@@ -1,4 +1,4 @@
-import { createSignal, mergeProps, splitProps, Index, type Component, type JSX } from "solid-js";
+import { createSignal, mergeProps, splitProps, Index, type Component } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Variants, Sizes } from "../types";
 
@@ -14,7 +14,7 @@ type AuthenticatorProps = {
   error?: boolean;
   disabled?: boolean;
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: (_value: string) => void;
   class?: string;
 };
 

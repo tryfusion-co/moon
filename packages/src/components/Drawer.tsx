@@ -13,7 +13,7 @@ import mergeClasses from "../helpers/mergeClasses";
 
 type DrawerContextType = {
   drawerRef: Accessor<HTMLDialogElement | undefined>;
-  setDrawerRef: (el: HTMLDialogElement) => void;
+  setDrawerRef: (_el: HTMLDialogElement) => void;
 };
 
 const DrawerContext = createContext<DrawerContextType>();

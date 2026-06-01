@@ -60,7 +60,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Checkbox, Radio, Switch, Input, Textarea, FormGroup, and SegmentedControl each pass a Solid test asserting controlled and uncontrolled behavior, with `onInput` (not `onChange`) for text inputs
   2. Carousel passes a Solid test asserting scroll-position updates and event-listener cleanup; no `useEffect`, `useCallback`, or `useRef` imports remain in its source
   3. Zero prop destructuring across all ported form components and Carousel
-**Plans**: TBD
+**Plans**: 5 plans
+- [ ] 03-01-PLAN.md — Port Checkbox, Input, Textarea (trivial pass-through trio) + tests [Wave 1]
+- [ ] 03-02-PLAN.md — Port FormGroup (compound), Switch (onChange→onInput) + tests [Wave 1]
+- [ ] 03-03-PLAN.md — Port Radio (Group name-injection via context), SegmentedControl (context + createSignal selection) + tests [Wave 1]
+- [ ] 03-04-PLAN.md — Port Carousel (let reelRef, createSignal×2, onMount/onCleanup) + scroll-state/cleanup test [Wave 1]
+- [ ] 03-05-PLAN.md — Regen barrel, extend src/index.ts, eslint un-ignore, build(dual)+test+lint green gate (human-verify) [Wave 2]
 
 ### Phase 4: Compound, Portal + Composite
 **Goal**: All compound/portal components (Dialog, Drawer, BottomSheet, Snackbar, Tooltip, Dropdown, Menu, Select) and composite components (Accordion, TabList, Table, List, Pagination, Authenticator) are ported with createContext, signal-wrapped refs, and `<Portal>`, completing the entire 37-component set; the Drawer.Trigger cloneElement replacement is decided and documented before implementation begins
@@ -115,7 +120,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 |-------|----------------|--------|-----------|
 | 1. Toolchain + Foundation | 3/3 | Complete   | 2026-06-01 |
 | 2. Stateless Atoms | 5/5 | Complete   | 2026-06-01 |
-| 3. Stateful Atoms + Carousel | 0/TBD | Not started | - |
+| 3. Stateful Atoms + Carousel | 0/5 | Not started | - |
 | 4. Compound, Portal + Composite | 0/TBD | Not started | - |
 | 5. Tests | 0/TBD | Not started | - |
 | 6. Storybook | 0/TBD | Not started | - |

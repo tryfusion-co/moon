@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 01 toolchain-foundation verified complete; ready for Phase 2
-last_updated: "2026-06-01T05:00:40.887Z"
+stopped_at: Phase 02 stateless-atoms all 5 plans complete (ATOM-01 satisfied); ready for Phase 3
+last_updated: "2026-06-01T06:00:00.000Z"
 last_activity: 2026-06-01
 progress:
   total_phases: 7
@@ -25,9 +25,9 @@ See: .planning/PROJECT.md (updated 2026-06-01)
 
 ## Current Position
 
-Phase: 02 (stateless-atoms) — EXECUTING
-Plan: 2 of 5
-Status: Ready to execute
+Phase: 02 (stateless-atoms) — COMPLETE (all 5 plans done)
+Phase: 03 (stateful-atoms) — NEXT
+Status: Phase 2 gate approved; Phase 3 ready to start
 Last activity: 2026-06-01
 
 Progress: [██████████] 100%
@@ -75,6 +75,7 @@ None yet.
 
 - **Phase 6 (Storybook) — SPIKE RISK**: `storybook-solidjs-vite` community adapter compatibility with Storybook 10 (@addon-vitest, Chromatic) is unverified at runtime. Button story spike required before porting all 37 stories. Fallback: pin Storybook 9.x.
 - **Phase 4 — DESIGN DECISION**: Drawer.Trigger cloneElement replacement (wrapper span / display:contents / documented DOM change) must be chosen before Phase 4 execution starts. Cannot be deferred.
+- **Phase 5 polish (cosmetic, non-blocking)**: 4 ESLint warnings remain from Phase 2 gate — 2x `solid/reactivity` in Alert.tsx (onClick passthrough handlers), 2x `solid/self-closing-comp` in LinearProgress.tsx. Zero errors; zero `solid/no-destructure` violations. Optional cleanup in Phase 5.
 
 ## Deferred Items
 

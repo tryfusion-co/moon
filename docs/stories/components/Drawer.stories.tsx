@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Drawer as DrawerComponent, Button } from "@moondesignsystem/react";
+import type { Meta, StoryObj } from "storybook-solidjs-vite";
+import { Drawer as DrawerComponent, Button } from "@moondesignsystem/solid";
+import type { ComponentProps } from "solid-js";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof DrawerComponent>;
+type Type = ComponentProps<typeof DrawerComponent>;
 
 const meta: Meta<Type> = {
   component: () => <div>Coming soon</div>,
@@ -24,7 +25,7 @@ const meta: Meta<Type> = {
           <Button>Open Drawer</Button>
         </DrawerComponent.Trigger>
         <DrawerComponent.Content>
-          <div className="w-full flex items-center justify-center h-full bg-brand-subtle text-brand">
+          <div class="w-full flex items-center justify-center h-full bg-brand-subtle text-brand">
             Content
           </div>
         </DrawerComponent.Content>
@@ -65,7 +66,7 @@ export const DrawerWithHeaderAndClose: Story = {
             Drawer Title
             <DrawerComponent.Close />
           </DrawerComponent.Header>
-          <div className="w-full flex items-center justify-center h-full bg-brand-subtle text-brand">
+          <div class="w-full flex items-center justify-center h-full bg-brand-subtle text-brand">
             Content
           </div>
         </DrawerComponent.Content>

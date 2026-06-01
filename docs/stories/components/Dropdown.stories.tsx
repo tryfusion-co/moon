@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button, Dropdown as DropdownComponent } from "@moondesignsystem/react";
+import type { Meta, StoryObj } from "storybook-solidjs-vite";
+import { Button, Dropdown as DropdownComponent } from "@moondesignsystem/solid";
+import type { ComponentProps } from "solid-js";
 import LinksBlock from "../shared/LinksBlock";
 
-type Type = React.ComponentProps<typeof DropdownComponent>;
+type Type = ComponentProps<typeof DropdownComponent>;
 
 const meta: Meta<Type> = {
   title: "Containers & layout/Dropdown",
@@ -23,7 +24,7 @@ const meta: Meta<Type> = {
           <Button>Open Dropdown</Button>
         </DropdownComponent.Trigger>
         <DropdownComponent.Content>
-          <div className="w-full flex items-center justify-center h-20 bg-brand-subtle text-brand">
+          <div class="w-full flex items-center justify-center h-20 bg-brand-subtle text-brand">
             Content
           </div>
         </DropdownComponent.Content>

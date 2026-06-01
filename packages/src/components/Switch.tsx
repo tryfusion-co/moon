@@ -20,7 +20,7 @@ type SwitchProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "size"> & {
 
 const Switch: Component<SwitchProps> = (props) => {
   const merged = mergeProps({ size: "sm" } as const, props);
-  const [local, rest] = splitProps(merged, ["onChange", "size", "label", "class"]);
+  const [local, rest] = splitProps(merged, ["onChange", "onInput", "size", "label", "class"]);
 
   const handleInput: JSX.EventHandler<HTMLInputElement, InputEvent> = () => {
     if (typeof local.onChange === "function") {

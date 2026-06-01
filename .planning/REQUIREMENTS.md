@@ -30,8 +30,8 @@ Requirements for the `@moondesignsystem/solid@3.0.0` release. Each maps to a roa
 
 ### Components — Stateful Form Atoms
 
-- [ ] **FORM-01**: Stateful form atoms (Checkbox, Radio, Switch, Input, Textarea, FormGroup, SegmentedControl) ported with `createSignal` local state and `onInput` (not `onChange`) bindings, preserving controlled/uncontrolled behavior and class output
-- [ ] **FORM-02**: Carousel (complexity outlier — `useEffect`+`useCallback`+`useRef`) ported using `onMount`/`onCleanup`/local `let` ref, validating the effect+cleanup pattern
+- [x] **FORM-01**: Stateful form atoms (Checkbox, Radio, Switch, Input, Textarea, FormGroup, SegmentedControl) ported with `createSignal` local state and `onInput` (not `onChange`) bindings, preserving controlled/uncontrolled behavior and class output
+- [x] **FORM-02**: Carousel (complexity outlier — `useEffect`+`useCallback`+`useRef`) ported using `onMount`/`onCleanup`/local `let` ref, validating the effect+cleanup pattern
 
 ### Components — Compound + Portal
 
@@ -98,8 +98,8 @@ Deferred. Tracked, not in current roadmap.
 | FND-03 | Phase 1: Toolchain + Foundation | Complete |
 | FND-04 | Phase 1: Toolchain + Foundation | Complete |
 | ATOM-01 | Phase 2: Stateless Atoms | Complete |
-| FORM-01 | Phase 3: Stateful Atoms + Carousel | Pending |
-| FORM-02 | Phase 3: Stateful Atoms + Carousel | Pending |
+| FORM-01 | Phase 3: Stateful Atoms + Carousel | Complete |
+| FORM-02 | Phase 3: Stateful Atoms + Carousel | Complete |
 | CMPD-01 | Phase 4: Compound, Portal + Composite | Pending |
 | CMPD-02 | Phase 4: Compound, Portal + Composite | Pending |
 | COMP-01 | Phase 4: Compound, Portal + Composite | Pending |

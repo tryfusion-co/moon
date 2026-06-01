@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Phase 02 stateless-atoms all 5 plans complete (ATOM-01 satisfied); ready for Phase 3
-last_updated: "2026-06-01T06:00:00.000Z"
+status: Phase 3 gate approved and complete; Phase 4 ready to start
+stopped_at: Completed 03-05-PLAN.md - Phase 3 gate complete: build+test+lint green, 8 components wired
+last_updated: "2026-06-01T13:14:06.274Z"
 last_activity: 2026-06-01
 progress:
   total_phases: 7
-  completed_phases: 2
-  total_plans: 8
-  completed_plans: 8
+  completed_phases: 3
+  total_plans: 13
+  completed_plans: 13
   percent: 100
 ---
 
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-01)
 
 **Core value:** Every existing Moon component renders and behaves identically under SolidJS — same public API, same Tailwind class output, same DOM — so consuming apps get a true framework swap, not a redesign.
-**Current focus:** Phase 02 — stateless-atoms
+**Current focus:** Phase 04 — compound-portal-composite (next)
 
 ## Current Position
 
-Phase: 02 (stateless-atoms) — COMPLETE (all 5 plans done)
-Phase: 03 (stateful-atoms) — NEXT
-Status: Phase 2 gate approved; Phase 3 ready to start
+Phase: 03 (stateful-atoms-carousel) — COMPLETE (all 5 plans done)
+Phase: 04 (compound-portal-composite) — NEXT
+Status: Phase 3 gate approved and complete; Phase 4 ready to start
 Last activity: 2026-06-01
 
 Progress: [██████████] 100%
@@ -75,7 +75,7 @@ None yet.
 
 - **Phase 6 (Storybook) — SPIKE RISK**: `storybook-solidjs-vite` community adapter compatibility with Storybook 10 (@addon-vitest, Chromatic) is unverified at runtime. Button story spike required before porting all 37 stories. Fallback: pin Storybook 9.x.
 - **Phase 4 — DESIGN DECISION**: Drawer.Trigger cloneElement replacement (wrapper span / display:contents / documented DOM change) must be chosen before Phase 4 execution starts. Cannot be deferred.
-- **Phase 5 polish (cosmetic, non-blocking)**: 4 ESLint warnings remain from Phase 2 gate — 2x `solid/reactivity` in Alert.tsx (onClick passthrough handlers), 2x `solid/self-closing-comp` in LinearProgress.tsx. Zero errors; zero `solid/no-destructure` violations. Optional cleanup in Phase 5.
+- **Phase 5 polish (cosmetic, non-blocking)**: 12 ESLint warnings remain from Phase 3 gate — 2x `solid/reactivity` in Alert.tsx, 2x `solid/self-closing-comp` in LinearProgress.tsx, 4x `solid/reactivity`/`solid/components-return-once` in Checkbox.tsx + Radio.tsx, 3x `solid/reactivity` in SegmentedControl.tsx. Zero errors; zero `solid/no-destructure` violations. Optional cleanup in Phase 5.
 
 ## Deferred Items
 
@@ -86,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-01T05:00:40.875Z
+Last session: 2026-06-01T13:14:06.263Z
 Stopped at: Phase 01 toolchain-foundation verified complete; ready for Phase 2
 Resume file: None

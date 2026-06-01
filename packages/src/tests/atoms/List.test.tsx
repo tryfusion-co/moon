@@ -1,5 +1,5 @@
-import { render } from "@solidjs/testing-library";
-import { describe, it, expect } from "vitest";
+import { render, fireEvent } from "@solidjs/testing-library";
+import { describe, it, expect, vi } from "vitest";
 import List from "../../components/List";
 
 describe("List", () => {
@@ -14,6 +14,18 @@ describe("List", () => {
     expect(ul).not.toBeNull();
     expect(ul!.className).toBe("moon-list");
     expect(ul!.className).not.toContain("moon-list-md");
+  });
+
+  it("renders children text content", () => {
+    const { container } = render(() => (
+      <List>
+        <List.Item>Item 1</List.Item>
+        <List.Item>Item 2</List.Item>
+      </List>
+    ));
+    const items = container.querySelectorAll("li");
+    expect(items[0].textContent).toBe("Item 1");
+    expect(items[1].textContent).toBe("Item 2");
   });
 
   it("applies size modifier moon-list-sm for size=sm", () => {
@@ -66,6 +78,18 @@ describe("List", () => {
     ));
     const li = container.querySelector("li")!;
     expect(li.className).toBe("moon-list-item custom-item");
+  });
+
+  it("List.Item onClick handler fires on click", () => {
+    const onClick = vi.fn();
+    const { container } = render(() => (
+      <List>
+        <List.Item data-testid="item" onClick={onClick}>Click me</List.Item>
+      </List>
+    ));
+    const li = container.querySelector("li")!;
+    fireEvent.click(li);
+    expect(onClick).toHaveBeenCalled();
   });
 
   it("renders List.Meta as div.moon-list-item-meta", () => {

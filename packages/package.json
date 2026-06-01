@@ -50,7 +50,7 @@
     "test:watch": "vitest"
   },
   "bin": {
-    "moon-solid": "bin/moon-react"
+    "moon-solid": "bin/moon-solid"
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",

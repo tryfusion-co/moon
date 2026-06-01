@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Stateless Atoms** - Port all 12 stateless atom components using the canonical mergeProps+splitProps pattern (completed 2026-06-01)
 - [ ] **Phase 3: Stateful Atoms + Carousel** - Port form atoms (createSignal) and the Carousel lifecycle-complexity outlier
 - [x] **Phase 4: Compound, Portal + Composite** - Port all compound/portal components (createContext, signal-wrapped refs, Portal) and composite components; resolve Drawer.Trigger cloneElement design decision (completed 2026-06-01)
-- [x] **Phase 5: Tests** - Rewrite all 18 test files for @solidjs/testing-library + Vitest; normalize filenames to PascalCase (completed 2026-06-01)
+- [x] **Phase 5: Tests** - Rewrite all 18 test files for @solidjs/testing-library + Vitest; normalize filenames to PascalCase (completed 2026-06-01)
 - [ ] **Phase 6: Storybook** - Spike-validate storybook-solidjs-vite against Storybook 10, then port all 37 stories
 - [ ] **Phase 7: CLI + Release** - Rename CLI bin, update docs, dry-run publish, verify solid export condition in smoke consumer
 
@@ -126,7 +126,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. `npx @moondesignsystem/solid --add button` (via `bin/moon-solid`) scaffolds a valid Solid component template; `bin/moon-react` no longer exists and the `package.json` `bin` field is updated
   2. `npm publish --dry-run` exits zero with no missing-file or missing-export-condition errors
   3. A fresh SolidJS + Vite consumer project installs the package via `file:../packages` and renders a component, resolving through the `solid` export condition (not the `import` condition)
-**Plans**: TBD
+**Plans**: 3 plans
+- [ ] 07-01-PLAN.md — CLI bin rename moon-react→moon-solid (file + package.json value) + MOON_SOLID_ARGS rename + scaffold-then-typecheck Solid (CLI-01) [Wave 1]
+- [ ] 07-02-PLAN.md — README (root + packages) Solid rewrite + CHANGELOG 3.0.0 React→Solid entry + prepared major changeset (REL-01) [Wave 1]
+- [ ] 07-03-PLAN.md — npm publish --dry-run + tarball audit + smoke-consumer solid-condition + whole-repo milestone gate (human-verify) (REL-02 + D-07) [Wave 2]
 
 ## Progress
 
@@ -141,4 +144,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. Compound, Portal + Composite | 5/5 | Complete   | 2026-06-01 |
 | 5. Tests | 5/5 | Complete   | 2026-06-01 |
 | 6. Storybook | 6/6 | Complete   | 2026-06-01 |
-| 7. CLI + Release | 0/TBD | Not started | - |
+| 7. CLI + Release | 0/3 | Not started | - |

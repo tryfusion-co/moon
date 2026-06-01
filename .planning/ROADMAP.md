@@ -120,7 +120,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 |-------|----------------|--------|-----------|
 | 1. Toolchain + Foundation | 3/3 | Complete   | 2026-06-01 |
 | 2. Stateless Atoms | 5/5 | Complete   | 2026-06-01 |
-| 3. Stateful Atoms + Carousel | 0/5 | Not started | - |
+| 3. Stateful Atoms + Carousel | 5/5 | Complete   | 2026-06-01 |
 | 4. Compound, Portal + Composite | 0/TBD | Not started | - |
 | 5. Tests | 0/TBD | Not started | - |
 | 6. Storybook | 0/TBD | Not started | - |

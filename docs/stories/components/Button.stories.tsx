@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@moondesignsystem/react";
-import LinksBlock from "../shared/LinksBlock";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import { Button } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
+import LinksBlock from '../shared/LinksBlock';
 
-type Type = React.ComponentProps<typeof Button>;
+type Type = ComponentProps<typeof Button>;
 
 const meta: Meta<Type> = {
-  title: "Actions/Button",
+  title: 'Actions/Button',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -15,50 +16,50 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     size: {
-      description: "Defines Button size",
-      options: ["xs", "sm", "md", "lg", "xl"],
-      control: "select",
+      description: 'Defines Button size',
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "md" },
+        defaultValue: { summary: 'md' },
       },
     },
     disabled: {
-      description: "Disables Button when set to true",
-      control: { type: "boolean" },
+      description: 'Disables Button when set to true',
+      control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: "false" },
+        defaultValue: { summary: 'false' },
       },
     },
     isFullWidth: {
-      description: "Sets Button to full width",
-      control: { type: "boolean" },
+      description: 'Sets Button to full width',
+      control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: "false" },
+        defaultValue: { summary: 'false' },
       },
     },
     variant: {
-      description: "Defines Button variant",
-      options: ["fill", "outline", "soft", "ghost"],
-      control: "select",
+      description: 'Defines Button variant',
+      options: ['fill', 'outline', 'soft', 'ghost'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "fill" },
+        defaultValue: { summary: 'fill' },
       },
     },
     context: {
-      description: "Defines Button context",
-      options: ["brand", "neutral", "positive", "negative", "caution", "info"],
-      control: "select",
+      description: 'Defines Button context',
+      options: ['brand', 'neutral', 'positive', 'negative', 'caution', 'info'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "brand" },
+        defaultValue: { summary: 'brand' },
       },
     },
   },
   render: ({ variant, size, context, ...props }) => {
     const buttonProps = {
       ...props,
-      ...(variant !== "fill" && { variant }),
-      ...(size !== "md" && { size }),
-      ...(context !== "brand" && { context }),
+      ...(variant !== 'fill' && { variant }),
+      ...(size !== 'md' && { size }),
+      ...(context !== 'brand' && { context }),
     };
     return <Button {...buttonProps}>Button</Button>;
   },
@@ -70,9 +71,9 @@ type Story = StoryObj<Type>;
 
 export const ButtonStory: Story = {
   args: {
-    size: "md",
-    variant: "fill",
-    context: "brand",
+    size: 'md',
+    variant: 'fill',
+    context: 'brand',
     disabled: false,
     isFullWidth: false,
   },

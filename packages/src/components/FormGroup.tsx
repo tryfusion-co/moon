@@ -1,54 +1,55 @@
-import React from "react";
+import { splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 
-type Props = React.ComponentProps<"div"> & {
-  className?: string;
+type RootProps = JSX.HTMLAttributes<HTMLDivElement> & {
   error?: boolean;
-  children?: React.ReactNode;
+  class?: string;
+  children?: JSX.Element;
 };
 
-type LabelProps = React.ComponentProps<"label"> & {
-  className?: string;
-  children?: React.ReactNode;
+type LabelProps = JSX.LabelHTMLAttributes<HTMLLabelElement> & {
+  class?: string;
+  children?: JSX.Element;
 };
 
-type HintProps = React.ComponentProps<"p"> & {
-  className?: string;
-  children?: React.ReactNode;
+type HintProps = JSX.HTMLAttributes<HTMLParagraphElement> & {
+  class?: string;
+  children?: JSX.Element;
 };
 
-const Root = ({ className, error, children, ...props }: Props) => {
-  const classes = mergeClasses(
-    "moon-form-group",
-    error && "moon-form-group-error",
-    className
-  );
-
+const Root: Component<RootProps> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "error", "children"]);
   return (
-    <div className={classes} {...props}>
-      {children}
+    <div
+      class={mergeClasses(
+        "moon-form-group",
+        local.error && "moon-form-group-error",
+        local.class
+      )}
+      {...rest}
+    >
+      {local.children}
     </div>
   );
 };
 
-const Label = ({ className, children, ...props }: LabelProps) => (
-  <label className={className} {...props}>
-    {children}
-  </label>
-);
-
-const Hint = ({ className, children, ...props }: HintProps) => {
-  const classes = mergeClasses("moon-form-hint", className);
+const Label: Component<LabelProps> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "children"]);
   return (
-    <p className={classes} {...props}>
-      {children}
-    </p>
+    <label class={local.class} {...rest}>
+      {local.children}
+    </label>
   );
 };
 
-Root.displayName = "FormGroup";
-Label.displayName = "FormGroup.Label";
-Hint.displayName = "FormGroup.Hint";
+const Hint: Component<HintProps> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "children"]);
+  return (
+    <p class={mergeClasses("moon-form-hint", local.class)} {...rest}>
+      {local.children}
+    </p>
+  );
+};
 
 const FormGroup = Object.assign(Root, { Label, Hint });
 

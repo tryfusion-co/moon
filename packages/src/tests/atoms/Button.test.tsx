@@ -1,5 +1,5 @@
-import { render } from "@solidjs/testing-library";
-import { describe, it, expect } from "vitest";
+import { fireEvent, render } from "@solidjs/testing-library";
+import { describe, it, expect, vi } from "vitest";
 import Button from "../../components/Button";
 
 describe("Button", () => {
@@ -30,5 +30,13 @@ describe("Button", () => {
     const { container } = render(() => <Button disabled />);
     const button = container.firstChild as HTMLButtonElement;
     expect(button.disabled).toBe(true);
+  });
+
+  it("calls onClick handler when clicked", () => {
+    const handleClick = vi.fn();
+    const { container } = render(() => <Button onClick={handleClick}>Click</Button>);
+    const button = container.firstChild as HTMLButtonElement;
+    fireEvent.click(button);
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 });

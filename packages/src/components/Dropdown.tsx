@@ -1,51 +1,47 @@
-import React from "react";
+import { splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 
 type DropdownProps = {
-  children: React.ReactNode;
-  className?: string;
+  children?: JSX.Element;
+  class?: string;
 };
 
 type DropdownTriggerProps = {
-  children: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
+  children?: JSX.Element;
 };
 
 type DropdownContentProps = {
-  children: React.ReactNode;
-  className?: string;
+  children?: JSX.Element;
+  class?: string;
 };
 
-const Trigger = ({ children }: DropdownTriggerProps) => {
-  return React.cloneElement(children, {
-    tabIndex: 0,
-    role: "button",
-  });
-};
-
-const Content = ({ children, className }: DropdownContentProps) => {
+const Trigger: Component<DropdownTriggerProps> = (props) => {
+  const [local] = splitProps(props, ["children"]);
   return (
-    <div
-      tabIndex={0}
-      className={mergeClasses("moon-dropdown-content", className)}
-    >
-      {children}
+    <span style={{ display: "contents" }} tabIndex={0} role="button">
+      {local.children}
+    </span>
+  );
+};
+
+const Content: Component<DropdownContentProps> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
+  return (
+    <div tabIndex={0} class={mergeClasses("moon-dropdown-content", local.class)} {...rest}>
+      {local.children}
     </div>
   );
 };
 
-const Root = ({ children, className }: DropdownProps) => {
+const Root: Component<DropdownProps> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
   return (
-    <div className={mergeClasses("moon-dropdown", className)}>{children}</div>
+    <div class={mergeClasses("moon-dropdown", local.class)} {...rest}>
+      {local.children}
+    </div>
   );
 };
 
-Root.displayName = "Dropdown";
-Trigger.displayName = "Dropdown.Trigger";
-Content.displayName = "Dropdown.Content";
-
-const Dropdown = Object.assign(Root, {
-  Trigger,
-  Content,
-});
+const Dropdown = Object.assign(Root, { Trigger, Content });
 
 export default Dropdown;

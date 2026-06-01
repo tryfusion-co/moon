@@ -1,43 +1,53 @@
-import React from "react";
+import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes } from "../types";
 
 export type MenuSizes = Extract<Sizes, "sm" | "md" | "lg">;
 
 type BaseProps = {
-  children: React.ReactNode;
-  className?: string;
+  children?: JSX.Element;
+  class?: string;
 };
 
-type MenuProps = BaseProps & {
-  size?: MenuSizes;
+type MenuProps = JSX.HTMLAttributes<HTMLUListElement> &
+  BaseProps & {
+    size?: MenuSizes;
+  };
+
+const Item: Component<JSX.HTMLAttributes<HTMLLIElement> & BaseProps> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
+  return (
+    <li class={mergeClasses("moon-menu-item", local.class)} {...rest}>
+      {local.children}
+    </li>
+  );
 };
 
-const Item = ({ children, className }: BaseProps) => (
-  <li className={mergeClasses("moon-menu-item", className)}>{children}</li>
-);
+const Meta: Component<JSX.HTMLAttributes<HTMLDivElement> & BaseProps> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
+  return (
+    <div class={mergeClasses("moon-menu-item-meta", local.class)} {...rest}>
+      {local.children}
+    </div>
+  );
+};
 
-const Meta = ({ children, className }: BaseProps) => (
-  <div className={mergeClasses("moon-menu-item-meta", className)}>
-    {children}
-  </div>
-);
-
-const Root = ({ size = "md", children, className }: MenuProps) => (
-  <ul
-    className={mergeClasses(
-      "moon-menu",
-      size !== "md" && `moon-menu-${size}`,
-      className
-    )}
-  >
-    {children}
-  </ul>
-);
-
-Root.displayName = "Menu";
-Item.displayName = "Menu.Item";
-Meta.displayName = "Menu.Meta";
+const Root: Component<MenuProps> = (props) => {
+  const merged = mergeProps({ size: "md" as MenuSizes }, props);
+  const [local, rest] = splitProps(merged, ["children", "size", "class"]);
+  return (
+    <ul
+      class={mergeClasses(
+        "moon-menu",
+        local.size !== "md" && `moon-menu-${local.size}`,
+        local.class
+      )}
+      {...rest}
+    >
+      {local.children}
+    </ul>
+  );
+};
 
 const Menu = Object.assign(Root, { Item, Meta });
 

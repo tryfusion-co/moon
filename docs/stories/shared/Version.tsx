@@ -1,4 +1,3 @@
-import React from "react";
 // @ts-ignore - JSON import
 import packageJson from "../../../packages/package.json";
 

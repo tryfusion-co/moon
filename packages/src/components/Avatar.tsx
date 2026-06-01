@@ -1,4 +1,4 @@
-import React from "react";
+import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
 import User from "../assets/icons/User";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes, Variants } from "../types";
@@ -10,34 +10,29 @@ export type AvatarSizes = Extract<
 
 export type AvatarVariants = Extract<Variants, "fill" | "soft">;
 
-type Props = React.ComponentProps<"div"> & {
+type AvatarProps = JSX.HTMLAttributes<HTMLDivElement> & {
   size?: AvatarSizes;
   variant?: AvatarVariants;
-  className?: string;
-  children?: React.ReactNode;
+  class?: string;
+  children?: JSX.Element;
 };
 
-const Avatar = ({
-  size = "md",
-  variant = "fill",
-  className,
-  children,
-  ...props
-}: Props) => {
-  const classes = mergeClasses(
-    "moon-avatar",
-    size !== "md" && `moon-avatar-${size}`,
-    variant !== "fill" && `moon-avatar-${variant}`,
-    className
-  );
-
+const Avatar: Component<AvatarProps> = (props) => {
+  const merged = mergeProps({ size: "md", variant: "fill" } as const, props);
+  const [local, rest] = splitProps(merged, ["size", "variant", "class", "children"]);
   return (
-    <div className={classes} {...props}>
-      {children || <User />}
+    <div
+      class={mergeClasses(
+        "moon-avatar",
+        local.size !== "md" && `moon-avatar-${local.size}`,
+        local.variant !== "fill" && `moon-avatar-${local.variant}`,
+        local.class
+      )}
+      {...rest}
+    >
+      {local.children || <User />}
     </div>
   );
 };
-
-Avatar.displayName = "Avatar";
 
 export default Avatar;

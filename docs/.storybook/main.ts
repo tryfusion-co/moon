@@ -2,7 +2,7 @@ import type { StorybookConfig } from 'storybook-solidjs-vite';
 import path from 'path';
 
 const getAbsolutePath = (packageName: string): string =>
-  path.dirname(import.meta.resolve(path.join(packageName, 'package.json'))).replace(/^file:\/\//, '');
+  path.dirname(import.meta.resolve(`${packageName}/package.json`)).replace(/^file:\/\//, '');
 
 const config: StorybookConfig = {
   stories: [

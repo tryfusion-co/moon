@@ -9,12 +9,12 @@ Requirements for the `@moondesignsystem/solid@3.0.0` release. Each maps to a roa
 
 ### Toolchain
 
-- [ ] **TOOL-01**: Package builds with `vite build --lib` + `vite-plugin-solid`, emitting ESM + `.d.ts` (replaces type-only `tsc` emit)
-- [ ] **TOOL-02**: `package.json` declares the mandatory `solid` export condition pointing to preserved-JSX output, plus `import`/`types` conditions
-- [ ] **TOOL-03**: Package renamed `@moondesignsystem/react` → `@moondesignsystem/solid`, version `3.0.0`, peer dep `solid-js@^1.9.13` (React/react-dom peer deps removed)
-- [ ] **TOOL-04**: `tsconfig` uses `jsx: preserve` + `jsxImportSource: solid-js` (no more `react-jsx`)
-- [ ] **TOOL-05**: Test runner is Vitest + `vite-plugin-solid` + `@solidjs/testing-library` + jsdom, with the `resolve.conditions` browser fix that prevents "Client-only API called on server" failures
-- [ ] **TOOL-06**: ESLint uses `eslint-plugin-solid` flat config with `solid/no-destructure` enabled (blocks the #1 reactivity trap by tooling, not convention); React lint plugins removed
+- [x] **TOOL-01**: Package builds with `vite build --lib` + `vite-plugin-solid`, emitting ESM + `.d.ts` (replaces type-only `tsc` emit)
+- [x] **TOOL-02**: `package.json` declares the mandatory `solid` export condition pointing to preserved-JSX output, plus `import`/`types` conditions
+- [x] **TOOL-03**: Package renamed `@moondesignsystem/react` → `@moondesignsystem/solid`, version `3.0.0`, peer dep `solid-js@^1.9.13` (React/react-dom peer deps removed)
+- [x] **TOOL-04**: `tsconfig` uses `jsx: preserve` + `jsxImportSource: solid-js` (no more `react-jsx`)
+- [x] **TOOL-05**: Test runner is Vitest + `vite-plugin-solid` + `@solidjs/testing-library` + jsdom, with the `resolve.conditions` browser fix that prevents "Client-only API called on server" failures
+- [x] **TOOL-06**: ESLint uses `eslint-plugin-solid` flat config with `solid/no-destructure` enabled (blocks the #1 reactivity trap by tooling, not convention); React lint plugins removed
 - [ ] **TOOL-07**: Empty/barrel build succeeds end-to-end on the new toolchain before any component is ported (toolchain validated independently)
 
 ### Foundation
@@ -86,12 +86,12 @@ Deferred. Tracked, not in current roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TOOL-01 | Phase 1: Toolchain + Foundation | Pending |
-| TOOL-02 | Phase 1: Toolchain + Foundation | Pending |
-| TOOL-03 | Phase 1: Toolchain + Foundation | Pending |
-| TOOL-04 | Phase 1: Toolchain + Foundation | Pending |
-| TOOL-05 | Phase 1: Toolchain + Foundation | Pending |
-| TOOL-06 | Phase 1: Toolchain + Foundation | Pending |
+| TOOL-01 | Phase 1: Toolchain + Foundation | Complete |
+| TOOL-02 | Phase 1: Toolchain + Foundation | Complete |
+| TOOL-03 | Phase 1: Toolchain + Foundation | Complete |
+| TOOL-04 | Phase 1: Toolchain + Foundation | Complete |
+| TOOL-05 | Phase 1: Toolchain + Foundation | Complete |
+| TOOL-06 | Phase 1: Toolchain + Foundation | Complete |
 | TOOL-07 | Phase 1: Toolchain + Foundation | Pending |
 | FND-01 | Phase 1: Toolchain + Foundation | Pending |
 | FND-02 | Phase 1: Toolchain + Foundation | Pending |

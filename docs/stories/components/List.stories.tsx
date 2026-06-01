@@ -1,12 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { List as ListComponent } from "@moondesignsystem/react";
-import LinksBlock from "../shared/LinksBlock";
-import StarIcon from "../shared/icons/StarIcon";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import { List as ListComponent } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
+import { For } from 'solid-js';
+import LinksBlock from '../shared/LinksBlock';
+import StarIcon from '../shared/icons/StarIcon';
 
-type Type = React.ComponentProps<typeof ListComponent>;
+type Type = ComponentProps<typeof ListComponent>;
 
 const meta: Meta<Type> = {
-  title: "Content display/List",
+  title: 'Content display/List',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -16,25 +18,27 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     size: {
-      description: "Defines List item size",
-      options: ["sm", "md", "lg"],
-      control: "select",
+      description: 'Defines List item size',
+      options: ['sm', 'md', 'lg'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "md" },
+        defaultValue: { summary: 'md' },
       },
     },
   },
   render: ({ size, ...props }) => {
     const listProps = {
       ...props,
-      ...(size !== "md" && { size }),
+      ...(size !== 'md' && { size }),
     };
-    const items = new Array(3).fill("");
+    const items = new Array(3).fill('');
     return (
       <ListComponent {...listProps}>
-        {items.map((_, index) => (
-          <ListComponent.Item key={index}>Item {index + 1}</ListComponent.Item>
-        ))}
+        <For each={items}>
+          {(_, index) => (
+            <ListComponent.Item>Item {index() + 1}</ListComponent.Item>
+          )}
+        </For>
       </ListComponent>
     );
   },
@@ -46,30 +50,32 @@ type Story = StoryObj<Type>;
 
 export const List: Story = {
   args: {
-    size: "md",
+    size: 'md',
   },
 };
 
 export const ListWithMeta: Story = {
   args: {
-    size: "md",
+    size: 'md',
   },
   render: ({ size, ...props }) => {
     const listProps = {
       ...props,
-      ...(size !== "md" && { size }),
+      ...(size !== 'md' && { size }),
     };
-    const items = new Array(3).fill("");
+    const items = new Array(3).fill('');
     return (
       <ListComponent {...listProps}>
-        {items.map((_, index) => (
-          <ListComponent.Item key={index}>
-            Item {index + 1}
-            <ListComponent.Meta>
-              <StarIcon />
-            </ListComponent.Meta>
-          </ListComponent.Item>
-        ))}
+        <For each={items}>
+          {(_, index) => (
+            <ListComponent.Item>
+              Item {index() + 1}
+              <ListComponent.Meta>
+                <StarIcon />
+              </ListComponent.Meta>
+            </ListComponent.Item>
+          )}
+        </For>
       </ListComponent>
     );
   },

@@ -49,7 +49,7 @@ Per story, the Solid CSF translation:
 - `import type { Meta, StoryObj } from "@storybook/react"` → from `storybook-solidjs-vite`.
 - `import { X } from "@moondesignsystem/react"` → `from "@moondesignsystem/solid"`.
 - `type Type = React.ComponentProps<typeof X>` → `ComponentProps<typeof X>` from `solid-js` (or the story's prop type).
-- `render: (args) => <X {...args}/>` (React returns element) → Solid CSF: `render: (args) => () => <X {...args}/>` (Solid render returns a FUNCTION/component — the extra wrapper is mandatory; confirm exact signature via research). Story render fns that destructure args + build conditional props (like Button's `render: ({variant,size,...}) => ...`) keep the logic but return the Solid-wrapped component.
+- `render: (args) => <X {...args}/>` — **CORRECTED by research (06-RESEARCH.md)**: storybook-solidjs-vite@10 uses the SAME signature as React CSF — `render: (args) => <X {...args}/>`. NO double-wrapper `() => () =>`. The double-wrapper was a pre-v9 pattern and renders a function object to the DOM in v10. Story render fns that destructure args + build conditional props (like Button's `render: ({variant,size,...}) => ...`) keep the logic and return `<X .../>` directly.
 - JSX in render fns: `className`→`class` if any; React event types → Solid.
 - `StoryObj`/`Meta` generics + `args` stay structurally the same.
 - mdx (gettingStarted.mdx) — verify it still renders under Solid autodocs; adjust imports if it pulls React components.

@@ -75,6 +75,7 @@ Every existing Moon component renders and behaves identically under SolidJS — 
 | `storybook-solidjs` for docs, port all stories | Keep Storybook parity; community renderer is the only Solid option | — Pending (compat risk) |
 | Normalize test filenames to PascalCase | Fix `accordion.test.tsx` outlier for consistency | — Pending |
 | `splitProps`/`mergeProps` for every component | Solid reactivity requires no prop destructuring | — Pending |
+| Chip uncontrolled-toggle divergence from React is intentional | React's `isActive=false` default made the internal toggle dead code (clicking never activated the chip). Solid port omits that default so `local.isActive` is `undefined` when uncontrolled, allowing the signal to drive `moon-chip-active` on click. This is an accepted behavior improvement over the React original, not a parity bug. CR-01 rejected. | — Accepted |
 | Real bundled build (tsup/vite-lib) replaces type-only `tsc` | Solid JSX needs babel-preset-solid compilation | — Pending |
 
 ## Evolution

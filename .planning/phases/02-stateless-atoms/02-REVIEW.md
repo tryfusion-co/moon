@@ -22,6 +22,13 @@ findings:
   info: 2
   total: 6
 status: issues_found
+fix_status:
+  CR-01: rejected/intentional
+  WR-01: fixed
+  WR-02: fixed
+  WR-03: fixed
+  IN-01: deferred
+  IN-02: deferred
 ---
 
 # Phase 02: Code Review Report

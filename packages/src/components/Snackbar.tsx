@@ -1,4 +1,4 @@
-import React from "react";
+import { mergeProps, splitProps, Show, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Variants, Contexts } from "../types";
 
@@ -6,78 +6,60 @@ export type SnackbarVariants = Extract<Variants, "fill" | "soft">;
 
 type SnackbarProps = {
   isOpen: boolean;
-  children: React.ReactNode;
+  children?: JSX.Element;
   variant?: SnackbarVariants;
   context?: Contexts;
 };
 
-const Action = ({
-  children,
-  className,
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) => {
+type SnackbarSubProps = {
+  children?: JSX.Element;
+  class?: string;
+};
+
+const Action: Component<JSX.HTMLAttributes<HTMLDivElement> & SnackbarSubProps> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
   return (
-    <div className={mergeClasses("moon-snackbar-action", className)}>
-      {children}
+    <div class={mergeClasses("moon-snackbar-action", local.class)} {...rest}>
+      {local.children}
     </div>
   );
 };
 
-const Meta = ({
-  children,
-  className,
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) => {
+const Meta: Component<JSX.HTMLAttributes<HTMLDivElement> & SnackbarSubProps> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
   return (
-    <div className={mergeClasses("moon-snackbar-meta", className)}>
-      {children}
+    <div class={mergeClasses("moon-snackbar-meta", local.class)} {...rest}>
+      {local.children}
     </div>
   );
 };
 
-const Group = ({
-  children,
-  className,
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) => {
+const Group: Component<JSX.HTMLAttributes<HTMLDivElement> & SnackbarSubProps> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
   return (
-    <div className={mergeClasses("moon-snackbar-group", className)}>
-      {children}
+    <div class={mergeClasses("moon-snackbar-group", local.class)} {...rest}>
+      {local.children}
     </div>
   );
 };
 
-const Root = ({
-  isOpen,
-  children,
-  variant = "fill",
-  context = "brand",
-}: SnackbarProps) => {
+const Root: Component<SnackbarProps> = (props) => {
+  const merged = mergeProps({ variant: "fill" as SnackbarVariants, context: "brand" as Contexts }, props);
+  const [local] = splitProps(merged, ["isOpen", "children", "variant", "context"]);
   return (
-    isOpen && (
+    <Show when={local.isOpen}>
       <div
-        className={mergeClasses(
+        class={mergeClasses(
           "moon-snackbar",
-          variant !== "fill" && `moon-snackbar-${variant}`,
-          context !== "brand" && `moon-snackbar-${context}`
+          local.variant !== "fill" && `moon-snackbar-${local.variant}`,
+          local.context !== "brand" && `moon-snackbar-${local.context}`
         )}
       >
-        {children}
+        {local.children}
       </div>
-    )
+    </Show>
   );
 };
-
-Root.displayName = "Snackbar";
-Action.displayName = "Snackbar.Action";
-Meta.displayName = "Snackbar.Meta";
-Group.displayName = "Snackbar.Group";
 
 const Snackbar = Object.assign(Root, { Action, Meta, Group });
 

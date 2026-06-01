@@ -21,6 +21,22 @@ describe("Alert", () => {
     expect(div!.className).toBe("moon-alert moon-alert-outline moon-alert-error");
   });
 
+  it("applies soft variant and positive context (legacy coverage)", () => {
+    const { container } = render(() => (
+      <Alert variant="soft" context="positive">
+        Custom Alert
+      </Alert>
+    ));
+    const div = container.querySelector("div");
+    expect(div!.className).toBe("moon-alert moon-alert-soft moon-alert-positive");
+  });
+
+  it("default variant=fill context=brand: only moon-alert base class", () => {
+    const { container } = render(() => <Alert>Default Alert</Alert>);
+    const div = container.querySelector("div");
+    expect(div!.className).toBe("moon-alert");
+  });
+
   it("appends custom class after base", () => {
     const { container } = render(() => <Alert class="c">x</Alert>);
     const div = container.querySelector("div");

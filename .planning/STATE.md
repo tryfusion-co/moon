@@ -4,14 +4,14 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Phase 6 COMPLETE. All 6 plans done. Storybook fully migrated to storybook-solidjs-vite@10, all 33 component stories + gettingStarted.mdx Solid CSF, build-storybook EXIT 0 (Storybook 10.4.1, 267 modules transformed), Table on @tanstack/solid-table. STORY-01 + STORY-02 complete. Approved on green-build evidence (headless, no browser visual check). Phase 7 (CLI + Release) is next.
-last_updated: "2026-06-01T16:03:03.504Z"
-last_activity: 2026-06-01 -- Phase 07 execution started
+last_updated: "2026-06-01T16:15:23.852Z"
+last_activity: 2026-06-01
 progress:
   total_phases: 7
-  completed_phases: 6
+  completed_phases: 7
   total_plans: 32
-  completed_plans: 29
-  percent: 91
+  completed_plans: 32
+  percent: 100
 ---
 
 # Project State
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-06-01)
 ## Current Position
 
 Phase: 07 (cli-release) — EXECUTING
-Plan: 1 of 3
-Status: Executing Phase 07
-Last activity: 2026-06-01 -- Phase 07 execution started
+Plan: 2 of 3
+Status: Ready to execute
+Last activity: 2026-06-01
 
 Progress: [██████████] 100%
 
@@ -56,6 +56,7 @@ Progress: [██████████] 100%
 | Phase 02-stateless-atoms P02-05 | 15 | 3 tasks | 3 files |
 | Phase 04-compound-portal-composite P05 | 25min | - tasks | - files |
 | Phase 06-storybook P06 | 25min | 2 tasks | 4 files |
+| Phase 07-cli-release P07-03 | 15min | 3 tasks | 0 files |
 
 ## Accumulated Context
 
@@ -77,6 +78,8 @@ Recent decisions affecting current work:
 - [Phase 06 plan 01]: storybook-solidjs-vite@10.1.1 spike approved. Storybook v10.4.1, 228 modules, all 5 addons load. Windows import.meta.resolve fix: template literal (not path.join) prevents backslash ERR_INVALID_MODULE_SPECIFIER. npm install without --legacy-peer-deps. Wave 2 stories glob: full 3-glob pattern restored in main.ts.
 - [Phase ?]: Table.stories.tsx ported to @tanstack/solid-table: createSolidTable + get data() getter + createSignal + <For> loops; build-storybook exits 0 with 267 modules; STORY-02 complete
 - [Phase ?]: vite.config.ts: replaced @vitejs/plugin-react with vite-plugin-solid; root devDeps now include storybook + tslib for CLI availability in npm workspace
+- [Phase ?]: Used node --conditions=solid import.meta.resolve as smoke consumer; solid export condition resolves dist/index.jsx end-to-end
+- [Phase ?]: npm publish --dry-run is the scope boundary; real npm publish deferred to human/CI post-milestone
 
 ### Pending Todos
 
@@ -98,6 +101,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-06-01T15:47:41.105Z
+Last session: 2026-06-01T16:15:23.841Z
 Stopped at: Phase 6 COMPLETE. All 6 plans done. Storybook fully migrated to storybook-solidjs-vite@10, all 33 component stories + gettingStarted.mdx Solid CSF, build-storybook EXIT 0 (Storybook 10.4.1, 267 modules transformed), Table on @tanstack/solid-table. STORY-01 + STORY-02 complete. Approved on green-build evidence (headless, no browser visual check). Phase 7 (CLI + Release) is next.
 Resume file: None

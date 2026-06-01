@@ -127,9 +127,9 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. `npm publish --dry-run` exits zero with no missing-file or missing-export-condition errors
   3. A fresh SolidJS + Vite consumer project installs the package via `file:../packages` and renders a component, resolving through the `solid` export condition (not the `import` condition)
 **Plans**: 3 plans
-- [ ] 07-01-PLAN.md — CLI bin rename moon-react→moon-solid (file + package.json value) + MOON_SOLID_ARGS rename + scaffold-then-typecheck Solid (CLI-01) [Wave 1]
-- [ ] 07-02-PLAN.md — README (root + packages) Solid rewrite + CHANGELOG 3.0.0 React→Solid entry + prepared major changeset (REL-01) [Wave 1]
-- [ ] 07-03-PLAN.md — npm publish --dry-run + tarball audit + smoke-consumer solid-condition + whole-repo milestone gate (human-verify) (REL-02 + D-07) [Wave 2]
+- [x] 07-01-PLAN.md — CLI bin rename moon-react→moon-solid (file + package.json value) + MOON_SOLID_ARGS rename + scaffold-then-typecheck Solid (CLI-01) [Wave 1]
+- [x] 07-02-PLAN.md — README (root + packages) Solid rewrite + CHANGELOG 3.0.0 React→Solid entry + prepared major changeset (REL-01) [Wave 1]
+- [x] 07-03-PLAN.md — npm publish --dry-run + tarball audit + smoke-consumer solid-condition + whole-repo milestone gate (human-verify) (REL-02 + D-07) [Wave 2]
 
 ## Progress
 

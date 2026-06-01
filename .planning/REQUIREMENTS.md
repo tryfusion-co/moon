@@ -54,12 +54,12 @@ Requirements for the `@moondesignsystem/solid@3.0.0` release. Each maps to a roa
 
 ### Tooling — CLI
 
-- [ ] **CLI-01**: CLI scaffolder emits Solid component templates; `bin/moon-react` renamed `bin/moon-solid` and `package.json` `bin` field updated; scaffold-then-build of a generated component succeeds
+- [x] **CLI-01**: CLI scaffolder emits Solid component templates; `bin/moon-react` renamed `bin/moon-solid` and `package.json` `bin` field updated; scaffold-then-build of a generated component succeeds
 
 ### Release
 
-- [ ] **REL-01**: README + CHANGELOG updated for Solid; major version `3.0.0` set via changeset
-- [ ] **REL-02**: `npm publish --dry-run` passes and a smoke consumer (Solid + Vite app) resolves the package via the `solid` export condition and renders a component
+- [x] **REL-01**: README + CHANGELOG updated for Solid; major version `3.0.0` set via changeset
+- [x] **REL-02**: `npm publish --dry-run` passes and a smoke consumer (Solid + Vite app) resolves the package via the `solid` export condition and renders a component
 
 ## v2 Requirements
 
@@ -107,9 +107,9 @@ Deferred. Tracked, not in current roadmap.
 | TEST-02 | Phase 5: Tests | Complete |
 | STORY-01 | Phase 6: Storybook | Complete |
 | STORY-02 | Phase 6: Storybook | Complete |
-| CLI-01 | Phase 7: CLI + Release | Pending |
-| REL-01 | Phase 7: CLI + Release | Pending |
-| REL-02 | Phase 7: CLI + Release | Pending |
+| CLI-01 | Phase 7: CLI + Release | Complete |
+| REL-01 | Phase 7: CLI + Release | Complete |
+| REL-02 | Phase 7: CLI + Release | Complete |
 
 **Coverage:**
 - v1 requirements: 24 total

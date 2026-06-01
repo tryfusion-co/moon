@@ -140,5 +140,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 3. Stateful Atoms + Carousel | 5/5 | Complete   | 2026-06-01 |
 | 4. Compound, Portal + Composite | 5/5 | Complete   | 2026-06-01 |
 | 5. Tests | 5/5 | Complete   | 2026-06-01 |
-| 6. Storybook | 1/6 | In progress | - |
+| 6. Storybook | 6/6 | Complete   | 2026-06-01 |
 | 7. CLI + Release | 0/TBD | Not started | - |

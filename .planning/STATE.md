@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 6 plan 06-01 complete. storybook-solidjs-vite spike approved (build-storybook EXIT 0, 228 modules, all 5 addons loaded). STORY-01 complete. Spike approved on build-storybook-green evidence — no browser visual check available in headless context; green build + all addons load accepted as pass criterion. Wave 2 bulk porting (06-02..06-06) cleared to run in parallel.
+stopped_at: Phase 6 COMPLETE. All 6 plans done. Storybook fully migrated to storybook-solidjs-vite@10, all 33 component stories + gettingStarted.mdx Solid CSF, build-storybook EXIT 0 (Storybook 10.4.1, 267 modules transformed), Table on @tanstack/solid-table. STORY-01 + STORY-02 complete. Approved on green-build evidence (headless, no browser visual check). Phase 7 (CLI + Release) is next.
 last_updated: "2026-06-01T15:47:50.077Z"
 last_activity: 2026-06-01
 progress:
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-01)
 
 **Core value:** Every existing Moon component renders and behaves identically under SolidJS — same public API, same Tailwind class output, same DOM — so consuming apps get a true framework swap, not a redesign.
-**Current focus:** Phase 06 — storybook
+**Current focus:** Phase 07 — CLI + Release
 
 ## Current Position
 
-Phase: 06 (storybook) — EXECUTING
-Plan: 3 of 6 (06-01 complete, 06-02..06-06 ready — Wave 2 unlocked)
-Status: Ready to execute
+Phase: 06 (storybook) — COMPLETE
+Plan: 6 of 6 (all plans complete)
+Status: Phase 6 done — ready for Phase 7 (CLI + Release)
 Last activity: 2026-06-01
 
 Progress: [██████████] 100%
@@ -99,5 +99,5 @@ Recent decisions affecting current work:
 ## Session Continuity
 
 Last session: 2026-06-01T15:47:41.105Z
-Stopped at: Phase 6 plan 06-01 complete. storybook-solidjs-vite spike approved (build-storybook EXIT 0, 228 modules, all 5 addons loaded). STORY-01 complete. Spike approved on build-storybook-green evidence — no browser visual check available in headless context; green build + all addons load accepted as pass criterion. Wave 2 bulk porting (06-02..06-06) cleared to run in parallel.
+Stopped at: Phase 6 COMPLETE. All 6 plans done. Storybook fully migrated to storybook-solidjs-vite@10, all 33 component stories + gettingStarted.mdx Solid CSF, build-storybook EXIT 0 (Storybook 10.4.1, 267 modules transformed), Table on @tanstack/solid-table. STORY-01 + STORY-02 complete. Approved on green-build evidence (headless, no browser visual check). Phase 7 (CLI + Release) is next.
 Resume file: None

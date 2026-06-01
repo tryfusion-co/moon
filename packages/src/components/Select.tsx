@@ -1,4 +1,4 @@
-import React from "react";
+import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes, Variants } from "../types";
 
@@ -6,61 +6,52 @@ export type SelectSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
 export type SelectVariants = Extract<Variants, "fill" | "outline">;
 
-type SelectType = Omit<React.ComponentProps<"select">, "size">;
-
-type SelectProps = SelectType & {
+type SelectProps = JSX.SelectHTMLAttributes<HTMLSelectElement> & {
   size?: SelectSizes;
   variant?: SelectVariants;
   error?: boolean;
-  children: React.ReactNode;
-  className?: string;
+  children?: JSX.Element;
+  class?: string;
 };
 
-type SelectItemProps = React.ComponentProps<"option"> & {
-  children: React.ReactNode;
+type OptionProps = JSX.OptionHTMLAttributes<HTMLOptionElement> & {
+  children?: JSX.Element;
 };
 
-const Option = ({ children, ...props }: SelectItemProps) => (
-  <option {...props}>{children}</option>
-);
-
-type SelectItemsGroupProps = React.ComponentProps<"optgroup"> & {
-  children: React.ReactNode;
+type OptionGroupProps = JSX.OptgroupHTMLAttributes<HTMLOptGroupElement> & {
+  children?: JSX.Element;
   label: string;
   disabled?: boolean;
 };
 
-const OptionGroup = ({ children, ...props }: SelectItemsGroupProps) => (
-  <optgroup {...props}>{children}</optgroup>
-);
+const Option: Component<OptionProps> = (props) => {
+  const [local, rest] = splitProps(props, ["children"]);
+  return <option {...rest}>{local.children}</option>;
+};
 
-const Root = ({
-  children,
-  size = "md",
-  variant = "fill",
-  error = false,
-  className,
-  ...props
-}: SelectProps) => {
+const OptionGroup: Component<OptionGroupProps> = (props) => {
+  const [local, rest] = splitProps(props, ["children"]);
+  return <optgroup {...rest}>{local.children}</optgroup>;
+};
+
+const Root: Component<SelectProps> = (props) => {
+  const merged = mergeProps({ size: "md" as SelectSizes, variant: "fill" as SelectVariants, error: false }, props);
+  const [local, rest] = splitProps(merged, ["children", "size", "variant", "error", "class"]);
   return (
     <select
-      className={mergeClasses(
+      class={mergeClasses(
         "moon-select",
-        size !== "md" && `moon-select-${size}`,
-        variant !== "fill" && `moon-select-${variant}`,
-        error && "moon-select-error",
-        className
+        local.size !== "md" && `moon-select-${local.size}`,
+        local.variant !== "fill" && `moon-select-${local.variant}`,
+        local.error && "moon-select-error",
+        local.class
       )}
-      {...props}
+      {...rest}
     >
-      {children}
+      {local.children}
     </select>
   );
 };
-
-Root.displayName = "Select";
-Option.displayName = "Select.Option";
-OptionGroup.displayName = "Select.OptionGroup";
 
 const Select = Object.assign(Root, { Option, OptionGroup });
 

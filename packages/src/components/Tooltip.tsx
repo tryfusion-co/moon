@@ -1,49 +1,53 @@
-import React from "react";
+import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Positions } from "../types";
 
 export type TooltipPositions = Positions;
 
-type TooltipChildren = {
-  children: React.ReactNode;
-  className?: string;
+type TooltipChildProps = {
+  children?: JSX.Element;
+  class?: string;
 };
 
 type TooltipProps = {
-  children: React.ReactNode;
+  children?: JSX.Element;
   position?: TooltipPositions;
   hasPointer?: boolean;
 };
 
-const Trigger = ({ children, className }: TooltipChildren) => (
-  <p className={className}>{children}</p>
-);
+const Trigger: Component<TooltipChildProps> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
+  return (
+    <p class={local.class} {...rest}>
+      {local.children}
+    </p>
+  );
+};
 
-const Content = ({ children, className }: TooltipChildren) => (
-  <div className={mergeClasses("moon-tooltip-content", className)}>
-    {children}
-  </div>
-);
+const Content: Component<TooltipChildProps> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
+  return (
+    <div class={mergeClasses("moon-tooltip-content", local.class)} {...rest}>
+      {local.children}
+    </div>
+  );
+};
 
-const Root = ({
-  children,
-  position = "top",
-  hasPointer = false,
-}: TooltipProps) => (
-  <div
-    className={mergeClasses(
-      "moon-tooltip",
-      position !== "top" && `moon-tooltip-${position}`,
-      hasPointer && "moon-tooltip-pointer"
-    )}
-  >
-    {children}
-  </div>
-);
-
-Root.displayName = "Tooltip";
-Trigger.displayName = "Tooltip.Trigger";
-Content.displayName = "Tooltip.Content";
+const Root: Component<TooltipProps> = (props) => {
+  const merged = mergeProps({ position: "top" as TooltipPositions, hasPointer: false }, props);
+  const [local] = splitProps(merged, ["children", "position", "hasPointer"]);
+  return (
+    <div
+      class={mergeClasses(
+        "moon-tooltip",
+        local.position !== "top" && `moon-tooltip-${local.position}`,
+        local.hasPointer && "moon-tooltip-pointer"
+      )}
+    >
+      {local.children}
+    </div>
+  );
+};
 
 const Tooltip = Object.assign(Root, { Trigger, Content });
 

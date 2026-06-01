@@ -1,4 +1,10 @@
-import React, { useState } from "react";
+import {
+  createSignal,
+  mergeProps,
+  splitProps,
+  type Component,
+  type JSX,
+} from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes, Variants } from "../types";
 import ChevronDown from "../assets/icons/ChevronDown";
@@ -6,117 +12,105 @@ import ChevronDown from "../assets/icons/ChevronDown";
 export type AccordionSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 export type AccordionVariants = Extract<Variants, "fill" | "ghost" | "outline">;
 
-type Props = {
+type AccordionProps = {
   size?: AccordionSizes;
   variant?: AccordionVariants;
-  className?: string;
-  children: React.ReactNode;
+  class?: string;
+  children?: JSX.Element;
 };
 
 type ItemProps = {
   initiallyOpen?: boolean;
-  className?: string;
-  children: React.ReactNode;
+  class?: string;
+  children?: JSX.Element;
 };
 
-const Item = ({ initiallyOpen = false, children, className }: ItemProps) => {
-  const [isOpen, setIsOpen] = useState(initiallyOpen);
-
-  const classes = mergeClasses(
-    "moon-accordion-item",
-    isOpen && "moon-accordion-open",
-    className
-  );
-
+const Item: Component<ItemProps> = (props) => {
+  const merged = mergeProps({ initiallyOpen: false }, props);
+  const [local] = splitProps(merged, ["initiallyOpen", "children", "class"]);
+  const [isOpen, setIsOpen] = createSignal(local.initiallyOpen);
   return (
     <details
-      className={classes}
-      open={isOpen}
+      class={mergeClasses(
+        "moon-accordion-item",
+        isOpen() && "moon-accordion-open",
+        local.class
+      )}
+      open={isOpen()}
       onToggle={(e) => setIsOpen(e.currentTarget.open)}
     >
-      {children}
+      {local.children}
     </details>
   );
 };
 
-const Header = ({
-  children,
-  className,
-  ...props
-}: React.ComponentProps<"summary">) => {
-  const classes = mergeClasses("moon-accordion-item-header", className);
-
+const Header: Component<JSX.HTMLAttributes<HTMLElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
   return (
-    <summary className={classes} {...props}>
-      {children}
+    <summary
+      class={mergeClasses("moon-accordion-item-header", local.class)}
+      {...rest}
+    >
+      {local.children}
     </summary>
   );
 };
 
-const Toggle = ({
-  children,
-  className,
-  ...props
-}: React.ComponentProps<"div">) => {
-  const classes = mergeClasses("moon-accordion-item-toggle", className);
-
+const Toggle: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
   return (
-    <div className={classes} {...props}>
-      {children || <ChevronDown />}
+    <div
+      class={mergeClasses("moon-accordion-item-toggle", local.class)}
+      {...rest}
+    >
+      {local.children || <ChevronDown />}
     </div>
   );
 };
 
-const Content = ({
-  children,
-  className,
-  ...props
-}: React.ComponentProps<"div">) => {
-  const classes = mergeClasses("moon-accordion-item-content", className);
-
+const Content: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
   return (
-    <div className={classes} {...props}>
-      {children}
+    <div
+      class={mergeClasses("moon-accordion-item-content", local.class)}
+      {...rest}
+    >
+      {local.children}
     </div>
   );
 };
 
-const Meta = ({
-  children,
-  className,
-  ...props
-}: React.ComponentProps<"div">) => {
-  const classes = mergeClasses("moon-accordion-item-meta", className);
-
+const Meta: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["children", "class"]);
   return (
-    <div className={classes} {...props}>
-      {children}
+    <div
+      class={mergeClasses("moon-accordion-item-meta", local.class)}
+      {...rest}
+    >
+      {local.children}
     </div>
   );
 };
 
-const Root = ({
-  size = "md",
-  variant = "fill",
-  className,
-  children,
-}: Props) => {
-  const classes = mergeClasses(
-    "moon-accordion",
-    size !== "md" && `moon-accordion-${size}`,
-    variant !== "fill" && `moon-accordion-${variant}`,
-    className
+const Root: Component<AccordionProps> = (props) => {
+  const merged = mergeProps(
+    { size: "md" as AccordionSizes, variant: "fill" as AccordionVariants },
+    props
   );
-
-  return <div className={classes}>{children}</div>;
+  const [local] = splitProps(merged, ["size", "variant", "class", "children"]);
+  return (
+    <div
+      class={mergeClasses(
+        "moon-accordion",
+        local.size !== "md" && `moon-accordion-${local.size}`,
+        local.variant !== "fill" && `moon-accordion-${local.variant}`,
+        local.class
+      )}
+    >
+      {local.children}
+    </div>
+  );
 };
-
-Root.displayName = "Accordion";
-Item.displayName = "Accordion.Item";
-Header.displayName = "Accordion.Header";
-Toggle.displayName = "Accordion.Toggle";
-Content.displayName = "Accordion.Content";
-Meta.displayName = "Accordion.Meta";
 
 const Accordion = Object.assign(Root, {
   Item,

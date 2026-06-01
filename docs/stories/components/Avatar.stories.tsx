@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import LinksBlock from "../shared/LinksBlock";
-import { Avatar as AvatarComponent } from "@moondesignsystem/react";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import LinksBlock from '../shared/LinksBlock';
+import { Avatar as AvatarComponent } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
 
-type Type = React.ComponentProps<typeof AvatarComponent>;
+type Type = ComponentProps<typeof AvatarComponent>;
 
 const meta: Meta<Type> = {
-  title: "Content display/Avatar",
+  title: 'Content display/Avatar',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -15,31 +16,31 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     size: {
-      description: "Defines Avatar size",
-      options: ["xs", "sm", "md", "lg", "xl", "2xl"],
-      control: "select",
+      description: 'Defines Avatar size',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "md" },
+        defaultValue: { summary: 'md' },
       },
     },
     variant: {
-      description: "Defines Avatar variant",
-      options: ["fill", "soft"],
-      control: "select",
+      description: 'Defines Avatar variant',
+      options: ['fill', 'soft'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "fill" },
+        defaultValue: { summary: 'fill' },
       },
     },
     children: {
-      description: "Custom content of Avatar",
-      control: { type: "text" },
+      description: 'Custom content of Avatar',
+      control: { type: 'text' },
     },
   },
   render: ({ size, variant, children, ...props }) => {
     const avatarProps = {
       ...props,
-      ...(size !== "md" && { size }),
-      ...(variant !== "fill" && { variant }),
+      ...(size !== 'md' && { size }),
+      ...(variant !== 'fill' && { variant }),
     };
     return <AvatarComponent {...avatarProps}>{children}</AvatarComponent>;
   },
@@ -51,8 +52,8 @@ type Story = StoryObj<Type>;
 
 export const Avatar: Story = {
   args: {
-    size: "md",
-    variant: "fill",
-    children: "",
+    size: 'md',
+    variant: 'fill',
+    children: '',
   },
 };

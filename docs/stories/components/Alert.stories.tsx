@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import LinksBlock from "../shared/LinksBlock";
-import { Alert as AlertComponent } from "@moondesignsystem/react";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import LinksBlock from '../shared/LinksBlock';
+import { Alert as AlertComponent } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
 
-type Type = React.ComponentProps<typeof AlertComponent>;
+type Type = ComponentProps<typeof AlertComponent>;
 
 const meta: Meta<Type> = {
-  title: "Messaging & feedback/Alert",
+  title: 'Messaging & feedback/Alert',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -15,27 +16,27 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     variant: {
-      description: "Defines Alert variant",
-      options: ["fill", "soft", "outline"],
-      control: "select",
+      description: 'Defines Alert variant',
+      options: ['fill', 'soft', 'outline'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "fill" },
+        defaultValue: { summary: 'fill' },
       },
     },
     context: {
-      description: "Defines Alert context",
-      options: ["brand", "neutral", "positive", "negative", "caution", "info"],
-      control: "select",
+      description: 'Defines Alert context',
+      options: ['brand', 'neutral', 'positive', 'negative', 'caution', 'info'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "brand" },
+        defaultValue: { summary: 'brand' },
       },
     },
   },
   render: ({ variant, context, ...props }) => {
     const alertProps = {
       ...props,
-      ...(variant !== "fill" && { variant }),
-      ...(context !== "brand" && { context }),
+      ...(variant !== 'fill' && { variant }),
+      ...(context !== 'brand' && { context }),
     };
     return <AlertComponent {...alertProps}>Alert</AlertComponent>;
   },
@@ -46,16 +47,16 @@ export default meta;
 type Story = StoryObj<Type>;
 
 export const Alert: Story = {
-  args: { variant: "fill", context: "brand" },
+  args: { variant: 'fill', context: 'brand' },
 };
 
 export const AlertWithMeta: Story = {
-  args: { variant: "fill", context: "brand" },
+  args: { variant: 'fill', context: 'brand' },
   render: ({ variant, context, ...props }) => {
     const alertProps = {
       ...props,
-      ...(variant !== "fill" && { variant }),
-      ...(context !== "brand" && { context }),
+      ...(variant !== 'fill' && { variant }),
+      ...(context !== 'brand' && { context }),
     };
     return (
       <AlertComponent {...alertProps}>
@@ -70,12 +71,12 @@ export const AlertWithMeta: Story = {
 };
 
 export const AlertWithContent: Story = {
-  args: { variant: "fill", context: "brand" },
+  args: { variant: 'fill', context: 'brand' },
   render: ({ variant, context, ...props }) => {
     const alertProps = {
       ...props,
-      ...(variant !== "fill" && { variant }),
-      ...(context !== "brand" && { context }),
+      ...(variant !== 'fill' && { variant }),
+      ...(context !== 'brand' && { context }),
     };
     return (
       <AlertComponent {...alertProps}>

@@ -1,5 +1,5 @@
-import { render } from "@solidjs/testing-library";
-import { describe, it, expect } from "vitest";
+import { fireEvent, render } from "@solidjs/testing-library";
+import { describe, it, expect, vi } from "vitest";
 import Checkbox from "../../components/Checkbox";
 
 describe("Checkbox", () => {
@@ -49,5 +49,27 @@ describe("Checkbox", () => {
     const { container } = render(() => <Checkbox label="L" name="cb" />);
     const input = container.querySelector("input");
     expect(input!.getAttribute("name")).toBe("cb");
+  });
+
+  it("bare: calls onChange callback when input event fires on the checkbox", () => {
+    const spy = vi.fn();
+    const { container } = render(() => <Checkbox onChange={spy} />);
+    const input = container.querySelector("input")!;
+    fireEvent.input(input);
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it("label branch: calls onChange callback when input event fires on the checkbox", () => {
+    const spy = vi.fn();
+    const { container } = render(() => <Checkbox label="Accept" onChange={spy} />);
+    const input = container.querySelector("input")!;
+    fireEvent.input(input);
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not throw when onChange is not provided and input event fires", () => {
+    const { container } = render(() => <Checkbox />);
+    const input = container.querySelector("input")!;
+    expect(() => fireEvent.input(input)).not.toThrow();
   });
 });

@@ -44,8 +44,8 @@ Requirements for the `@moondesignsystem/solid@3.0.0` release. Each maps to a roa
 
 ### Quality — Tests
 
-- [ ] **TEST-01**: All 18 test files rewritten for `@solidjs/testing-library` using the `render(() => <Comp/>)` function-wrapper form, asserting real DOM render + events, with per-component parity to the React suite
-- [ ] **TEST-02**: Test filenames normalized to PascalCase (`accordion.test.tsx` → `Accordion.test.tsx`); full Vitest suite passes green
+- [x] **TEST-01**: All 18 test files rewritten for `@solidjs/testing-library` using the `render(() => <Comp/>)` function-wrapper form, asserting real DOM render + events, with per-component parity to the React suite
+- [x] **TEST-02**: Test filenames normalized to PascalCase (`accordion.test.tsx` → `Accordion.test.tsx`); full Vitest suite passes green
 
 ### Docs — Storybook
 
@@ -103,8 +103,8 @@ Deferred. Tracked, not in current roadmap.
 | CMPD-01 | Phase 4: Compound, Portal + Composite | Complete |
 | CMPD-02 | Phase 4: Compound, Portal + Composite | Complete |
 | COMP-01 | Phase 4: Compound, Portal + Composite | Complete |
-| TEST-01 | Phase 5: Tests | Pending |
-| TEST-02 | Phase 5: Tests | Pending |
+| TEST-01 | Phase 5: Tests | Complete |
+| TEST-02 | Phase 5: Tests | Complete |
 | STORY-01 | Phase 6: Storybook | Pending |
 | STORY-02 | Phase 6: Storybook | Pending |
 | CLI-01 | Phase 7: CLI + Release | Pending |

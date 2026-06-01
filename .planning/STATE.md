@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 4 complete — ready for Phase 5 (tests)
-last_updated: "2026-06-01T14:30:00.000Z"
+stopped_at: Phase 4 complete — ALL 37 components ported (34 .tsx source files; 37 counts compound sub-components). All 5/5 Phase 4 plans done. Phase 5 (tests) is next.
+last_updated: "2026-06-01T14:48:44.315Z"
 last_activity: 2026-06-01
 progress:
   total_phases: 7
-  completed_phases: 4
-  total_plans: 18
-  completed_plans: 18
+  completed_phases: 5
+  total_plans: 23
+  completed_plans: 23
   percent: 100
 ---
 
@@ -21,13 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-01)
 
 **Core value:** Every existing Moon component renders and behaves identically under SolidJS — same public API, same Tailwind class output, same DOM — so consuming apps get a true framework swap, not a redesign.
-**Current focus:** Phase 05 — tests (all 37 components source-complete; rewrite legacy React test suite for @solidjs/testing-library)
+**Current focus:** Phase 05 — tests
 
 ## Current Position
 
-Phase: 04 (compound-portal-composite) — COMPLETE (all 5/5 plans done)
+Phase: 05 (tests) — EXECUTING
+Plan: 2 of 5
 Phase: 05 (tests) — NEXT
-Status: Ready to execute Phase 5
+Status: Ready to execute
 Last activity: 2026-06-01
 
 Progress: [██████████] 100%
@@ -92,6 +93,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-01T14:30:00.000Z
+Last session: 2026-06-01T14:48:44.303Z
 Stopped at: Phase 4 complete — ALL 37 components ported (34 .tsx source files; 37 counts compound sub-components). All 5/5 Phase 4 plans done. Phase 5 (tests) is next.
 Resume file: None

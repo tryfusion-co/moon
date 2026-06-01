@@ -1,4 +1,4 @@
-import React from "react";
+import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes, Variants, Contexts } from "../types";
 
@@ -6,34 +6,39 @@ export type TagSizes = Extract<Sizes, "2xs" | "xs">;
 
 export type TagVariants = Variants;
 
-type TagProps = React.ComponentProps<"div"> & {
+type TagProps = JSX.HTMLAttributes<HTMLDivElement> & {
   size?: TagSizes;
   variant?: TagVariants;
   context?: Contexts;
-  className?: string;
-  children: React.ReactNode;
+  class?: string;
+  children?: JSX.Element;
 };
 
-const Tag = ({
-  size = "xs",
-  variant = "fill",
-  context = "brand",
-  children,
-  className,
-}: TagProps) => (
-  <div
-    className={mergeClasses(
-      "moon-tag",
-      size !== "xs" && `moon-tag-${size}`,
-      variant !== "fill" && `moon-tag-${variant}`,
-      context !== "brand" && `moon-tag-${context}`,
-      className
-    )}
-  >
-    {children}
-  </div>
-);
-
-Tag.displayName = "Tag";
+const Tag: Component<TagProps> = (props) => {
+  const merged = mergeProps(
+    { size: "xs", variant: "fill", context: "brand" } as const,
+    props
+  );
+  const [local] = splitProps(merged, [
+    "class",
+    "size",
+    "variant",
+    "context",
+    "children",
+  ]);
+  return (
+    <div
+      class={mergeClasses(
+        "moon-tag",
+        local.size !== "xs" && `moon-tag-${local.size}`,
+        local.variant !== "fill" && `moon-tag-${local.variant}`,
+        local.context !== "brand" && `moon-tag-${local.context}`,
+        local.class
+      )}
+    >
+      {local.children}
+    </div>
+  );
+};
 
 export default Tag;

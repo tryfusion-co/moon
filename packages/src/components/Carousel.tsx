@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import { createSignal, onMount, onCleanup, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import ChevronLeft from "../assets/icons/ChevronLeft";
 import ChevronRight from "../assets/icons/ChevronRight";
@@ -6,53 +6,46 @@ import type { Directions } from "../types";
 
 export type ScrollDirections = Directions;
 
-const Item = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <div className={mergeClasses("moon-carousel-item", className)}>
-    {children}
-  </div>
-);
+const Item: Component<{ children?: JSX.Element; class?: string }> = (props) => {
+  const [local] = splitProps(props, ["children", "class"]);
+  return (
+    <div class={mergeClasses("moon-carousel-item", local.class)}>
+      {local.children}
+    </div>
+  );
+};
 
-const Control = ({
-  className,
-  direction,
-  disabled,
-  onScrollDirection,
-  ...props
-}: React.ComponentProps<"button"> & {
+type ControlProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
   direction: ScrollDirections;
   disabled?: boolean;
   onScrollDirection: (direction: ScrollDirections) => void;
-}) => (
-  <button
-    className={mergeClasses("moon-carousel-control", className)}
-    disabled={disabled}
-    onClick={() => onScrollDirection(direction)}
-    aria-label={direction === "previous" ? "Previous" : "Next"}
-    {...props}
-  >
-    {direction === "next" ? <ChevronRight /> : <ChevronLeft />}
-  </button>
-);
+  class?: string;
+};
 
-const Root = ({
-  hasControls,
-  children,
-}: {
-  children: React.ReactNode;
-  hasControls?: boolean;
-}) => {
-  const reelRef = useRef<HTMLDivElement>(null);
-  const [canScrollStart, setCanScrollStart] = useState(false);
-  const [canScrollEnd, setCanScrollEnd] = useState(true);
+const Control: Component<ControlProps> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "direction", "disabled", "onScrollDirection"]);
+  return (
+    <button
+      class={mergeClasses("moon-carousel-control", local.class)}
+      disabled={local.disabled}
+      onClick={() => local.onScrollDirection(local.direction)}
+      aria-label={local.direction === "previous" ? "Previous" : "Next"}
+      {...rest}
+    >
+      {local.direction === "next" ? <ChevronRight /> : <ChevronLeft />}
+    </button>
+  );
+};
 
-  const updateScrollState = useCallback(() => {
-    const reel = reelRef.current;
+const Root: Component<{ children?: JSX.Element; hasControls?: boolean }> = (props) => {
+  const [local] = splitProps(props, ["children", "hasControls"]);
+
+  let reelRef!: HTMLDivElement;
+  const [canScrollStart, setCanScrollStart] = createSignal(false);
+  const [canScrollEnd, setCanScrollEnd] = createSignal(true);
+
+  const updateScrollState = () => {
+    const reel = reelRef;
     if (!reel) return;
 
     const isRTL = getComputedStyle(reel).direction === "rtl";
@@ -65,10 +58,10 @@ const Root = ({
       setCanScrollStart(reel.scrollLeft > 0);
       setCanScrollEnd(reel.scrollLeft < maxScrollLeft);
     }
-  }, []);
+  };
 
-  const handleScroll = useCallback((direction: ScrollDirections) => {
-    const reel = reelRef.current;
+  const handleScroll = (direction: ScrollDirections) => {
+    const reel = reelRef;
     if (!reel) return;
 
     const item = reel.querySelector(".moon-carousel-item") as HTMLElement;
@@ -89,10 +82,10 @@ const Root = ({
       left: scrollValue,
       behavior: "smooth",
     });
-  }, []);
+  };
 
-  useEffect(() => {
-    const reel = reelRef.current;
+  onMount(() => {
+    const reel = reelRef;
     if (!reel) return;
 
     updateScrollState();
@@ -103,37 +96,34 @@ const Root = ({
     reel.addEventListener("scroll", handleScrollEvent);
     window.addEventListener("resize", handleResize);
 
-    return () => {
+    onCleanup(() => {
       reel.removeEventListener("scroll", handleScrollEvent);
       window.removeEventListener("resize", handleResize);
-    };
-  }, [updateScrollState]);
+    });
+  });
 
   return (
-    <div className="moon-carousel">
-      {hasControls && (
+    <div class="moon-carousel">
+      {local.hasControls && (
         <Control
           direction="previous"
-          disabled={!canScrollStart}
+          disabled={!canScrollStart()}
           onScrollDirection={handleScroll}
         />
       )}
-      <div className="moon-carousel-reel" ref={reelRef}>
-        {children}
+      <div class="moon-carousel-reel" ref={reelRef}>
+        {local.children}
       </div>
-      {hasControls && (
+      {local.hasControls && (
         <Control
           direction="next"
-          disabled={!canScrollEnd}
+          disabled={!canScrollEnd()}
           onScrollDirection={handleScroll}
         />
       )}
     </div>
   );
 };
-
-Root.displayName = "Carousel";
-Item.displayName = "Carousel.Item";
 
 const Carousel = Object.assign(Root, { Item });
 

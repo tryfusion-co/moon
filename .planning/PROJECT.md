@@ -58,7 +58,7 @@ Every existing Moon component renders and behaves identically under SolidJS — 
 
 ## Constraints
 
-- **Tech stack**: Target `solid-js@^1.8`. JSX via `vite-plugin-solid` / `babel-preset-solid`. No headless deps.
+- **Tech stack**: Target `solid-js@^1.9.13` (current production; 2.0 is experimental). Build via `vite build --lib` + `vite-plugin-solid` (chosen over abandoned `tsup-preset-solid`). Mandatory `solid` export condition in package.json. No headless deps.
 - **Compatibility**: Public API (component names, prop names, exported types, class names) must stay identical — consuming apps swap framework only.
 - **Compatibility**: Tailwind class output per component must match the React version exactly (verified via tests/Storybook).
 - **Process**: In-place rewrite on `main`. Full GSD workflow per phase.

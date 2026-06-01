@@ -13,12 +13,12 @@ describe("Alert", () => {
 
   it("applies variant and context modifier classes", () => {
     const { container } = render(() => (
-      <Alert variant="outline" context="error">
+      <Alert variant="outline" context="negative">
         x
       </Alert>
     ));
     const div = container.querySelector("div");
-    expect(div!.className).toBe("moon-alert moon-alert-outline moon-alert-error");
+    expect(div!.className).toBe("moon-alert moon-alert-outline moon-alert-negative");
   });
 
   it("applies soft variant and positive context (legacy coverage)", () => {

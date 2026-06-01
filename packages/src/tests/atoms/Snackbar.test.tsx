@@ -46,14 +46,14 @@ describe("Snackbar", () => {
     expect(div!.className).not.toContain("moon-snackbar-positive");
   });
 
-  it("context=error adds moon-snackbar-error modifier", () => {
+  it("context=negative adds moon-snackbar-negative modifier", () => {
     const { container } = render(() => (
-      <Snackbar isOpen={true} context="error">
+      <Snackbar isOpen={true} context="negative">
         x
       </Snackbar>
     ));
     const div = container.querySelector("div");
-    expect(div!.className).toContain("moon-snackbar-error");
+    expect(div!.className).toContain("moon-snackbar-negative");
   });
 
   it("context=positive adds moon-snackbar-positive modifier", () => {

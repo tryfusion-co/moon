@@ -16,15 +16,15 @@ describe("Tag", () => {
     expect(screen.getByText("Test Tag")).toBeInTheDocument();
   });
 
-  it("applies modifier classes in correct order: size, variant, context (error)", () => {
+  it("applies modifier classes in correct order: size, variant, context (negative)", () => {
     const { container } = render(() => (
-      <Tag size="2xs" variant="outline" context="error">
+      <Tag size="2xs" variant="outline" context="negative">
         x
       </Tag>
     ));
     const div = container.firstChild as HTMLDivElement;
     expect(div.getAttribute("class")).toBe(
-      "moon-tag moon-tag-2xs moon-tag-outline moon-tag-error"
+      "moon-tag moon-tag-2xs moon-tag-outline moon-tag-negative"
     );
   });
 

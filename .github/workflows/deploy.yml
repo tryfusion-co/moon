@@ -39,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: heathmont/moon-react-docs:${{ steps.get_version.outputs.TAG_VERSION }}
+          tags: heathmont/moon-solid-docs:${{ steps.get_version.outputs.TAG_VERSION }}
 
   deployment:
     name: Update Docker Compose, Create Manifest, and Deploy
@@ -63,7 +63,7 @@ jobs:
 
       - name: Prepare variables
         run: |
-          echo "IMAGE=heathmont/moon-react-docs:${{ needs.build-and-push.outputs.image }}" >> $GITHUB_ENV
+          echo "IMAGE=heathmont/moon-solid-docs:${{ needs.build-and-push.outputs.image }}" >> $GITHUB_ENV
 
       - name: Check Image variable
         run: echo "IMAGE=${{env.IMAGE}}"
@@ -71,6 +71,9 @@ jobs:
       - name: Update Docker Compose with New Image
         working-directory: stacks
         run: |
+          # NOTE: the service key `moon-react-docs` lives in the external coingaming/stacks
+          # repo's docker-compose.moon.yml. Rename it there to `moon-solid-docs` in lockstep
+          # if you want full consistency; the image name above is already moon-solid-docs.
           yq -i '.services.moon-react-docs.image = "${{ env.IMAGE }}"' docker-compose.moon.yml
 
       - name: Commit and Push Changes to docker-compose file

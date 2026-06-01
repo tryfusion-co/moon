@@ -12,11 +12,11 @@ describe("IconButton", () => {
 
   it("applies modifier classes in correct order: variant, size, context, rounded", () => {
     const { container } = render(() => (
-      <IconButton variant="ghost" size="xl" context="error" isRounded />
+      <IconButton variant="ghost" size="xl" context="negative" isRounded />
     ));
     const button = container.firstChild as HTMLButtonElement;
     expect(button.getAttribute("class")).toBe(
-      "moon-icon-button moon-icon-button-ghost moon-icon-button-xl moon-icon-button-error moon-icon-button-rounded"
+      "moon-icon-button moon-icon-button-ghost moon-icon-button-xl moon-icon-button-negative moon-icon-button-rounded"
     );
   });
 

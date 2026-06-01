@@ -12,11 +12,11 @@ describe("Button", () => {
 
   it("applies modifier classes in correct order: variant, size, context, fullWidth", () => {
     const { container } = render(() => (
-      <Button variant="outline" size="lg" context="error" isFullWidth />
+      <Button variant="outline" size="lg" context="negative" isFullWidth />
     ));
     const button = container.firstChild as HTMLButtonElement;
     expect(button.getAttribute("class")).toBe(
-      "moon-button moon-button-outline moon-button-lg moon-button-error moon-button-full-width"
+      "moon-button moon-button-outline moon-button-lg moon-button-negative moon-button-full-width"
     );
   });
 

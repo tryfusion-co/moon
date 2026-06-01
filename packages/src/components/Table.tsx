@@ -1,59 +1,61 @@
-import React from "react";
+import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes } from "../types";
 
 export type TableSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
 
-type TableProps = React.ComponentProps<"table"> & {
+type TableProps = JSX.HTMLAttributes<HTMLTableElement> & {
   size?: TableSizes;
 };
 
-const Head = ({ className, ...props }: React.ComponentProps<"thead">) => (
-  <thead className={className} {...props} />
-);
+const Head: Component<JSX.HTMLAttributes<HTMLTableSectionElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["class"]);
+  return <thead class={local.class} {...rest} />;
+};
 
-const Body = ({ className, ...props }: React.ComponentProps<"tbody">) => (
-  <tbody className={className} {...props} />
-);
+const Body: Component<JSX.HTMLAttributes<HTMLTableSectionElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["class"]);
+  return <tbody class={local.class} {...rest} />;
+};
 
-const Foot = ({ className, ...props }: React.ComponentProps<"tfoot">) => (
-  <tfoot className={className} {...props} />
-);
+const Foot: Component<JSX.HTMLAttributes<HTMLTableSectionElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["class"]);
+  return <tfoot class={local.class} {...rest} />;
+};
 
-const Row = ({ className, ...props }: React.ComponentProps<"tr">) => (
-  <tr className={className} {...props} />
-);
+const Row: Component<JSX.HTMLAttributes<HTMLTableRowElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["class"]);
+  return <tr class={local.class} {...rest} />;
+};
 
-const HeadCell = ({ className, ...props }: React.ComponentProps<"th">) => (
-  <th {...props} className={className} />
-);
+const HeadCell: Component<JSX.ThHTMLAttributes<HTMLTableCellElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["class"]);
+  return <th class={local.class} {...rest} />;
+};
 
-const Cell = ({ className, ...props }: React.ComponentProps<"td">) => (
-  <td {...props} className={className} />
-);
+const Cell: Component<JSX.TdHTMLAttributes<HTMLTableCellElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["class"]);
+  return <td class={local.class} {...rest} />;
+};
 
-const Caption = ({ className, ...props }: React.ComponentProps<"caption">) => (
-  <caption {...props} className={className} />
-);
+const Caption: Component<JSX.HTMLAttributes<HTMLTableCaptionElement>> = (props) => {
+  const [local, rest] = splitProps(props, ["class"]);
+  return <caption class={local.class} {...rest} />;
+};
 
-const Root = ({ className, size = "md", ...props }: TableProps) => (
-  <table
-    className={mergeClasses(
-      "moon-table",
-      size !== "md" && `moon-table-${size}`
-    )}
-    {...props}
-  />
-);
-
-Root.displayName = "Table";
-Head.displayName = "Table.Head";
-Body.displayName = "Table.Body";
-Foot.displayName = "Table.Foot";
-Row.displayName = "Table.Row";
-HeadCell.displayName = "Table.HeadCell";
-Cell.displayName = "Table.Cell";
-Caption.displayName = "Table.Caption";
+const Root: Component<TableProps> = (props) => {
+  const merged = mergeProps({ size: "md" as TableSizes }, props);
+  const [local, rest] = splitProps(merged, ["class", "size"]);
+  return (
+    <table
+      class={mergeClasses(
+        "moon-table",
+        local.size !== "md" && `moon-table-${local.size}`
+      )}
+      {...rest}
+    />
+  );
+};
 
 const Table = Object.assign(Root, {
   Head,

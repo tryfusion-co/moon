@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { mergeClasses } from "../helpers/mergeClasses";
+import { createSignal, mergeProps, splitProps, Index, type Component, type JSX } from "solid-js";
+import mergeClasses from "../helpers/mergeClasses";
 import type { Variants, Sizes } from "../types";
 
 export type AuthenticatorSizes = Extract<Sizes, "sm" | "md" | "lg" | "xl">;
@@ -15,98 +15,97 @@ type AuthenticatorProps = {
   disabled?: boolean;
   value?: string;
   onChange?: (value: string) => void;
-  className?: string;
+  class?: string;
 };
 
-const Authenticator = ({
-  id = "",
-  length = 6,
-  size = "md",
-  variant = "fill",
-  error = false,
-  disabled = false,
-  value = "",
-  onChange,
-  className,
-}: AuthenticatorProps) => {
-  const [internalValue, setInternalValue] = useState(value);
-  const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
+const Authenticator: Component<AuthenticatorProps> = (props) => {
+  const merged = mergeProps(
+    {
+      id: "",
+      length: 6,
+      size: "md" as AuthenticatorSizes,
+      variant: "fill" as AuthenticatorVariants,
+      error: false,
+      disabled: false,
+      value: "",
+    },
+    props
+  );
+  const [local] = splitProps(merged, [
+    "id",
+    "length",
+    "size",
+    "variant",
+    "error",
+    "disabled",
+    "value",
+    "onChange",
+    "class",
+  ]);
+
+  const [internalValue, setInternalValue] = createSignal(local.value);
+  let inputs: HTMLInputElement[] = [];
 
   const handleChange = (index: number, char: string) => {
-    const newValueArray = internalValue.split("");
-    newValueArray[index] = char;
-    const newValue = newValueArray.join("");
-
-    setInternalValue(newValue);
-    onChange?.(newValue);
-
-    if (char && index < length - 1) {
-      inputsRef.current[index + 1]?.focus();
+    const arr = internalValue().split("");
+    arr[index] = char;
+    const next = arr.join("");
+    setInternalValue(next);
+    local.onChange?.(next);
+    if (char && index < local.length - 1) {
+      inputs[index + 1]?.focus();
     }
   };
 
-  const handleKeyDown = (
-    index: number,
-    e: React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    if (e.key === "Backspace" && !internalValue[index] && index > 0) {
-      inputsRef.current[index - 1]?.focus();
+  const handleKeyDown = (index: number, e: KeyboardEvent & { currentTarget: HTMLInputElement }) => {
+    if (e.key === "Backspace" && !internalValue()[index] && index > 0) {
+      inputs[index - 1]?.focus();
     }
   };
 
-  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
-    const pasted = e.clipboardData.getData("text").slice(0, length);
-    const clean = pasted.replace(/[^0-9a-zA-Z]/g, "").slice(0, length);
+  const handlePaste = (e: ClipboardEvent & { currentTarget: HTMLInputElement }) => {
+    const pasted = e.clipboardData?.getData("text").slice(0, local.length) ?? "";
+    const clean = pasted.replace(/[^0-9a-zA-Z]/g, "").slice(0, local.length);
 
     if (clean) {
-      setInternalValue(clean.padEnd(length, ""));
-      onChange?.(clean);
-
-      const targetIndex = Math.min(clean.length, length - 1);
-      inputsRef.current[targetIndex]?.focus();
+      setInternalValue(clean.padEnd(local.length, ""));
+      local.onChange?.(clean);
+      inputs[Math.min(clean.length, local.length - 1)]?.focus();
       e.preventDefault();
     }
   };
 
-  const renderInputs = () =>
-    Array.from({ length }, (_, index) => (
-      <input
-        key={index}
-        id={index === 0 ? id : `${id}${index}`}
-        ref={(el) => {
-          if (inputsRef?.current) {
-            inputsRef.current[index] = el;
-          }
-        }}
-        type="text"
-        maxLength={1}
-        value={internalValue[index] || ""}
-        onChange={(e) => handleChange(index, e.target.value.slice(-1))}
-        onKeyDown={(e) => handleKeyDown(index, e)}
-        onPaste={handlePaste}
-        autoComplete="off"
-        inputMode="text"
-        pattern="[0-9a-zA-Z]*"
-        disabled={disabled}
-      />
-    ));
-
   return (
     <div
-      className={mergeClasses(
+      class={mergeClasses(
         "moon-authenticator",
-        size !== "md" && `moon-authenticator-${size}`,
-        variant !== "fill" && `moon-authenticator-${variant}`,
-        error && "moon-authenticator-error",
-        className
+        local.size !== "md" && `moon-authenticator-${local.size}`,
+        local.variant !== "fill" && `moon-authenticator-${local.variant}`,
+        local.error && "moon-authenticator-error",
+        local.class
       )}
       role="group"
     >
-      {renderInputs()}
+      <Index each={Array.from({ length: local.length })}>
+        {(_, index) => (
+          <input
+            id={index === 0 ? local.id : `${local.id}${index}`}
+            ref={(el) => (inputs[index] = el)}
+            type="text"
+            maxLength={1}
+            value={internalValue()[index] || ""}
+            onInput={(e) => handleChange(index, e.currentTarget.value.slice(-1))}
+            onKeyDown={(e) => handleKeyDown(index, e)}
+            onPaste={handlePaste}
+            autocomplete="off"
+            inputMode="text"
+            pattern="[0-9a-zA-Z]*"
+            disabled={local.disabled}
+          />
+        )}
+      </Index>
     </div>
   );
 };
-
-Authenticator.displayName = "Authenticator";
 
 export default Authenticator;

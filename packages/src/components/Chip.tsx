@@ -1,45 +1,49 @@
-import React, { useState } from "react";
+import { createSignal, mergeProps, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes, Variants } from "../types";
 
 export type ChipSizes = Extract<Sizes, "sm" | "md">;
 export type ChipVariants = Extract<Variants, "fill" | "soft" | "outline">;
 
-type ChipProps = React.ComponentProps<"button"> & {
+type ChipProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: ChipSizes;
   variant?: ChipVariants;
   isActive?: boolean;
-  children: React.ReactNode;
+  children?: JSX.Element;
 };
 
-const Chip = ({
-  size = "md",
-  variant = "fill",
-  isActive = false,
-  onClick,
-  children,
-  ...props
-}: ChipProps) => {
-  const [active, setActive] = useState(false);
-  const currentActive = isActive ?? active;
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (isActive === undefined) {
-      setActive(!active);
+const Chip: Component<ChipProps> = (props) => {
+  const merged = mergeProps({ size: "md", variant: "fill" } as const, props);
+  const [local, rest] = splitProps(merged, [
+    "class",
+    "size",
+    "variant",
+    "isActive",
+    "onClick",
+    "children",
+  ]);
+  const [active, setActive] = createSignal(false);
+  const currentActive = () => local.isActive ?? active();
+  const handleClick: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (e) => {
+    if (local.isActive === undefined) {
+      setActive(!active());
     }
-    onClick?.(e);
+    if (typeof local.onClick === "function") {
+      local.onClick(e);
+    }
   };
   return (
     <button
-      className={mergeClasses(
+      class={mergeClasses(
         "moon-chip",
-        size !== "md" && `moon-chip-${size}`,
-        variant !== "fill" && `moon-chip-${variant}`,
-        currentActive && "moon-chip-active"
+        local.size !== "md" && `moon-chip-${local.size}`,
+        local.variant !== "fill" && `moon-chip-${local.variant}`,
+        currentActive() && "moon-chip-active"
       )}
       onClick={handleClick}
-      {...props}
+      {...rest}
     >
-      {children}
+      {local.children}
     </button>
   );
 };

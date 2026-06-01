@@ -50,7 +50,7 @@ Requirements for the `@moondesignsystem/solid@3.0.0` release. Each maps to a roa
 ### Docs — Storybook
 
 - [ ] **STORY-01**: `docs/` Storybook migrated to `storybook-solidjs-vite` (Storybook 10); a single Button story spike validates the renderer + addons (a11y/docs/themes/vitest/chromatic) before bulk porting
-- [ ] **STORY-02**: All 37 stories rewritten to Solid CSF (`render: (args) => () => <Comp {...args} />`); Table story uses `@tanstack/solid-table`; `build-storybook` succeeds
+- [ ] **STORY-02**: All 37 stories rewritten to Solid CSF (`render: (args) => <Comp {...args} />` — single form, NO double-wrapper, per 06-RESEARCH.md storybook-solidjs-vite@10); Table story uses `@tanstack/solid-table`; `build-storybook` succeeds
 
 ### Tooling — CLI
 

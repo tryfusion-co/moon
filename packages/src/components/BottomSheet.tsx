@@ -40,7 +40,7 @@ type ComponentProps = {
 };
 
 type CloseProps = {
-  onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
+  onClick?: () => void;
   class?: string;
 };
 
@@ -95,7 +95,7 @@ const Close: Component<CloseProps> = (props) => {
       aria-label="Close"
       onClick={() => {
         bottomSheetRef()?.close();
-        (local.onClick as (() => void) | undefined)?.();
+        local.onClick?.();
       }}
     >
       <CloseIcon />

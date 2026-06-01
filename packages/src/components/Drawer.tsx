@@ -39,7 +39,7 @@ type DrawerHeaderProps = {
 };
 
 type DrawerCloseProps = {
-  onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
+  onClick?: () => void;
   class?: string;
 };
 
@@ -86,7 +86,7 @@ const Close: Component<DrawerCloseProps> = (props) => {
       aria-label="Close"
       onClick={() => {
         drawerRef()?.close();
-        (local.onClick as (() => void) | undefined)?.();
+        local.onClick?.();
       }}
     >
       <CloseIcon />

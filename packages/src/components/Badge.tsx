@@ -1,34 +1,31 @@
-import React from "react";
+import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Variants, Contexts } from "../types";
 
 export type BadgeVariants = Extract<Variants, "fill" | "soft" | "outline">;
 
 type BadgeProps = {
-  children?: React.ReactNode;
-  className?: string;
+  children?: JSX.Element;
+  class?: string;
   variant?: BadgeVariants;
   context?: Contexts;
 };
 
-const Badge = ({
-  children,
-  className,
-  variant = "fill",
-  context = "brand",
-}: BadgeProps) => (
-  <span
-    className={mergeClasses(
-      "moon-badge",
-      variant !== "fill" && `moon-badge-${variant}`,
-      context !== "brand" && `moon-badge-${context}`,
-      className
-    )}
-  >
-    {children}
-  </span>
-);
-
-Badge.displayName = "Badge";
+const Badge: Component<BadgeProps> = (props) => {
+  const merged = mergeProps({ variant: "fill", context: "brand" } as const, props);
+  const [local] = splitProps(merged, ["children", "class", "variant", "context"]);
+  return (
+    <span
+      class={mergeClasses(
+        "moon-badge",
+        local.variant !== "fill" && `moon-badge-${local.variant}`,
+        local.context !== "brand" && `moon-badge-${local.context}`,
+        local.class
+      )}
+    >
+      {local.children}
+    </span>
+  );
+};
 
 export default Badge;

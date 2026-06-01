@@ -1,108 +1,109 @@
-import React, { useContext, createContext, useState } from "react";
+import {
+  createContext,
+  useContext,
+  createSignal,
+  mergeProps,
+  splitProps,
+  type Component,
+  type JSX,
+} from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import type { Sizes } from "../types";
 
 export type SegmentedControlSizes = Extract<Sizes, "sm" | "md">;
 
 type SegmentedControlContextType = {
-  activeIndex: number;
+  activeIndex: () => number;
   setActiveIndex: (idx: number) => void;
   size: SegmentedControlSizes;
+  register: () => number;
 };
 
-const SegmentedControlContext =
-  createContext<SegmentedControlContextType | null>(null);
+const SegmentedControlContext = createContext<SegmentedControlContextType>();
 
 function useSegmentedControlContext() {
-  const context = useContext(SegmentedControlContext);
-  if (!context) {
+  const c = useContext(SegmentedControlContext);
+  if (!c)
     throw new Error(
       "SegmentedControl components must be used within <SegmentedControl> wrapper"
     );
-  }
-  return context;
+  return c;
 }
 
 type SegmentedControlProps = {
-  children: React.ReactNode;
+  children?: JSX.Element;
   size?: SegmentedControlSizes;
   activeIndex?: number;
   setActiveIndex?: (idx: number) => void;
-  className?: string;
+  class?: string;
 };
 
-type SegmentProps = React.ComponentProps<"button"> & {
-  children: React.ReactNode;
-  className?: string;
+type SegmentProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
+  children?: JSX.Element;
+  class?: string;
   index?: number;
 };
 
-const Item = ({ children, className, index = 0, ...props }: SegmentProps) => {
-  const context = useSegmentedControlContext();
-  const isActive = context.activeIndex === index;
+const Item: Component<SegmentProps> = (props) => {
+  const ctx = useSegmentedControlContext();
+  const [local, rest] = splitProps(props, ["children", "class", "index"]);
+  const index = local.index !== undefined ? local.index : ctx.register();
+  const isActive = () => ctx.activeIndex() === index;
   return (
     <button
       role="tab"
-      aria-selected={isActive}
-      className={mergeClasses(
+      aria-selected={isActive()}
+      class={mergeClasses(
         "moon-segmented-control-item",
-        isActive && "moon-segmented-control-item-active",
-        className
+        isActive() && "moon-segmented-control-item-active",
+        local.class
       )}
-      onClick={() => context.setActiveIndex(index)}
-      tabIndex={isActive ? 0 : -1}
-      {...props}
+      onClick={() => ctx.setActiveIndex(index)}
+      tabIndex={isActive() ? 0 : -1}
+      {...rest}
     >
-      {children}
+      {local.children}
     </button>
   );
 };
 
-const Root = ({
-  children,
-  size = "md",
-  activeIndex,
-  setActiveIndex,
-  className,
-}: SegmentedControlProps) => {
-  const [internalActiveIndex, setInternalActiveIndex] = useState(0);
-  const currentActiveIndex = activeIndex ?? internalActiveIndex;
-  const currentSetActiveIndex = setActiveIndex ?? setInternalActiveIndex;
-  const childrenWithIndices = React.Children.map(children, (child, index) => {
-    if (React.isValidElement(child) && child.type === Item) {
-      const childProps = child.props as SegmentProps;
-      return React.cloneElement(child, {
-        ...childProps,
-        index: childProps.index ?? index,
-      } as SegmentProps);
+const Root: Component<SegmentedControlProps> = (props) => {
+  const merged = mergeProps({ size: "md" as SegmentedControlSizes }, props);
+  const [local] = splitProps(merged, [
+    "children",
+    "size",
+    "activeIndex",
+    "setActiveIndex",
+    "class",
+  ]);
+  const [internal, setInternal] = createSignal(0);
+  const activeIndex = () => local.activeIndex ?? internal();
+  const setActiveIndex = (idx: number) => {
+    if (local.setActiveIndex) {
+      local.setActiveIndex(idx);
+    } else {
+      setInternal(idx);
     }
-    return child;
-  });
-
+  };
+  let counter = 0;
+  const register = () => counter++;
   return (
     <SegmentedControlContext.Provider
-      value={{
-        activeIndex: currentActiveIndex,
-        setActiveIndex: currentSetActiveIndex,
-        size,
-      }}
+      value={{ activeIndex, setActiveIndex, size: local.size, register }}
     >
       <div
         role="tablist"
-        className={mergeClasses(
+        class={mergeClasses(
           "moon-segmented-control",
-          size !== "md" && `moon-segmented-control-${size}`,
-          className
+          local.size !== "md" && `moon-segmented-control-${local.size}`,
+          local.class
         )}
       >
-        {childrenWithIndices}
+        {local.children}
       </div>
     </SegmentedControlContext.Provider>
   );
 };
-
-Root.displayName = "SegmentedControl";
-Item.displayName = "SegmentedControl.Item";
 
 const SegmentedControl = Object.assign(Root, { Item });
 

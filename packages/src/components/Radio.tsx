@@ -1,53 +1,66 @@
-import React from "react";
+import {
+  createContext,
+  useContext,
+  splitProps,
+  type Component,
+  type JSX,
+} from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 
-type RadioProps = Omit<React.ComponentProps<"input">, "type"> & {
+type RadioGroupCtx = { name: string };
+const RadioGroupContext = createContext<RadioGroupCtx>();
+
+type RadioProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type"> & {
   label?: string;
+  class?: string;
 };
 
 type RadioGroupProps = {
-  children: React.ReactNode;
-  className?: string;
+  children?: JSX.Element;
+  class?: string;
   name: string;
 };
 
-const Group = ({ children, className, name }: RadioGroupProps) => {
-  const childrenWithName = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
-      return React.cloneElement(child as React.ReactElement<any>, { name });
-    }
-    return child;
-  });
-  return (
-    <div
-      className={mergeClasses("moon-radio-group", className)}
-      role="radiogroup"
-    >
-      {childrenWithName}
-    </div>
-  );
-};
-
-const Root = ({ className, label, ...props }: RadioProps) => {
-  if (label) {
+const Root: Component<RadioProps> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "label", "name"]);
+  const group = useContext(RadioGroupContext);
+  const name = () => group?.name ?? (local.name as string | undefined);
+  if (local.label) {
     return (
-      <label className={className}>
-        <input type="radio" className="moon-radio" {...props} />
-        <span>{label}</span>
+      <label class={local.class}>
+        <input
+          type="radio"
+          class="moon-radio"
+          name={name()}
+          {...rest}
+        />
+        <span>{local.label}</span>
       </label>
     );
   }
   return (
     <input
       type="radio"
-      className={mergeClasses("moon-radio", className)}
-      {...props}
+      class={mergeClasses("moon-radio", local.class)}
+      name={name()}
+      {...rest}
     />
   );
 };
 
-Root.displayName = "Radio";
-Group.displayName = "Radio.Group";
+const Group: Component<RadioGroupProps> = (props) => {
+  const [local] = splitProps(props, ["children", "class", "name"]);
+  return (
+    <RadioGroupContext.Provider value={{ name: local.name }}>
+      <div
+        role="radiogroup"
+        class={mergeClasses("moon-radio-group", local.class)}
+      >
+        {local.children}
+      </div>
+    </RadioGroupContext.Provider>
+  );
+};
 
 const Radio = Object.assign(Root, { Group });
 

@@ -1,28 +1,28 @@
-import React from "react";
+import { splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 
-type CheckboxProps = Omit<React.ComponentProps<"input">, "type"> & {
+type CheckboxProps = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, "type"> & {
   label?: string;
+  class?: string;
 };
 
-const Checkbox = ({ className, label, ...props }: CheckboxProps) => {
-  if (label) {
+const Checkbox: Component<CheckboxProps> = (props) => {
+  const [local, rest] = splitProps(props, ["class", "label"]);
+  if (local.label) {
     return (
-      <label className={className}>
-        <input type="checkbox" className="moon-checkbox" {...props} />
-        <span>{label}</span>
+      <label class={local.class}>
+        <input type="checkbox" class="moon-checkbox" {...rest} />
+        <span>{local.label}</span>
       </label>
     );
   }
   return (
     <input
       type="checkbox"
-      className={mergeClasses("moon-checkbox", className)}
-      {...props}
+      class={mergeClasses("moon-checkbox", local.class)}
+      {...rest}
     />
   );
 };
-
-Checkbox.displayName = "Checkbox";
 
 export default Checkbox;

@@ -25,7 +25,21 @@ findings:
   warning: 5
   info: 3
   total: 11
-status: issues_found
+status: resolved
+resolution:
+  fixed: 2026-06-01T00:30:00Z
+  findings:
+    CR-01: FIXED — Two-pass build: vite build (compiled .js) + esbuild script (jsx:preserve .jsx). Proven: dist/*.jsx has raw JSX, dist/*.js has compiled output.
+    CR-02: FIXED — Added dir:"dist" to first Rollup output in vite.config.ts.
+    CR-03: REJECTED — React originals used fill="black"; byte-identical SVG parity is a locked requirement (D-14). Do not change.
+    WR-01: FIXED — repository.url, homepage, bin key updated to solid equivalents.
+    WR-02: REJECTED — ESM-only by design; legacy CJS out of scope.
+    WR-03: FIXED — Per-component log gated behind BARREL_VERBOSE env var.
+    WR-04: DEFERRED — Phase 7 (CLI phase). Pre-existing from React package.
+    WR-05: DEFERRED — Phase 5 (Tests). Throwaway gate test; cleanup is Phase 5 concern.
+    IN-01: ACKNOWLEDGED — Intentional config-file lint exclusion.
+    IN-02: ACKNOWLEDGED — ES target mismatch is minor/intentional.
+    IN-03: FIXED — Funding URL updated from moon-react-library to moon-solid.
 ---
 
 # Phase 01: Code Review Report

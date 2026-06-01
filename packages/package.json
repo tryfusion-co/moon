@@ -11,13 +11,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/moondesignsystem/react.git"
+    "url": "git+https://github.com/moondesignsystem/solid.git"
   },
   "funding": {
     "type": "opencollective",
-    "url": "https://opencollective.com/moon-react-library"
+    "url": "https://opencollective.com/moon-solid"
   },
-  "homepage": "https://react.moondesignsystem.com",
+  "homepage": "https://solid.moondesignsystem.com",
   "publishConfig": {
     "access": "public"
   },
@@ -40,7 +40,7 @@
     "barrels": "node scripts/generate-barrel.cjs",
     "prebuild": "npm run barrels",
     "dev": "vite",
-    "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly",
+    "build": "vite build && node scripts/build-solid-condition.mjs && tsc --project tsconfig.build.json --emitDeclarationOnly",
     "build:watch": "vite build --watch",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -50,7 +50,7 @@
     "test:watch": "vitest"
   },
   "bin": {
-    "moon-react": "bin/moon-react"
+    "moon-solid": "bin/moon-react"
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",

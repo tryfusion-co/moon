@@ -61,7 +61,9 @@ function getExportedTypes(filePath, componentName) {
     });
   }
 
-  console.log(`${componentName}: found types [${exports.join(", ")}]`);
+  if (process.env.BARREL_VERBOSE) {
+    console.log(`${componentName}: found types [${exports.join(", ")}]`);
+  }
   return exports;
 }
 

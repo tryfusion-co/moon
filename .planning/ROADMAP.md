@@ -106,11 +106,17 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Requirements**: STORY-01, STORY-02
 **Success Criteria** (what must be TRUE):
   1. A single Button story spike confirms `storybook-solidjs-vite@^10.1.1` renders controls, a11y, docs, and Chromatic addons correctly under the current Storybook 10 version; if blocked, the decision to pin Storybook 9 is made before proceeding
-  2. All 37 stories use Solid CSF render format `render: (args) => () => <Component {...args} />`; `@storybook/react-vite` is removed from the workspace
+  2. All 37 stories use Solid CSF render format `render: (args) => <Component {...args} />` (NO double-wrapper — corrected by 06-RESEARCH.md for storybook-solidjs-vite v10); `@storybook/react-vite` is removed from the workspace
   3. `build-storybook` completes without errors; Table story imports `@tanstack/solid-table` (not `@tanstack/react-table`)
-**Notes**: SPIKE RISK — storybook-solidjs-vite is community-maintained and lags core Storybook. Version number alignment with Storybook 10 is confirmed but full addon parity (@addon-vitest, Chromatic) is unverified. Run the Button story spike first; if the adapter is incompatible, pin Storybook to 9.x before porting remaining 36 stories.
+**Notes**: SPIKE RISK — storybook-solidjs-vite is community-maintained and lags core Storybook. Research de-risked the adapter (v10.1.1 SB10-compatible, all 5 addons compatible, render signature corrected to NO double-wrapper) but the Button spike still BLOCKING-gates before bulk porting. If the spike build fails, pin Storybook 9.x or drop the offending addon before porting the remaining 32 stories.
 **UI hint**: yes
-**Plans**: TBD
+**Plans**: 6 plans
+- [ ] 06-01-PLAN.md — SPIKE (Wave 1, BLOCKING): deps/main.ts/preview.ts swap + LinksBlock + Button story + build-storybook green (human-verify) [STORY-01]
+- [ ] 06-02-PLAN.md — Wave 2: 8 stories (Accordion/Alert/Avatar/Badge/Breadcrumb/IconButton/List/Menu) + StarIcon/UserIcon [STORY-02]
+- [ ] 06-03-PLAN.md — Wave 2: 8 stories incl stateful useState→createSignal (Chip/SegmentedControl/Snackbar) + Carousel/Checkbox/Input/Textarea/Switch [STORY-02]
+- [ ] 06-04-PLAN.md — Wave 2: 8 portal/className stories (Dialog/Drawer/BottomSheet/Dropdown/Tooltip/Placeholder/Radio/Loader) [STORY-02]
+- [ ] 06-05-PLAN.md — Wave 2: 6 stories (CircularProgress/LinearProgress/Tag/Pagination/TabList/Select) + Version + gettingStarted.mdx [STORY-02]
+- [ ] 06-06-PLAN.md — Wave 3 final gate: Table→@tanstack/solid-table + full build-storybook green (all 37) + React-remnant sweep (human-verify) [STORY-02]
 
 ### Phase 7: CLI + Release
 **Goal**: The CLI scaffolder emits Solid templates under the renamed bin, README and CHANGELOG are updated for the 3.0.0 major release, and `npm publish --dry-run` passes with the `solid` export condition verified in a smoke consumer
@@ -134,5 +140,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 3. Stateful Atoms + Carousel | 5/5 | Complete   | 2026-06-01 |
 | 4. Compound, Portal + Composite | 5/5 | Complete   | 2026-06-01 |
 | 5. Tests | 5/5 | Complete   | 2026-06-01 |
-| 6. Storybook | 0/TBD | Not started | - |
+| 6. Storybook | 0/6 | In progress | - |
 | 7. CLI + Release | 0/TBD | Not started | - |

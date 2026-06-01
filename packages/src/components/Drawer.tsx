@@ -1,104 +1,108 @@
-import React, { createContext, ReactNode, useContext, useRef } from "react";
-import { createPortal } from "react-dom";
+import {
+  createContext,
+  createSignal,
+  useContext,
+  splitProps,
+  type Accessor,
+  type Component,
+  type JSX,
+} from "solid-js";
+import { Portal } from "solid-js/web";
 import CloseIcon from "../assets/icons/Close";
 import mergeClasses from "../helpers/mergeClasses";
 
 type DrawerContextType = {
-  drawerRef: React.RefObject<HTMLDialogElement | null> | null;
+  drawerRef: Accessor<HTMLDialogElement | undefined>;
+  setDrawerRef: (el: HTMLDialogElement) => void;
 };
 
-const DrawerContext = createContext<DrawerContextType>({
-  drawerRef: null,
-});
+const DrawerContext = createContext<DrawerContextType>();
 
 function useDrawerContext() {
-  const ctx = useContext(DrawerContext);
-  if (!ctx) throw new Error("Drawer components must be used within <Drawer>");
-  return ctx;
+  const c = useContext(DrawerContext);
+  if (!c) throw new Error("Drawer components must be used within <Drawer>");
+  return c;
 }
 
 type DrawerProps = {
-  children: ReactNode;
-};
-
-type DrawerTriggerProps = {
-  children: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
-};
-
-const Trigger = ({ children }: DrawerTriggerProps) => {
-  const { drawerRef } = useDrawerContext();
-  const handleClick = () => drawerRef?.current?.showModal();
-  return React.cloneElement(children, {
-    onClick: handleClick,
-  });
+  children?: JSX.Element;
 };
 
 type DrawerContentProps = {
-  children: ReactNode;
-  className?: string;
+  children?: JSX.Element;
+  class?: string;
 };
 
-type DrawerTitleProps = {
-  children: ReactNode;
-  className?: string;
-};
-
-const Header = ({ children, className }: DrawerTitleProps) => (
-  <div className={mergeClasses("moon-drawer-header", className)}>
-    {children}
-  </div>
-);
-
-const Content = ({ children, className }: DrawerContentProps) => {
-  const { drawerRef } = useDrawerContext();
-  return createPortal(
-    <dialog className={mergeClasses("moon-drawer", className)} ref={drawerRef}>
-      <div className="moon-drawer-box">{children}</div>
-      <form method="dialog" className="moon-backdrop">
-        <button></button>
-      </form>
-    </dialog>,
-    document.body
-  );
+type DrawerHeaderProps = {
+  children?: JSX.Element;
+  class?: string;
 };
 
 type DrawerCloseProps = {
-  onClick?: () => void;
-  className?: string;
-  children?: ReactNode;
+  onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
+  class?: string;
 };
 
-const Close = ({ onClick, className }: DrawerCloseProps) => {
+const Trigger: Component<DrawerProps> = (props) => {
   const { drawerRef } = useDrawerContext();
-  const handleClick = () => {
-    drawerRef?.current?.close();
-    onClick?.();
-  };
+  const [local] = splitProps(props, ["children"]);
+  return (
+    <span style={{ display: "contents" }} onClick={() => drawerRef()?.showModal()}>
+      {local.children}
+    </span>
+  );
+};
+
+const Header: Component<DrawerHeaderProps> = (props) => {
+  const [local] = splitProps(props, ["children", "class"]);
+  return (
+    <div class={mergeClasses("moon-drawer-header", local.class)}>
+      {local.children}
+    </div>
+  );
+};
+
+const Content: Component<DrawerContentProps> = (props) => {
+  const { setDrawerRef } = useDrawerContext();
+  const [local] = splitProps(props, ["children", "class"]);
+  return (
+    <Portal mount={document.body}>
+      <dialog class={mergeClasses("moon-drawer", local.class)} ref={setDrawerRef}>
+        <div class="moon-drawer-box">{local.children}</div>
+        <form method="dialog" class="moon-backdrop">
+          <button></button>
+        </form>
+      </dialog>
+    </Portal>
+  );
+};
+
+const Close: Component<DrawerCloseProps> = (props) => {
+  const { drawerRef } = useDrawerContext();
+  const [local] = splitProps(props, ["onClick", "class"]);
   return (
     <button
-      className={mergeClasses("moon-drawer-close", className)}
+      class={mergeClasses("moon-drawer-close", local.class)}
       aria-label="Close"
-      onClick={handleClick}
+      onClick={() => {
+        drawerRef()?.close();
+        (local.onClick as (() => void) | undefined)?.();
+      }}
     >
       <CloseIcon />
     </button>
   );
 };
 
-const Root = ({ children }: DrawerProps) => {
-  const drawerRef = useRef<HTMLDialogElement | null>(null);
+const Root: Component<DrawerProps> = (props) => {
+  const [local] = splitProps(props, ["children"]);
+  const [drawerRef, setDrawerRef] = createSignal<HTMLDialogElement>();
   return (
-    <DrawerContext.Provider value={{ drawerRef }}>
-      {children}
+    <DrawerContext.Provider value={{ drawerRef, setDrawerRef }}>
+      {local.children}
     </DrawerContext.Provider>
   );
 };
-
-Root.displayName = "Drawer";
-Trigger.displayName = "Drawer.Trigger";
-Close.displayName = "Drawer.Close";
-Header.displayName = "Drawer.Header";
-Content.displayName = "Drawer.Content";
 
 const Drawer = Object.assign(Root, { Trigger, Content, Close, Header });
 

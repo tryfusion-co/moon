@@ -26,16 +26,20 @@ Every existing Moon component renders and behaves identically under SolidJS — 
 
 ### Active
 
-<!-- The Solid migration scope. Hypotheses until shipped. -->
+<!-- v1.0 migration shipped. Next milestone TBD. -->
 
-- [ ] Toolchain swapped to Solid: `solid-js`, `vite-plugin-solid`, real bundled build (replaces type-only `tsc` emit), Vitest, `eslint-plugin-solid`, tsconfig `jsxImportSource: solid-js`
-- [ ] Package renamed `@moondesignsystem/react` → `@moondesignsystem/solid`, version `3.0.0`
-- [ ] Helpers + types + icon assets ported to Solid (`mergeClasses` is framework-pure; icons React FC → Solid `Component`)
-- [ ] All 37 components ported to Solid idioms (`splitProps`/`mergeProps`, `createSignal`, `createEffect`, `<Portal>`, signal-wrapped refs) with identical class output and public API
-- [ ] All 18 test files rewritten for `@solidjs/testing-library` + Vitest, normalized to PascalCase filenames, per-component parity
-- [ ] All 37 Storybook stories rewritten for `storybook-solidjs`
-- [ ] CLI scaffolder emits Solid templates; bin renamed `moon-solid`
-- [ ] Release prep: README/CHANGELOG, major version bump, publish dry-run
+(None active — run /gsd-new-milestone to start the next one.)
+
+### Validated (v1.0 — shipped 2026-06-01)
+
+- ✓ Toolchain swapped to Solid: `solid-js`, `vite-plugin-solid`, dual bundled build (compiled `.js` + raw-JSX `.jsx` + `.d.ts`), Vitest, `eslint-plugin-solid`, tsconfig `jsxImportSource: solid-js` — v1.0
+- ✓ Package renamed `@moondesignsystem/react` → `@moondesignsystem/solid`, version `3.0.0`, `solid` export condition — v1.0
+- ✓ Helpers + types + icon assets ported to Solid — v1.0
+- ✓ All 37 components (34 source files) ported to Solid idioms with identical class output and public API; zero React imports — v1.0
+- ✓ 34 test files rewritten for `@solidjs/testing-library` + Vitest, PascalCase, 278 tests green — v1.0
+- ✓ All 34 Storybook stories rewritten for `storybook-solidjs-vite` (Storybook 10); build-storybook green — v1.0
+- ✓ CLI scaffolder emits Solid templates; bin renamed `moon-solid` — v1.0
+- ✓ Release prep: Solid README/CHANGELOG, major 3.0.0 changeset, `npm publish --dry-run` green with `solid` condition verified — v1.0
 
 ### Out of Scope
 
@@ -97,5 +101,15 @@ This document evolves at phase transitions and milestone boundaries.
 3. Audit Out of Scope — reasons still valid?
 4. Update Context with current state
 
+## Current State
+
+**Shipped:** v1.0 — React → SolidJS migration (2026-06-01). `@moondesignsystem/solid@3.0.0` is a complete, publishable SolidJS port: 37 components, 278 Solid tests, 34 Storybook stories, Solid CLI scaffolder, publish dry-run green with the `solid` export condition verified. `main` is Solid-only (hard cut from React). Archive: `.planning/milestones/v1.0-ROADMAP.md`.
+
+**Not yet done (post-milestone / v2):** real `npm publish` (only dry-run gated — a human/CI action), SolidStart SSR consumer verification (ENH-02), idiomatic Solid refinements like `children()` adoption (ENH-01).
+
+## Next Milestone Goals
+
+(TBD — run `/gsd-new-milestone` to define the next milestone.)
+
 ---
-*Last updated: 2026-06-01 after initialization*
+*Last updated: 2026-06-01 after v1.0 milestone completion*

@@ -7,11 +7,25 @@ export default defineConfig({
     lib: { entry: "./src/index.ts", formats: ["es"], fileName: "index" },
     rollupOptions: {
       external: ["solid-js", "solid-js/web", "solid-js/store"],
-      output: {
-        preserveModules: true,
-        preserveModulesRoot: "src",
-        entryFileNames: "[name].jsx",
-      },
+      output: [
+        // Compiled ESM output — resolves via "import" condition
+        {
+          format: "es",
+          entryFileNames: "[name].js",
+          chunkFileNames: "[name]-[hash].js",
+          preserveModules: true,
+          preserveModulesRoot: "src",
+        },
+        // Preserved-JSX output — resolves via "solid" condition
+        {
+          format: "es",
+          entryFileNames: "[name].jsx",
+          chunkFileNames: "[name]-[hash].jsx",
+          preserveModules: true,
+          preserveModulesRoot: "src",
+          dir: "dist",
+        },
+      ],
     },
   },
 });

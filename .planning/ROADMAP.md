@@ -76,8 +76,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. `Drawer.Trigger` renders without `React.cloneElement`; the chosen replacement (wrapper span / display:contents / documented DOM change) is recorded in PROJECT.md Key Decisions and produces a passing DOM-assertion test
   3. Accordion, TabList, Table, List, Pagination, and Authenticator each pass a Solid test using `<For>`/`<Show>` rendering; Table source has zero `@tanstack/react-table` imports
   4. All 37 component source files are free of React imports (`react`, `react-dom`, `@types/react`)
-**Notes**: DESIGN DECISION REQUIRED — Drawer.Trigger cloneElement replacement must be chosen and recorded in PROJECT.md before Phase 4 implementation begins. Options: (a) wrapper `<span onClick={handleClick}>`, (b) `display:contents` span, (c) documented DOM change. Do not defer past this phase.
-**Plans**: TBD
+**Notes**: DESIGN DECISION RESOLVED — Drawer.Trigger + BottomSheet.Trigger `cloneElement` → `display:contents` span; recorded in PROJECT.md Key Decisions (Accepted). Dropdown.Trigger → display:contents span; TabList → createContext (SegmentedControl pattern). All 4 cloneElement sites removed.
+**Plans**: 5 plans
+- [ ] 04-01-PLAN.md — Port Dialog, Drawer, BottomSheet (Portal + signal-ref context + display:contents Trigger) + tests [Wave 1]
+- [ ] 04-02-PLAN.md — Port Dropdown (display:contents Trigger), Menu, Select, Tooltip, Snackbar (Show) + tests [Wave 1]
+- [ ] 04-03-PLAN.md — Port Accordion, TabList (createContext, no clone), Pagination (createSignal + For) + tests [Wave 1]
+- [ ] 04-04-PLAN.md — Port Table (no tanstack), List, Authenticator (createSignal + Index + onInput) + tests [Wave 1]
+- [ ] 04-05-PLAN.md — Regen barrel, extend src/index.ts to all 37, eslint un-ignore-all, build(dual)+test+lint green gate (human-verify) [Wave 2]
 
 ### Phase 5: Tests
 **Goal**: All 18 test files are rewritten for @solidjs/testing-library + Vitest with per-component parity to the React suite, filenames normalized to PascalCase, and the full suite passes green
@@ -121,7 +126,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 1. Toolchain + Foundation | 3/3 | Complete   | 2026-06-01 |
 | 2. Stateless Atoms | 5/5 | Complete   | 2026-06-01 |
 | 3. Stateful Atoms + Carousel | 5/5 | Complete   | 2026-06-01 |
-| 4. Compound, Portal + Composite | 0/TBD | Not started | - |
+| 4. Compound, Portal + Composite | 0/5 | Not started | - |
 | 5. Tests | 0/TBD | Not started | - |
 | 6. Storybook | 0/TBD | Not started | - |
 | 7. CLI + Release | 0/TBD | Not started | - |

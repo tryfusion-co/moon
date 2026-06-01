@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Toolchain + Foundation** - Swap build/test/lint pipeline to SolidJS and port framework-pure helpers, types, and icon assets (completed 2026-06-01)
 - [x] **Phase 2: Stateless Atoms** - Port all 12 stateless atom components using the canonical mergeProps+splitProps pattern (completed 2026-06-01)
 - [ ] **Phase 3: Stateful Atoms + Carousel** - Port form atoms (createSignal) and the Carousel lifecycle-complexity outlier
-- [ ] **Phase 4: Compound, Portal + Composite** - Port all compound/portal components (createContext, signal-wrapped refs, Portal) and composite components; resolve Drawer.Trigger cloneElement design decision
+- [x] **Phase 4: Compound, Portal + Composite** - Port all compound/portal components (createContext, signal-wrapped refs, Portal) and composite components; resolve Drawer.Trigger cloneElement design decision (completed 2026-06-01)
 - [ ] **Phase 5: Tests** - Rewrite all 18 test files for @solidjs/testing-library + Vitest; normalize filenames to PascalCase
 - [ ] **Phase 6: Storybook** - Spike-validate storybook-solidjs-vite against Storybook 10, then port all 37 stories
 - [ ] **Phase 7: CLI + Release** - Rename CLI bin, update docs, dry-run publish, verify solid export condition in smoke consumer
@@ -78,11 +78,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. All 37 component source files are free of React imports (`react`, `react-dom`, `@types/react`)
 **Notes**: DESIGN DECISION RESOLVED — Drawer.Trigger + BottomSheet.Trigger `cloneElement` → `display:contents` span; recorded in PROJECT.md Key Decisions (Accepted). Dropdown.Trigger → display:contents span; TabList → createContext (SegmentedControl pattern). All 4 cloneElement sites removed.
 **Plans**: 5 plans
-- [ ] 04-01-PLAN.md — Port Dialog, Drawer, BottomSheet (Portal + signal-ref context + display:contents Trigger) + tests [Wave 1]
-- [ ] 04-02-PLAN.md — Port Dropdown (display:contents Trigger), Menu, Select, Tooltip, Snackbar (Show) + tests [Wave 1]
-- [ ] 04-03-PLAN.md — Port Accordion, TabList (createContext, no clone), Pagination (createSignal + For) + tests [Wave 1]
-- [ ] 04-04-PLAN.md — Port Table (no tanstack), List, Authenticator (createSignal + Index + onInput) + tests [Wave 1]
-- [ ] 04-05-PLAN.md — Regen barrel, extend src/index.ts to all 37, eslint un-ignore-all, build(dual)+test+lint green gate (human-verify) [Wave 2]
+- [x] 04-01-PLAN.md — Port Dialog, Drawer, BottomSheet (Portal + signal-ref context + display:contents Trigger) + tests [Wave 1]
+- [x] 04-02-PLAN.md — Port Dropdown (display:contents Trigger), Menu, Select, Tooltip, Snackbar (Show) + tests [Wave 1]
+- [x] 04-03-PLAN.md — Port Accordion, TabList (createContext, no clone), Pagination (createSignal + For) + tests [Wave 1]
+- [x] 04-04-PLAN.md — Port Table (no tanstack), List, Authenticator (createSignal + Index + onInput) + tests [Wave 1]
+- [x] 04-05-PLAN.md — Regen barrel, extend src/index.ts to all 37, eslint un-ignore-all, build(dual)+test+lint green gate (human-verify) [Wave 2]
 
 ### Phase 5: Tests
 **Goal**: All 18 test files are rewritten for @solidjs/testing-library + Vitest with per-component parity to the React suite, filenames normalized to PascalCase, and the full suite passes green
@@ -126,7 +126,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 1. Toolchain + Foundation | 3/3 | Complete   | 2026-06-01 |
 | 2. Stateless Atoms | 5/5 | Complete   | 2026-06-01 |
 | 3. Stateful Atoms + Carousel | 5/5 | Complete   | 2026-06-01 |
-| 4. Compound, Portal + Composite | 0/5 | Not started | - |
+| 4. Compound, Portal + Composite | 5/5 | Complete   | 2026-06-01 |
 | 5. Tests | 0/TBD | Not started | - |
 | 6. Storybook | 0/TBD | Not started | - |
 | 7. CLI + Release | 0/TBD | Not started | - |

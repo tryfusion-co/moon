@@ -35,12 +35,12 @@ Requirements for the `@moondesignsystem/solid@3.0.0` release. Each maps to a roa
 
 ### Components — Compound + Portal
 
-- [ ] **CMPD-01**: Compound/portal components (Dialog, Drawer, BottomSheet, Snackbar, Tooltip, Dropdown, Menu, Select) ported with `createContext`/`useContext`, signal-wrapped shared refs, and `<Portal mount>`, preserving the `Object.assign(Root, {...})` compound API
-- [ ] **CMPD-02**: `Drawer.Trigger` `React.cloneElement` replaced with a Solid-compatible approach (the one non-mechanical translation), with the rendered-DOM decision documented
+- [x] **CMPD-01**: Compound/portal components (Dialog, Drawer, BottomSheet, Snackbar, Tooltip, Dropdown, Menu, Select) ported with `createContext`/`useContext`, signal-wrapped shared refs, and `<Portal mount>`, preserving the `Object.assign(Root, {...})` compound API
+- [x] **CMPD-02**: `Drawer.Trigger` `React.cloneElement` replaced with a Solid-compatible approach (the one non-mechanical translation), with the rendered-DOM decision documented
 
 ### Components — Composite
 
-- [ ] **COMP-01**: Composite components (Accordion, TabList, Table, List, Pagination, Authenticator) ported using `<For>`/`<Show>`/`<Switch>` where `map()`/conditionals were used, preserving public API and class output (Table source needs no tanstack dep)
+- [x] **COMP-01**: Composite components (Accordion, TabList, Table, List, Pagination, Authenticator) ported using `<For>`/`<Show>`/`<Switch>` where `map()`/conditionals were used, preserving public API and class output (Table source needs no tanstack dep)
 
 ### Quality — Tests
 
@@ -100,9 +100,9 @@ Deferred. Tracked, not in current roadmap.
 | ATOM-01 | Phase 2: Stateless Atoms | Complete |
 | FORM-01 | Phase 3: Stateful Atoms + Carousel | Complete |
 | FORM-02 | Phase 3: Stateful Atoms + Carousel | Complete |
-| CMPD-01 | Phase 4: Compound, Portal + Composite | Pending |
-| CMPD-02 | Phase 4: Compound, Portal + Composite | Pending |
-| COMP-01 | Phase 4: Compound, Portal + Composite | Pending |
+| CMPD-01 | Phase 4: Compound, Portal + Composite | Complete |
+| CMPD-02 | Phase 4: Compound, Portal + Composite | Complete |
+| COMP-01 | Phase 4: Compound, Portal + Composite | Complete |
 | TEST-01 | Phase 5: Tests | Pending |
 | TEST-02 | Phase 5: Tests | Pending |
 | STORY-01 | Phase 6: Storybook | Pending |

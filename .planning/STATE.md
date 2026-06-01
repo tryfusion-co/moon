@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Phase 3 gate approved and complete; Phase 4 ready to start
-stopped_at: Phase 3 gate human-verify APPROVED — 20 components in build graph, FORM-01 + FORM-02 closed; Phase 4 ready
-last_updated: "2026-06-01T13:14:06.274Z"
+status: executing
+stopped_at: Completed 04-05-PLAN.md
+last_updated: "2026-06-01T14:08:16.532Z"
 last_activity: 2026-06-01
 progress:
   total_phases: 7
-  completed_phases: 3
-  total_plans: 13
-  completed_plans: 13
-  percent: 43
+  completed_phases: 4
+  total_plans: 18
+  completed_plans: 18
+  percent: 100
 ---
 
 # Project State
@@ -21,16 +21,17 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-01)
 
 **Core value:** Every existing Moon component renders and behaves identically under SolidJS — same public API, same Tailwind class output, same DOM — so consuming apps get a true framework swap, not a redesign.
-**Current focus:** Phase 04 — compound-portal-composite (next)
+**Current focus:** Phase 04 — compound-portal-composite
 
 ## Current Position
 
-Phase: 03 (stateful-atoms-carousel) — COMPLETE (all 5 plans done)
+Phase: 04 (compound-portal-composite) — EXECUTING
+Plan: 2 of 5
 Phase: 04 (compound-portal-composite) — NEXT
-Status: Phase 3 gate approved and complete; Phase 4 ready to start
+Status: Ready to execute
 Last activity: 2026-06-01
 
-Progress: [███░░░░░░░] 43%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -54,6 +55,7 @@ Progress: [███░░░░░░░] 43%
 *Updated after each plan completion*
 | Phase 01-toolchain-foundation P03 | 10 | 2 tasks | 5 files |
 | Phase 02-stateless-atoms P02-05 | 15 | 3 tasks | 3 files |
+| Phase 04-compound-portal-composite P05 | 25min | - tasks | - files |
 
 ## Accumulated Context
 
@@ -66,6 +68,9 @@ Recent decisions affecting current work:
 - Pre-Phase 1: Target `solid-js@^1.9.13`; `eslint-plugin-solid@~0.14.5` (tilde-pinned, pre-1.0)
 - Pre-Phase 4: Drawer.Trigger `React.cloneElement` replacement must be decided and documented before Phase 4 begins
 - [Phase ?]: D-12: Phase 01 validation gate (TOOL-07) proven green — vite build emits .js+.jsx+.d.ts, vitest passes real Solid render(), eslint green, solid/no-destructure confirmed active
+- [Phase ?]: Improved generate-barrel.cjs to auto-detect export type aliases (TooltipPositions) preventing prebuild hook from wiping hand-adds
+- [Phase ?]: Kept explicit named re-exports in src/index.ts matching Phase 1-3 convention
+- [Phase ?]: Function-type param names use _ prefix to satisfy no-unused-vars in type signatures
 
 ### Pending Todos
 
@@ -86,6 +91,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-01
-Stopped at: Phase 3 (03-05) gate approved; all 5 Phase 3 plans complete; Phase 4 ready to start
+Last session: 2026-06-01T14:08:16.520Z
+Stopped at: Completed 04-05-PLAN.md
 Resume file: None

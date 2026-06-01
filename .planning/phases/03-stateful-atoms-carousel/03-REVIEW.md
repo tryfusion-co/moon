@@ -17,7 +17,18 @@ findings:
   warning: 4
   info: 1
   total: 7
-status: issues_found
+status: fixed
+fixed_at: 2026-06-01T09:24:00Z
+findings_fixed:
+  - CR-02: Checkbox onChange bridged to onInput (behavioral regression fixed)
+  - WR-01: Switch onInput excluded from rest (bridge no longer clobberable)
+  - WR-02: Radio.Group name stored as reactive accessor in context
+  - WR-03: SegmentedControl static-children comment added (no logic change)
+findings_rejected:
+  - CR-01: rejected-parity (React original has identical onClick order; byte-for-byte parity preserved)
+  - IN-01: rejected-parity (React original also initialises canScrollEnd=true; changing would diverge)
+findings_deferred:
+  - WR-04: left (dead size field in context; harmless, matches React vestigial behavior)
 ---
 
 # Phase 3: Code Review Report

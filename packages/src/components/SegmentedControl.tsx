@@ -85,6 +85,9 @@ const Root: Component<SegmentedControlProps> = (props) => {
       setInternal(idx);
     }
   };
+  // NOTE: register() assumes static children only (counter is never reset).
+  // Matches React original which also used static Children.map at render time.
+  // For dynamic children use explicit `index` props on each Item.
   let counter = 0;
   const register = () => counter++;
   return (

@@ -1,4 +1,4 @@
-import { render } from "@solidjs/testing-library";
+import { render, screen } from "@solidjs/testing-library";
 import { describe, it, expect } from "vitest";
 import Tooltip from "../../components/Tooltip";
 
@@ -81,5 +81,27 @@ describe("Tooltip", () => {
       const div = container.querySelector("div");
       expect(div!.className).toBe("moon-tooltip-content extra");
     });
+
+    it("renders nested children with base and custom classes visible", () => {
+      render(() => (
+        <Tooltip>
+          <Tooltip.Content class="extra-class">Content text</Tooltip.Content>
+        </Tooltip>
+      ));
+      const content = screen.getByText("Content text");
+      expect(content).toHaveClass("moon-tooltip-content");
+      expect(content).toHaveClass("extra-class");
+    });
+  });
+
+  it("renders nested Trigger and Content children", () => {
+    render(() => (
+      <Tooltip>
+        <Tooltip.Trigger>Trigger here</Tooltip.Trigger>
+        <Tooltip.Content>Content here</Tooltip.Content>
+      </Tooltip>
+    ));
+    expect(screen.getByText("Trigger here")).toBeInTheDocument();
+    expect(screen.getByText("Content here")).toBeInTheDocument();
   });
 });

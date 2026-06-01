@@ -1,9 +1,9 @@
-import { render } from "@solidjs/testing-library";
+import { render, screen } from "@solidjs/testing-library";
 import { describe, it, expect } from "vitest";
 import Table from "../../components/Table";
 
 describe("Table", () => {
-  it("renders table.moon-table with full compound structure", () => {
+  it("renders table.moon-table with full compound structure and visible text", () => {
     const { container } = render(() => (
       <Table>
         <Table.Caption>Caption</Table.Caption>
@@ -34,6 +34,9 @@ describe("Table", () => {
     expect(container.querySelector("tr")).not.toBeNull();
     expect(container.querySelector("th")).not.toBeNull();
     expect(container.querySelector("td")).not.toBeNull();
+    // legacy: text content visible in header/body cells
+    expect(screen.getByText("Header")).toBeInTheDocument();
+    expect(screen.getByText("Data")).toBeInTheDocument();
   });
 
   it("does NOT add size modifier for default size md", () => {

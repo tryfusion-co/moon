@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Phase 6 COMPLETE. All 6 plans done. Storybook fully migrated to storybook-solidjs-vite@10, all 33 component stories + gettingStarted.mdx Solid CSF, build-storybook EXIT 0 (Storybook 10.4.1, 267 modules transformed), Table on @tanstack/solid-table. STORY-01 + STORY-02 complete. Approved on green-build evidence (headless, no browser visual check). Phase 7 (CLI + Release) is next.
-last_updated: "2026-06-01T16:15:23.852Z"
+status: complete
+stopped_at: "MILESTONE COMPLETE. React->SolidJS migration done. Phase 7 (07-03) human-verify checkpoint approved on real evidence: npm publish --dry-run EXIT 0 (@moondesignsystem/solid@3.0.0, 263 files, tarball correct — dist .js/.jsx/.d.ts + cli + bin/moon-solid + README + LICENSE + src; node_modules/.planning absent); solid export condition proven via node --conditions=solid resolves to dist/index.jsx (raw JSX); whole-repo gate green: 278/278 tests, 0 lint errors, build-storybook 267 modules/37 stories, dry-run. All 7 phases complete. All 24 v1 requirements satisfied. @moondesignsystem/solid@3.0.0 publishable."
+last_updated: "2026-06-01T16:30:00.000Z"
 last_activity: 2026-06-01
 progress:
   total_phases: 7
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-01)
 
 **Core value:** Every existing Moon component renders and behaves identically under SolidJS — same public API, same Tailwind class output, same DOM — so consuming apps get a true framework swap, not a redesign.
-**Current focus:** Phase 07 — cli-release
+**Current focus:** MILESTONE COMPLETE — @moondesignsystem/solid@3.0.0 ready to publish
 
 ## Current Position
 
-Phase: 07 (cli-release) — EXECUTING
-Plan: 2 of 3
-Status: Ready to execute
+Phase: 07 (cli-release) — COMPLETE
+Plan: 3 of 3 (all done)
+Status: Milestone complete — all 7 phases, all 24 v1 requirements satisfied
 Last activity: 2026-06-01
 
 Progress: [██████████] 100%
@@ -101,6 +101,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-06-01T16:15:23.841Z
-Stopped at: Phase 6 COMPLETE. All 6 plans done. Storybook fully migrated to storybook-solidjs-vite@10, all 33 component stories + gettingStarted.mdx Solid CSF, build-storybook EXIT 0 (Storybook 10.4.1, 267 modules transformed), Table on @tanstack/solid-table. STORY-01 + STORY-02 complete. Approved on green-build evidence (headless, no browser visual check). Phase 7 (CLI + Release) is next.
+Last session: 2026-06-01T16:30:00.000Z
+Stopped at: "MILESTONE COMPLETE. React->SolidJS migration done. All 7 phases, all 24 v1 requirements satisfied. @moondesignsystem/solid@3.0.0 publishable (dry-run green). Real npm publish deferred to human/CI."
 Resume file: None

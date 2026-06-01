@@ -77,6 +77,8 @@ Every existing Moon component renders and behaves identically under SolidJS — 
 | `splitProps`/`mergeProps` for every component | Solid reactivity requires no prop destructuring | — Pending |
 | Chip uncontrolled-toggle divergence from React is intentional | React's `isActive=false` default made the internal toggle dead code (clicking never activated the chip). Solid port omits that default so `local.isActive` is `undefined` when uncontrolled, allowing the signal to drive `moon-chip-active` on click. This is an accepted behavior improvement over the React original, not a parity bug. CR-01 rejected. | — Accepted |
 | Real bundled build (tsup/vite-lib) replaces type-only `tsc` | Solid JSX needs babel-preset-solid compilation | — Pending |
+| Drawer.Trigger `cloneElement` → `display:contents` wrapper span | Solid has no cloneElement. A `<span style="display:contents" onClick>` attaches the open-handler while staying layout-invisible (no box in the layout tree), the closest low-risk equivalent. Adds one DOM node vs React's clone — documented, accepted divergence. | — Accepted |
+| Context-shared refs use signal/callback refs | Plain `let` ref is not reactive across Solid context. Dialog/Drawer/BottomSheet use `createSignal<HTMLDialogElement>()` + `ref={setRef}`, share the getter via context, call `ref()?.showModal()`. | — Accepted |
 
 ## Evolution
 

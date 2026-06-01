@@ -2,7 +2,7 @@
 
 ## What This Is
 
-Moon is a component library / design system, currently `@moondesignsystem/react@2.5.21` — a monorepo with a React component package, a Storybook docs site, and a CLI scaffolder (`npx @moondesignsystem/ui --add-components`). This project ports the entire library from React 19 to SolidJS in-place on `main`, republishing as `@moondesignsystem/solid@3.0.0`. Consumers are app developers who install Moon components and style them with Tailwind.
+Moon is a component library / design system shipped as `@moondesignsystem/solid@3.0.0` — a monorepo with a SolidJS component package (`packages/`), a Storybook docs site (`docs/`), and a CLI scaffolder (`bin/moon-solid`). It was migrated in v1.0 from React 19 to SolidJS in-place on `main` (was `@moondesignsystem/react@2.5.21`; hard cut, React abandoned). Consumers are app developers who install Moon components and style them with Tailwind.
 
 ## Core Value
 

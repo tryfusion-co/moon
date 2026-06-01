@@ -14,10 +14,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
     "baseUrl": "..",
     "paths": {
-      "@moondesignsystem/react": [
+      "@moondesignsystem/solid": [
         "../packages/src/index.ts",
         "../packages/dist/index.d.ts"
       ]

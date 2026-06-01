@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { LinearProgress as LinearProgressComponent } from "@moondesignsystem/react";
-import LinksBlock from "../shared/LinksBlock";
+import type { Meta, StoryObj } from 'storybook-solidjs-vite';
+import { LinearProgress as LinearProgressComponent } from '@moondesignsystem/solid';
+import type { ComponentProps } from 'solid-js';
+import LinksBlock from '../shared/LinksBlock';
 
-type Type = React.ComponentProps<typeof LinearProgressComponent>;
+type Type = ComponentProps<typeof LinearProgressComponent>;
 
 const meta: Meta<Type> = {
-  title: "Indicators & status/Linear Progress",
+  title: 'Indicators & status/Linear Progress',
   parameters: {
     docs: {
       container: ({ context }: any) => (
@@ -15,25 +16,25 @@ const meta: Meta<Type> = {
   },
   argTypes: {
     size: {
-      description: "Defines LinearProgress size",
-      options: ["5xs", "4xs", "3xs", "2xs"],
-      control: "select",
+      description: 'Defines LinearProgress size',
+      options: ['5xs', '4xs', '3xs', '2xs'],
+      control: 'select',
       table: {
-        defaultValue: { summary: "2xs" },
+        defaultValue: { summary: '2xs' },
       },
     },
     value: {
-      description: "Current value of LinearProgress",
-      control: "range",
+      description: 'Current value of LinearProgress',
+      control: 'range',
       table: {
-        defaultValue: { summary: "0" },
+        defaultValue: { summary: '0' },
       },
     },
     label: {
-      description: "Label for LinearProgress",
-      control: "text",
+      description: 'Label for LinearProgress',
+      control: 'text',
       table: {
-        defaultValue: { summary: "" },
+        defaultValue: { summary: '' },
       },
     },
   },
@@ -41,7 +42,7 @@ const meta: Meta<Type> = {
     const linearProgressProps = {
       ...props,
       ...(label && { label }),
-      ...(size !== "2xs" && { size }),
+      ...(size !== '2xs' && { size }),
     };
     return (
       <LinearProgressComponent {...linearProgressProps} value={props.value} />
@@ -55,8 +56,8 @@ type Story = StoryObj<Type>;
 
 export const LinearProgress: Story = {
   args: {
-    size: "2xs",
+    size: '2xs',
     value: 25,
-    label: "",
+    label: '',
   },
 };

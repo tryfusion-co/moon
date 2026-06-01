@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. `packages/src/helpers/` and `packages/src/types/` compile with zero React imports; barrel generator produces a valid Solid barrel
 **Plans**: 3 plans
 - [x] 01-01-PLAN.md — Toolchain swap: deps, tsconfigs, vite/vitest/eslint configs, package rename + solid export condition, stub entry (TOOL-01..06)
-- [ ] 01-02-PLAN.md — Foundation: port 5 icons to Solid, verify helpers/types React-free, verify barrel generator (FND-01..04)
+- [x] 01-02-PLAN.md — Foundation: port 5 icons to Solid, verify helpers/types React-free, verify barrel generator (FND-01..04)
 - [ ] 01-03-PLAN.md — TOOL-07 validation gate: prove build+test+lint green on stub, confirm solid/no-destructure fires (TOOL-07)
 
 ### Phase 2: Stateless Atoms

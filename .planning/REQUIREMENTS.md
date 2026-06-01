@@ -19,10 +19,10 @@ Requirements for the `@moondesignsystem/solid@3.0.0` release. Each maps to a roa
 
 ### Foundation
 
-- [ ] **FND-01**: `helpers/mergeClasses.ts` compiles and is consumed under the Solid toolchain unchanged (framework-pure)
-- [ ] **FND-02**: `types/index.ts` (`Sizes`/`Contexts`/`Variants`/`Directions`/`Positions`) exported unchanged
-- [ ] **FND-03**: Icon assets in `assets/icons/` ported from React FC to Solid `Component` with `JSX`/SVG attribute types, rendering identical SVG output
-- [ ] **FND-04**: Barrel generator (`scripts/generate-barrel.js`) produces a valid Solid barrel; unused `barrelsby` dep removed
+- [x] **FND-01**: `helpers/mergeClasses.ts` compiles and is consumed under the Solid toolchain unchanged (framework-pure)
+- [x] **FND-02**: `types/index.ts` (`Sizes`/`Contexts`/`Variants`/`Directions`/`Positions`) exported unchanged
+- [x] **FND-03**: Icon assets in `assets/icons/` ported from React FC to Solid `Component` with `JSX`/SVG attribute types, rendering identical SVG output
+- [x] **FND-04**: Barrel generator (`scripts/generate-barrel.js`) produces a valid Solid barrel; unused `barrelsby` dep removed
 
 ### Components — Stateless Atoms
 
@@ -93,10 +93,10 @@ Deferred. Tracked, not in current roadmap.
 | TOOL-05 | Phase 1: Toolchain + Foundation | Complete |
 | TOOL-06 | Phase 1: Toolchain + Foundation | Complete |
 | TOOL-07 | Phase 1: Toolchain + Foundation | Pending |
-| FND-01 | Phase 1: Toolchain + Foundation | Pending |
-| FND-02 | Phase 1: Toolchain + Foundation | Pending |
-| FND-03 | Phase 1: Toolchain + Foundation | Pending |
-| FND-04 | Phase 1: Toolchain + Foundation | Pending |
+| FND-01 | Phase 1: Toolchain + Foundation | Complete |
+| FND-02 | Phase 1: Toolchain + Foundation | Complete |
+| FND-03 | Phase 1: Toolchain + Foundation | Complete |
+| FND-04 | Phase 1: Toolchain + Foundation | Complete |
 | ATOM-01 | Phase 2: Stateless Atoms | Pending |
 | FORM-01 | Phase 3: Stateful Atoms + Carousel | Pending |
 | FORM-02 | Phase 3: Stateful Atoms + Carousel | Pending |

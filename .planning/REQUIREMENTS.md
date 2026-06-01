@@ -26,7 +26,7 @@ Requirements for the `@moondesignsystem/solid@3.0.0` release. Each maps to a roa
 
 ### Components — Stateless Atoms
 
-- [ ] **ATOM-01**: All 12 stateless atoms (Button, IconButton, Badge, Tag, Chip, Avatar, Loader, CircularProgress, LinearProgress, Placeholder, Alert, Breadcrumb) ported using `mergeProps` + `splitProps` (no prop destructuring), emitting identical class output and public API/types
+- [x] **ATOM-01**: All 12 stateless atoms (Button, IconButton, Badge, Tag, Chip, Avatar, Loader, CircularProgress, LinearProgress, Placeholder, Alert, Breadcrumb) ported using `mergeProps` + `splitProps` (no prop destructuring), emitting identical class output and public API/types
 
 ### Components — Stateful Form Atoms
 
@@ -97,7 +97,7 @@ Deferred. Tracked, not in current roadmap.
 | FND-02 | Phase 1: Toolchain + Foundation | Complete |
 | FND-03 | Phase 1: Toolchain + Foundation | Complete |
 | FND-04 | Phase 1: Toolchain + Foundation | Complete |
-| ATOM-01 | Phase 2: Stateless Atoms | Pending |
+| ATOM-01 | Phase 2: Stateless Atoms | Complete |
 | FORM-01 | Phase 3: Stateful Atoms + Carousel | Pending |
 | FORM-02 | Phase 3: Stateful Atoms + Carousel | Pending |
 | CMPD-01 | Phase 4: Compound, Portal + Composite | Pending |

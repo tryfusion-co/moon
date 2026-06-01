@@ -13,7 +13,7 @@ A bottom-up, in-place migration of the Moon design system from React 19 to Solid
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Toolchain + Foundation** - Swap build/test/lint pipeline to SolidJS and port framework-pure helpers, types, and icon assets (completed 2026-06-01)
-- [ ] **Phase 2: Stateless Atoms** - Port all 12 stateless atom components using the canonical mergeProps+splitProps pattern
+- [x] **Phase 2: Stateless Atoms** - Port all 12 stateless atom components using the canonical mergeProps+splitProps pattern (completed 2026-06-01)
 - [ ] **Phase 3: Stateful Atoms + Carousel** - Port form atoms (createSignal) and the Carousel lifecycle-complexity outlier
 - [ ] **Phase 4: Compound, Portal + Composite** - Port all compound/portal components (createContext, signal-wrapped refs, Portal) and composite components; resolve Drawer.Trigger cloneElement design decision
 - [ ] **Phase 5: Tests** - Rewrite all 18 test files for @solidjs/testing-library + Vitest; normalize filenames to PascalCase
@@ -46,11 +46,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Zero prop destructuring in any ported component — `eslint-plugin-solid/no-destructure` reports no violations across the atoms directory
   3. Public API (component name, prop names, exported types) is identical to the React version for all 12 atoms
 **Plans**: 5 plans
-- [ ] 02-01-PLAN.md — Port Button, IconButton, Tag (button/div spread atoms) + minimal Solid tests
-- [ ] 02-02-PLAN.md — Port Badge, Chip (createSignal), Avatar (User-icon fallback) + tests
-- [ ] 02-03-PLAN.md — Port Loader, CircularProgress, LinearProgress, Placeholder + tests
-- [ ] 02-04-PLAN.md — Port Alert, Breadcrumb (compound Object.assign atoms) + tests
-- [ ] 02-05-PLAN.md — Regen barrel, repoint src/index.ts, eslint un-ignore, vitest include, build(dual)+test+lint green gate
+- [x] 02-01-PLAN.md — Port Button, IconButton, Tag (button/div spread atoms) + minimal Solid tests
+- [x] 02-02-PLAN.md — Port Badge, Chip (createSignal), Avatar (User-icon fallback) + tests
+- [x] 02-03-PLAN.md — Port Loader, CircularProgress, LinearProgress, Placeholder + tests
+- [x] 02-04-PLAN.md — Port Alert, Breadcrumb (compound Object.assign atoms) + tests
+- [x] 02-05-PLAN.md — Regen barrel, repoint src/index.ts, eslint un-ignore, vitest include, build(dual)+test+lint green gate
 
 ### Phase 3: Stateful Atoms + Carousel
 **Goal**: All form atom components and Carousel are ported with local signals and correct Solid lifecycle, validating createSignal, onMount, onCleanup, and onInput patterns before they appear in the more complex compound layer
@@ -114,7 +114,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Toolchain + Foundation | 3/3 | Complete   | 2026-06-01 |
-| 2. Stateless Atoms | 0/5 | Not started | - |
+| 2. Stateless Atoms | 5/5 | Complete   | 2026-06-01 |
 | 3. Stateful Atoms + Carousel | 0/TBD | Not started | - |
 | 4. Compound, Portal + Composite | 0/TBD | Not started | - |
 | 5. Tests | 0/TBD | Not started | - |

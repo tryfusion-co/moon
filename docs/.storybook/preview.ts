@@ -1,18 +1,19 @@
-import type { Preview } from "@storybook/react-vite";
-import { withThemeByClassName } from "@storybook/addon-themes";
-import "./globals.css";
+import type { Preview } from 'storybook-solidjs-vite';
+import { createJSXDecorator } from 'storybook-solidjs-vite';
+import { withThemeByClassName } from '@storybook/addon-themes';
+import './globals.css';
 
 const preview: Preview = {
   globalTypes: {
     direction: {
-      name: "Text Direction",
-      description: "Switch between LTR and RTL",
-      defaultValue: "ltr",
+      name: 'Text Direction',
+      description: 'Switch between LTR and RTL',
+      defaultValue: 'ltr',
       toolbar: {
-        icon: "transfer",
+        icon: 'transfer',
         items: [
-          { value: "ltr", title: "LTR (Left to Right)" },
-          { value: "rtl", title: "RTL (Right to Left)" },
+          { value: 'ltr', title: 'LTR (Left to Right)' },
+          { value: 'rtl', title: 'RTL (Right to Left)' },
         ],
         showName: true,
       },
@@ -21,7 +22,7 @@ const preview: Preview = {
   parameters: {
     options: {
       storySort: {
-        order: ["Getting started", "*"],
+        order: ['Getting started', '*'],
       },
     },
     controls: {
@@ -30,40 +31,43 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-
     a11y: {
       // 'todo' - show a11y violations in the test UI only
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
-      test: "todo",
+      test: 'todo',
     },
   },
   decorators: [
     withThemeByClassName({
       themes: {
-        light: "light-theme",
-        dark: "dark-theme",
+        light: 'light-theme',
+        dark: 'dark-theme',
       },
-      defaultTheme: "light",
+      defaultTheme: 'light',
     }),
-    (Story, context) => {
-      const direction = context.globals.direction || "ltr";
-      const theme = context.globals?.theme || "light";
-      document.documentElement.setAttribute("dir", direction);
-      const docsStory = document.querySelector(".docs-story");
-      const mainPadded = document.querySelector(".sb-main-padded");
+    // createJSXDecorator marks the return value as JSX and prevents
+    // Storybook from double-executing this decorator when args change.
+    // The Story() call form (not <Story/>) is required to keep
+    // withThemeByClassName hooks in context (GitHub issue #24625).
+    createJSXDecorator((Story, context) => {
+      const direction = context.globals.direction || 'ltr';
+      const theme = context.globals?.theme || 'light';
+      document.documentElement.setAttribute('dir', direction);
+      const docsStory = document.querySelector('.docs-story');
+      const mainPadded = document.querySelector('.sb-main-padded');
       if (docsStory) {
-        docsStory.classList.remove("dark-theme", "light-theme");
+        docsStory.classList.remove('dark-theme', 'light-theme');
         docsStory.classList.add(`${theme}-theme`);
       }
       if (mainPadded) {
-        mainPadded.classList.remove("dark-theme", "light-theme");
+        mainPadded.classList.remove('dark-theme', 'light-theme');
         mainPadded.classList.add(`${theme}-theme`);
       }
       return Story();
-    },
+    }),
   ],
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default preview;

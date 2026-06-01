@@ -1,27 +1,36 @@
-// This file has been automatically migrated to valid ESM format by Storybook.
-import { createRequire } from "node:module";
-import { dirname, join } from "node:path";
-import type { StorybookConfig } from "@storybook/react-vite";
+import type { StorybookConfig } from 'storybook-solidjs-vite';
+import path from 'path';
 
-const require = createRequire(import.meta.url);
+const getAbsolutePath = (packageName: string): string =>
+  path.dirname(import.meta.resolve(path.join(packageName, 'package.json'))).replace(/^file:\/\//, '');
 
 const config: StorybookConfig = {
   stories: [
-    "../stories/*.stories.@(js|jsx|mjs|ts|tsx)",
-    "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-    "../stories/*.mdx",
+    '../stories/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../stories/*.mdx',
   ],
-  staticDirs: ["../stories/assets"],
+  staticDirs: ['../stories/assets'],
   addons: [
-    getAbsolutePath("@chromatic-com/storybook"),
-    getAbsolutePath("@storybook/addon-docs"),
-    getAbsolutePath("@storybook/addon-a11y"),
-    getAbsolutePath("@storybook/addon-vitest"),
-    getAbsolutePath("@storybook/addon-themes"),
+    getAbsolutePath('@chromatic-com/storybook'),
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    {
+      name: getAbsolutePath('@storybook/addon-vitest'),
+      options: { cli: false },
+    },
+    getAbsolutePath('@storybook/addon-themes'),
   ],
   framework: {
-    name: getAbsolutePath("@storybook/react-vite"),
-    options: {},
+    name: 'storybook-solidjs-vite',
+    options: {
+      docgen: {
+        savePropValueAsString: true,
+        shouldExtractLiteralValuesFromEnum: true,
+        propFilter: (prop: any) =>
+          prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+      },
+    },
   },
   managerHead: (head) => `
  <!-- Google tag (gtag.js) -->
@@ -38,8 +47,5 @@ const config: StorybookConfig = {
     <style>.sidebar-header img {height: 24px}</style>
   `,
 };
-export default config;
 
-function getAbsolutePath(value: string): any {
-  return dirname(require.resolve(join(value, "package.json")));
-}
+export default config;

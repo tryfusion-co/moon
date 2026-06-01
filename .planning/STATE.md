@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Phase 4 complete — ALL 37 components ported (34 .tsx source files; 37 counts compound sub-components). All 5/5 Phase 4 plans done. Phase 5 (tests) is next.
-last_updated: "2026-06-01T14:48:44.315Z"
+status: phase-complete
+stopped_at: Phase 5 complete — all 34 component tests consolidated into src/tests/atoms/, 278/278 vitest passing (35 files), eslint 0 errors, build green, all 19 legacy ignores removed. TEST-01 + TEST-02 complete. Phase 6 (Storybook) is next — ESLint warnings cleanup pass requested before Phase 6 starts.
+last_updated: "2026-06-01T16:00:00Z"
 last_activity: 2026-06-01
 progress:
   total_phases: 7
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-01)
 
 **Core value:** Every existing Moon component renders and behaves identically under SolidJS — same public API, same Tailwind class output, same DOM — so consuming apps get a true framework swap, not a redesign.
-**Current focus:** Phase 05 — tests
+**Current focus:** Phase 06 — Storybook (pending ESLint warnings cleanup pass first)
 
 ## Current Position
 
-Phase: 05 (tests) — EXECUTING
-Plan: 2 of 5
-Phase: 05 (tests) — NEXT
-Status: Ready to execute
+Phase: 05 (tests) — COMPLETE
+Plan: 5 of 5
+Phase: 06 (storybook) — NEXT
+Status: Phase 5 gate passed (human-approved). ESLint warnings cleanup pass requested before Phase 6 begins.
 Last activity: 2026-06-01
 
 Progress: [██████████] 100%
@@ -72,17 +72,19 @@ Recent decisions affecting current work:
 - [Phase 04-05]: Kept explicit named re-exports in src/index.ts matching Phase 1-3 convention
 - [Phase 04-05]: Function-type param names use _ prefix to satisfy no-unused-vars in type signatures
 - [Phase 04-05 / Phase 5 flag]: Select kept native onChange (not onInput); verify blur-vs-keystroke parity gap vs React source during Phase 5
+- [Phase 05]: All 19 stale legacy-test ignore entries removed from eslint.config.js; stale Phase-07 migration comment removed from vitest.config.ts
+- [Phase 05]: Phase 5 gate passed: 278/278 vitest passing (35 files), eslint 0 errors, build green, all suite-wide invariants confirmed (zero @testing-library/react, zero jest., all render(() => form, all PascalCase filenames)
 
 ### Pending Todos
 
-None yet.
+- **ESLint warnings cleanup (pre-Phase 6, user-requested)**: 21 cosmetic ESLint warnings remain in component source files — `solid/reactivity` and `solid/self-closing-comp` rules. Zero errors. User has requested a cleanup pass to resolve these before Phase 6 begins. This is a targeted source-file cleanup, not a config change — do NOT suppress warnings with eslint-disable comments; fix the underlying patterns.
 
 ### Blockers/Concerns
 
 - **Phase 6 (Storybook) — SPIKE RISK**: `storybook-solidjs-vite` community adapter compatibility with Storybook 10 (@addon-vitest, Chromatic) is unverified at runtime. Button story spike required before porting all 37 stories. Fallback: pin Storybook 9.x.
 - **Phase 4 — DESIGN DECISION**: RESOLVED — Drawer.Trigger + BottomSheet.Trigger `cloneElement` → `display:contents` span. Recorded in PROJECT.md Key Decisions.
-- **Phase 5 polish (cosmetic, non-blocking)**: 21 ESLint warnings remain across Phase 3-4 components (up from 12 after Phase 4 gate) — `solid/reactivity` and `solid/self-closing-comp`. Zero errors; zero `solid/no-destructure` violations. Optional cleanup in Phase 5.
-- **Phase 5 verification required — Select onChange parity gap**: Select component kept native `onChange` (not bridged to `onInput`). If React's Select `onChange` fires live on each keystroke, this is a blur-vs-keystroke parity gap (same category as Checkbox CR-02 fix). Must verify behavioral parity against React source during Phase 5 test authoring. Do NOT fix until behavioral analysis confirms gap exists.
+- **Phase 5 polish — ESLint warnings (user-requested cleanup before Phase 6)**: 21 ESLint warnings remain across Phase 3-4 component source files — `solid/reactivity` and `solid/self-closing-comp`. Zero errors; zero `solid/no-destructure` violations. User has requested these be resolved (not suppressed) before Phase 6 begins.
+- **Phase 5 — Select onChange parity gap**: RESOLVED — Select component's native onChange verified via test authoring; parity analysis complete during Phase 5.
 
 ## Deferred Items
 
@@ -93,6 +95,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-01T14:48:44.303Z
-Stopped at: Phase 4 complete — ALL 37 components ported (34 .tsx source files; 37 counts compound sub-components). All 5/5 Phase 4 plans done. Phase 5 (tests) is next.
+Last session: 2026-06-01T16:00:00Z
+Stopped at: Phase 5 complete — all 34 component tests consolidated into src/tests/atoms/, 278/278 vitest passing (35 files), eslint 0 errors, build green, all 19 legacy ignores removed. TEST-01 + TEST-02 complete. Phase 6 (Storybook) is next — ESLint warnings cleanup pass requested before Phase 6 starts.
 Resume file: None

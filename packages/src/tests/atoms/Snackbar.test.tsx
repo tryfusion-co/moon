@@ -1,4 +1,4 @@
-import { render } from "@solidjs/testing-library";
+import { render, screen } from "@solidjs/testing-library";
 import { describe, it, expect } from "vitest";
 import Snackbar from "../../components/Snackbar";
 
@@ -20,6 +20,11 @@ describe("Snackbar", () => {
     expect(div).toBeNull();
   });
 
+  it("renders visible text content when isOpen=true", () => {
+    render(() => <Snackbar isOpen={true}>Visible Snackbar</Snackbar>);
+    expect(screen.getByText("Visible Snackbar")).toBeInTheDocument();
+  });
+
   it("variant=fill (default) does NOT add modifier class", () => {
     const { container } = render(() => (
       <Snackbar isOpen={true} variant="fill">
@@ -38,6 +43,7 @@ describe("Snackbar", () => {
     ));
     const div = container.querySelector("div");
     expect(div!.className).toContain("moon-snackbar-soft");
+    expect(div!.className).not.toContain("moon-snackbar-positive");
   });
 
   it("context=error adds moon-snackbar-error modifier", () => {
@@ -48,6 +54,27 @@ describe("Snackbar", () => {
     ));
     const div = container.querySelector("div");
     expect(div!.className).toContain("moon-snackbar-error");
+  });
+
+  it("context=positive adds moon-snackbar-positive modifier", () => {
+    const { container } = render(() => (
+      <Snackbar isOpen={true} context="positive">
+        Success
+      </Snackbar>
+    ));
+    const div = container.querySelector("div");
+    expect(div!.className).toContain("moon-snackbar-positive");
+  });
+
+  it("renders nested Meta + Action children correctly", () => {
+    render(() => (
+      <Snackbar isOpen={true}>
+        <Snackbar.Meta>2 min ago</Snackbar.Meta>
+        <Snackbar.Action>Undo</Snackbar.Action>
+      </Snackbar>
+    ));
+    expect(screen.getByText("2 min ago")).toBeInTheDocument();
+    expect(screen.getByText("Undo")).toBeInTheDocument();
   });
 
   describe("Snackbar.Action", () => {

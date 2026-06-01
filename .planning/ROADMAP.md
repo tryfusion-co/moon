@@ -111,7 +111,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Notes**: SPIKE RISK — storybook-solidjs-vite is community-maintained and lags core Storybook. Research de-risked the adapter (v10.1.1 SB10-compatible, all 5 addons compatible, render signature corrected to NO double-wrapper) but the Button spike still BLOCKING-gates before bulk porting. If the spike build fails, pin Storybook 9.x or drop the offending addon before porting the remaining 32 stories.
 **UI hint**: yes
 **Plans**: 6 plans
-- [ ] 06-01-PLAN.md — SPIKE (Wave 1, BLOCKING): deps/main.ts/preview.ts swap + LinksBlock + Button story + build-storybook green (human-verify) [STORY-01]
+- [x] 06-01-PLAN.md — SPIKE (Wave 1, BLOCKING): deps/main.ts/preview.ts swap + LinksBlock + Button story + build-storybook green (human-verify) [STORY-01]
 - [ ] 06-02-PLAN.md — Wave 2: 8 stories (Accordion/Alert/Avatar/Badge/Breadcrumb/IconButton/List/Menu) + StarIcon/UserIcon [STORY-02]
 - [ ] 06-03-PLAN.md — Wave 2: 8 stories incl stateful useState→createSignal (Chip/SegmentedControl/Snackbar) + Carousel/Checkbox/Input/Textarea/Switch [STORY-02]
 - [ ] 06-04-PLAN.md — Wave 2: 8 portal/className stories (Dialog/Drawer/BottomSheet/Dropdown/Tooltip/Placeholder/Radio/Loader) [STORY-02]

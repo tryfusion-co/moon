@@ -1,5 +1,5 @@
 {
-  "name": "@moondesignsystem/solid",
+  "name": "@tryfusion-co/moon-solid",
   "version": "3.0.0",
   "private": false,
   "type": "module",
@@ -7,19 +7,16 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
-  "author": "Moon Design System",
+  "author": "tryfusion-co (Moon Design System SolidJS fork)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/moondesignsystem/solid.git"
+    "url": "git+https://github.com/tryfusion-co/moon.git"
   },
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/moon-solid"
-  },
-  "homepage": "https://solid.moondesignsystem.com",
+  "homepage": "https://github.com/tryfusion-co/moon",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
   },
   "exports": {
     ".": {

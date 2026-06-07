@@ -1,6 +1,7 @@
 import {
   createContext,
   createSignal,
+  onMount,
   useContext,
   splitProps,
   type Accessor,
@@ -46,8 +47,12 @@ type DrawerCloseProps = {
 const Trigger: Component<DrawerProps> = (props) => {
   const { drawerRef } = useDrawerContext();
   const [local] = splitProps(props, ["children"]);
+  let ref!: HTMLSpanElement;
+  onMount(() => {
+    ref.addEventListener("click", () => drawerRef()?.showModal());
+  });
   return (
-    <span style={{ display: "contents" }} onClick={() => drawerRef()?.showModal()}>
+    <span style={{ display: "contents" }} ref={ref}>
       {local.children}
     </span>
   );
@@ -80,14 +85,18 @@ const Content: Component<DrawerContentProps> = (props) => {
 const Close: Component<DrawerCloseProps> = (props) => {
   const { drawerRef } = useDrawerContext();
   const [local] = splitProps(props, ["onClick", "class"]);
+  let ref!: HTMLButtonElement;
+  onMount(() => {
+    ref.addEventListener("click", () => {
+      drawerRef()?.close();
+      local.onClick?.();
+    });
+  });
   return (
     <button
       class={mergeClasses("moon-drawer-close", local.class)}
       aria-label="Close"
-      onClick={() => {
-        drawerRef()?.close();
-        local.onClick?.();
-      }}
+      ref={ref}
     >
       <CloseIcon />
     </button>

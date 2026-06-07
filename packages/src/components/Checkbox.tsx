@@ -25,17 +25,17 @@ const Checkbox: Component<CheckboxProps> = (props) => {
     <Show
       when={local.label}
       fallback={
-        <input
-          type="checkbox"
-          class={mergeClasses("moon-checkbox", local.class)}
-          onInput={handleInput}
-          {...rest}
-        />
+          <input
+            type="checkbox"
+            class={mergeClasses("moon-checkbox", local.class)}
+            on:input={handleInput}
+            {...rest}
+          />
       }
     >
       {(label) => (
         <label class={local.class}>
-          <input type="checkbox" class="moon-checkbox" onInput={handleInput} {...rest} />
+          <input type="checkbox" class="moon-checkbox" on:input={handleInput} {...rest} />
           <span>{label()}</span>
         </label>
       )}

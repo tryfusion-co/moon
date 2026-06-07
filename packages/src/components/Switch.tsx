@@ -33,7 +33,7 @@ const Switch: Component<SwitchProps> = (props) => {
       {local.label && local.label}
       <input
         type="checkbox"
-        onInput={handleInput}
+        on:input={handleInput}
         class={mergeClasses(
           "moon-switch",
           local.size !== "sm" && `moon-switch-${local.size}`,

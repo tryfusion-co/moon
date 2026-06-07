@@ -1,6 +1,7 @@
 import {
   createContext,
   createSignal,
+  onMount,
   useContext,
   splitProps,
   type Accessor,
@@ -31,9 +32,11 @@ type DialogProps = {
 const Trigger: Component<DialogProps> = (props) => {
   const { dialogRef } = useDialogContext();
   const [local] = splitProps(props, ["children"]);
-  return (
-    <p onClick={() => dialogRef()?.showModal()}>{local.children}</p>
-  );
+  let ref!: HTMLParagraphElement;
+  onMount(() => {
+    ref.addEventListener("click", () => dialogRef()?.showModal());
+  });
+  return <p ref={ref}>{local.children}</p>;
 };
 
 const Content: Component<DialogProps> = (props) => {
@@ -58,12 +61,12 @@ const Header: Component<DialogProps> = (props) => {
 
 const Close: Component = () => {
   const { dialogRef } = useDialogContext();
+  let ref!: HTMLButtonElement;
+  onMount(() => {
+    ref.addEventListener("click", () => dialogRef()?.close());
+  });
   return (
-    <button
-      class="moon-dialog-close"
-      aria-label="Close"
-      onClick={() => dialogRef()?.close()}
-    >
+    <button class="moon-dialog-close" aria-label="Close" ref={ref}>
       <CloseIcon />
     </button>
   );

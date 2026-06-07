@@ -3,6 +3,7 @@ import {
   useContext,
   createSignal,
   mergeProps,
+  onMount,
   splitProps,
   untrack,
   type Component,
@@ -49,9 +50,14 @@ const Item: Component<TabProps> = (props) => {
   const [local, rest] = splitProps(props, ["children", "class", "index"]);
   const index = untrack(() => local.index !== undefined ? local.index : ctx.register());
   const isActive = () => ctx.activeIndex() === index;
+  let ref!: HTMLButtonElement;
+  onMount(() => {
+    ref.addEventListener("click", () => ctx.handleTabChange(index));
+  });
   return (
     <li>
       <button
+        ref={ref}
         role="tab"
         aria-selected={isActive()}
         class={mergeClasses(
@@ -59,7 +65,6 @@ const Item: Component<TabProps> = (props) => {
           isActive() && "moon-tab-list-item-active",
           local.class
         )}
-        onClick={() => ctx.handleTabChange(index)}
         tabIndex={isActive() ? 0 : -1}
         {...rest}
       >

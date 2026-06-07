@@ -1,6 +1,7 @@
 import {
   createSignal,
   mergeProps,
+  onMount,
   splitProps,
   untrack,
   Index,
@@ -38,14 +39,18 @@ const Item: Component<PaginationItemProps> = (props) => {
     "currentPage",
   ]);
   const isActive = () => local.currentPage === local.pageIndex;
+  let ref!: HTMLLIElement;
+  onMount(() => {
+    ref.addEventListener("click", () => local.onPageChange(local.pageIndex));
+  });
   return (
     <li
+      ref={ref}
       class={mergeClasses(
         "moon-pagination-item",
         isActive() && "moon-pagination-item-active",
         local.class
       )}
-      onClick={() => local.onPageChange(local.pageIndex)}
       {...(isActive() ? { "aria-current": "page" } : {})}
       {...rest}
     >
@@ -72,14 +77,20 @@ const Control: Component<ControlProps> = (props) => {
     const el = document.querySelector(".moon-pagination");
     return el ? getComputedStyle(el).direction === "rtl" : false;
   };
+  let ref!: HTMLLIElement;
+  onMount(() => {
+    ref.addEventListener("click", (e) => {
+      if (!local.disabled) local.onClick?.(e);
+    });
+  });
   return (
     <li
+      ref={ref}
       class={mergeClasses(
         "moon-pagination-control",
         local.disabled && "moon-pagination-control-disabled",
         local.class
       )}
-      onClick={(e) => { if (!local.disabled) local.onClick?.(e); }}
       aria-label={local.direction === "previous" ? "Previous" : "Next"}
       {...(local.disabled ? { "aria-disabled": "true" } : {})}
       {...rest}

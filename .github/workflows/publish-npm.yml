@@ -14,7 +14,10 @@ permissions:
 jobs:
   publish:
     name: npm publish to npm.pkg.github.com
-    runs-on: ubuntu-24.04
+    # 1vCPU slim runner — publish is install + build + npm publish, well under
+    # the slim runner's resource envelope. See:
+    # https://github.blog/changelog/2025-10-28-1-vcpu-linux-runner-now-available-in-github-actions-in-public-preview/
+    runs-on: ubuntu-slim
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: Checkout

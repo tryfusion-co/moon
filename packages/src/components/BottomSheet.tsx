@@ -2,7 +2,6 @@ import {
   createContext,
   createSignal,
   mergeProps,
-  onMount,
   useContext,
   splitProps,
   Show,
@@ -48,12 +47,8 @@ type CloseProps = {
 const Trigger: Component<{ children?: JSX.Element }> = (props) => {
   const { bottomSheetRef } = useBottomSheetContext();
   const [local] = splitProps(props, ["children"]);
-  let ref!: HTMLSpanElement;
-  onMount(() => {
-    ref.addEventListener("click", () => bottomSheetRef()?.showModal());
-  });
   return (
-    <span style={{ display: "contents" }} ref={ref}>
+    <span style={{ display: "contents" }} on:click={() => bottomSheetRef()?.showModal()}>
       {local.children}
     </span>
   );
@@ -94,18 +89,14 @@ const Content: Component<ComponentProps> = (props) => {
 const Close: Component<CloseProps> = (props) => {
   const { bottomSheetRef } = useBottomSheetContext();
   const [local] = splitProps(props, ["onClick", "class"]);
-  let ref!: HTMLButtonElement;
-  onMount(() => {
-    ref.addEventListener("click", () => {
-      bottomSheetRef()?.close();
-      local.onClick?.();
-    });
-  });
   return (
     <button
       class={mergeClasses("moon-bottom-sheet-close", local.class)}
       aria-label="Close"
-      ref={ref}
+      on:click={() => {
+        bottomSheetRef()?.close();
+        local.onClick?.();
+      }}
     >
       <CloseIcon />
     </button>

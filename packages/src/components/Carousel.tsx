@@ -24,15 +24,11 @@ type ControlProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const Control: Component<ControlProps> = (props) => {
   const [local, rest] = splitProps(props, ["class", "direction", "disabled", "onScrollDirection"]);
-  let ref!: HTMLButtonElement;
-  onMount(() => {
-    ref.addEventListener("click", () => local.onScrollDirection(local.direction));
-  });
   return (
     <button
-      ref={ref}
       class={mergeClasses("moon-carousel-control", local.class)}
       disabled={local.disabled}
+      on:click={() => local.onScrollDirection(local.direction)}
       aria-label={local.direction === "previous" ? "Previous" : "Next"}
       {...rest}
     >

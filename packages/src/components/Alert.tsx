@@ -1,4 +1,4 @@
-import { mergeProps, onMount, splitProps, type Component, type JSX } from "solid-js";
+import { mergeProps, splitProps, type Component, type JSX } from "solid-js";
 import mergeClasses from "../helpers/mergeClasses";
 import CloseIcon from "../assets/icons/Close";
 import type { Variants, Contexts } from "../types";
@@ -22,14 +22,10 @@ type ActionProps = AlertProps & {
 
 const Close: Component<ActionProps> = (props) => {
   const [local] = splitProps(props, ["children", "onClick", "class"]);
-  let ref!: HTMLParagraphElement;
-  onMount(() => {
-    ref.addEventListener("click", (e) => local.onClick?.(e));
-  });
   return (
     <p
-      ref={ref}
       class={mergeClasses("moon-alert-close", local.class)}
+      on:click={(e) => local.onClick?.(e)}
     >
       {local.children ? local.children : <CloseIcon />}
     </p>
@@ -54,14 +50,10 @@ const Content: Component<AlertProps> = (props) => {
 
 const Action: Component<ActionProps> = (props) => {
   const [local] = splitProps(props, ["children", "onClick", "class"]);
-  let ref!: HTMLButtonElement;
-  onMount(() => {
-    ref.addEventListener("click", (e) => local.onClick?.(e));
-  });
   return (
     <button
-      ref={ref}
       class={mergeClasses("moon-alert-action", local.class)}
+      on:click={(e) => local.onClick?.(e)}
     >
       {local.children}
     </button>

@@ -7,7 +7,11 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: ["./src/tests/setupTests.ts"],
-    include: ["src/tests/toolchain.test.tsx", "src/tests/atoms/**/*.test.tsx"],
+    include: [
+      "src/tests/toolchain.test.tsx",
+      "src/tests/atoms/**/*.test.tsx",
+      "src/tests/ssr-safety.test.ts",
+    ],
   },
   resolve: { conditions: ["development", "browser"] },
   ssr: { resolve: { conditions: ["browser"] } },

@@ -43,7 +43,7 @@ const Chip: Component<ChipProps> = (props) => {
         currentActive() && "moon-chip-active",
         local.class
       )}
-      onClick={handleClick}
+      on:click={handleClick}
       {...rest}
     >
       {local.children}

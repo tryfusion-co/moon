@@ -59,7 +59,7 @@ const Item: Component<TabProps> = (props) => {
           isActive() && "moon-tab-list-item-active",
           local.class
         )}
-        onClick={() => ctx.handleTabChange(index)}
+        on:click={() => ctx.handleTabChange(index)}
         tabIndex={isActive() ? 0 : -1}
         {...rest}
       >

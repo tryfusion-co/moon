@@ -59,7 +59,7 @@ const Item: Component<SegmentProps> = (props) => {
         isActive() && "moon-segmented-control-item-active",
         local.class
       )}
-      onClick={() => ctx.setActiveIndex(index)}
+      on:click={() => ctx.setActiveIndex(index)}
       tabIndex={isActive() ? 0 : -1}
       {...rest}
     >

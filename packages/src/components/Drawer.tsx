@@ -47,7 +47,7 @@ const Trigger: Component<DrawerProps> = (props) => {
   const { drawerRef } = useDrawerContext();
   const [local] = splitProps(props, ["children"]);
   return (
-    <span style={{ display: "contents" }} onClick={() => drawerRef()?.showModal()}>
+    <span style={{ display: "contents" }} on:click={() => drawerRef()?.showModal()}>
       {local.children}
     </span>
   );
@@ -84,7 +84,7 @@ const Close: Component<DrawerCloseProps> = (props) => {
     <button
       class={mergeClasses("moon-drawer-close", local.class)}
       aria-label="Close"
-      onClick={() => {
+      on:click={() => {
         drawerRef()?.close();
         local.onClick?.();
       }}

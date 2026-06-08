@@ -48,7 +48,7 @@ const Trigger: Component<{ children?: JSX.Element }> = (props) => {
   const { bottomSheetRef } = useBottomSheetContext();
   const [local] = splitProps(props, ["children"]);
   return (
-    <span style={{ display: "contents" }} onClick={() => bottomSheetRef()?.showModal()}>
+    <span style={{ display: "contents" }} on:click={() => bottomSheetRef()?.showModal()}>
       {local.children}
     </span>
   );
@@ -93,7 +93,7 @@ const Close: Component<CloseProps> = (props) => {
     <button
       class={mergeClasses("moon-bottom-sheet-close", local.class)}
       aria-label="Close"
-      onClick={() => {
+      on:click={() => {
         bottomSheetRef()?.close();
         local.onClick?.();
       }}

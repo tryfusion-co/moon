@@ -28,7 +28,7 @@ const Control: Component<ControlProps> = (props) => {
     <button
       class={mergeClasses("moon-carousel-control", local.class)}
       disabled={local.disabled}
-      onClick={() => local.onScrollDirection(local.direction)}
+      on:click={() => local.onScrollDirection(local.direction)}
       aria-label={local.direction === "previous" ? "Previous" : "Next"}
       {...rest}
     >

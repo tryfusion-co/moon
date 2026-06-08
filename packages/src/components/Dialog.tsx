@@ -31,9 +31,7 @@ type DialogProps = {
 const Trigger: Component<DialogProps> = (props) => {
   const { dialogRef } = useDialogContext();
   const [local] = splitProps(props, ["children"]);
-  return (
-    <p onClick={() => dialogRef()?.showModal()}>{local.children}</p>
-  );
+  return <p on:click={() => dialogRef()?.showModal()}>{local.children}</p>;
 };
 
 const Content: Component<DialogProps> = (props) => {
@@ -62,7 +60,7 @@ const Close: Component = () => {
     <button
       class="moon-dialog-close"
       aria-label="Close"
-      onClick={() => dialogRef()?.close()}
+      on:click={() => dialogRef()?.close()}
     >
       <CloseIcon />
     </button>

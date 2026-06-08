@@ -25,7 +25,7 @@ const Close: Component<ActionProps> = (props) => {
   return (
     <p
       class={mergeClasses("moon-alert-close", local.class)}
-      onClick={(e) => local.onClick?.(e)}
+      on:click={(e) => local.onClick?.(e)}
     >
       {local.children ? local.children : <CloseIcon />}
     </p>
@@ -53,7 +53,7 @@ const Action: Component<ActionProps> = (props) => {
   return (
     <button
       class={mergeClasses("moon-alert-action", local.class)}
-      onClick={(e) => local.onClick?.(e)}
+      on:click={(e) => local.onClick?.(e)}
     >
       {local.children}
     </button>

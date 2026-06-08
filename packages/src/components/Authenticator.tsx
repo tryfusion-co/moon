@@ -94,9 +94,9 @@ const Authenticator: Component<AuthenticatorProps> = (props) => {
             type="text"
             maxLength={1}
             value={internalValue()[index] || ""}
-            onInput={(e) => handleChange(index, e.currentTarget.value.slice(-1))}
-            onKeyDown={(e) => handleKeyDown(index, e)}
-            onPaste={handlePaste}
+            on:input={(e) => handleChange(index, e.currentTarget.value.slice(-1))}
+            on:keydown={(e) => handleKeyDown(index, e)}
+            on:paste={handlePaste}
             autocomplete="off"
             inputMode="text"
             pattern="[0-9a-zA-Z]*"

@@ -58,7 +58,7 @@ const Root: Component<SelectProps> = (props) => {
         local.error && "moon-select-error",
         local.class
       )}
-      onInput={handleInput}
+      on:input={handleInput}
       {...rest}
     >
       {local.children}

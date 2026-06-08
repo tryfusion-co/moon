@@ -45,7 +45,7 @@ const Item: Component<PaginationItemProps> = (props) => {
         isActive() && "moon-pagination-item-active",
         local.class
       )}
-      onClick={() => local.onPageChange(local.pageIndex)}
+      on:click={() => local.onPageChange(local.pageIndex)}
       {...(isActive() ? { "aria-current": "page" } : {})}
       {...rest}
     >
@@ -79,7 +79,7 @@ const Control: Component<ControlProps> = (props) => {
         local.disabled && "moon-pagination-control-disabled",
         local.class
       )}
-      onClick={(e) => { if (!local.disabled) local.onClick?.(e); }}
+      on:click={(e) => { if (!local.disabled) local.onClick?.(e); }}
       aria-label={local.direction === "previous" ? "Previous" : "Next"}
       {...(local.disabled ? { "aria-disabled": "true" } : {})}
       {...rest}

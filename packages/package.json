@@ -23,6 +23,23 @@
       "solid": "./dist/index.jsx",
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./components/*": {
+      "solid": "./dist/components/*.jsx",
+      "import": "./dist/components/*.js",
+      "types": "./dist/components/*.d.ts"
+    },
+    "./helpers/*": {
+      "import": "./dist/helpers/*.js",
+      "types": "./dist/helpers/*.d.ts"
+    },
+    "./assets/*": {
+      "import": "./dist/assets/*/index.js",
+      "types": "./dist/assets/*/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types/index.js",
+      "types": "./dist/types/index.d.ts"
     }
   },
   "files": [

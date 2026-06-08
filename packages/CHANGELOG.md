@@ -1,5 +1,11 @@
 # @moondesignsystem/solid
 
+## 3.1.0
+
+### Minor Changes
+
+- Use SSR safe exports for components
+
 ## 3.0.0
 
 ### Major Changes

@@ -8,16 +8,38 @@ Moon Solid provides simple functional SolidJS components, architected with the C
 
 ## 📦 Installation
 
+> **Registry:** `@tryfusion-co/moon-solid` is published to **GitHub Packages**, not the public npm registry. GitHub Packages requires an auth token even for public packages — see [Configure GitHub Packages registry](#configure-github-packages-registry) below before running `npm install`.
+
+### Configure GitHub Packages registry
+
+Add this `.npmrc` to your project root (or `~/.npmrc` for all your projects):
+
+```ini
+@tryfusion-co:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+Then set `GITHUB_TOKEN` to:
+
+- **Locally:** a [classic Personal Access Token](https://github.com/settings/tokens/new?scopes=read:packages&description=GitHub%20Packages%20read) with the `read:packages` scope.
+- **In CI:** the built-in `secrets.GITHUB_TOKEN` (no setup needed for repos under `tryfusion-co/*`).
+
+Verify the token is wired:
+
+```bash
+npm view @tryfusion-co/moon-solid --registry=https://npm.pkg.github.com
+```
+
 ### Full Package Installation
 
 Install the complete component library:
 
 ```bash
-npm install @moondesignsystem/solid
+npm install @tryfusion-co/moon-solid
 # or
-yarn add @moondesignsystem/solid
+yarn add @tryfusion-co/moon-solid
 # or
-pnpm install @moondesignsystem/solid
+pnpm install @tryfusion-co/moon-solid
 ```
 
 **Peer dependency:** `solid-js@^1.9.13` is required.
@@ -32,16 +54,16 @@ Install selective components using the CLI:
 
 ```bash
 # Add a single component
-npx @moondesignsystem/solid --add button
+npx moon-solid --add button
 
 # Add multiple components
-npx @moondesignsystem/solid --add button input
+npx moon-solid --add button input
 ```
 
 Or install all components at once:
 
 ```bash
-npx @moondesignsystem/solid --add-components
+npx moon-solid --add-components
 ```
 
 You can also use the `moon-solid` bin directly if the package is installed globally or locally:
@@ -66,13 +88,13 @@ FIGMA_TOKEN=your-figma-token-here
 
 ```bash
 # Specify your project name for css files generation
-npx @moondesignsystem/solid --projectName your-project
+npx moon-solid --projectName your-project
 
 # Use custom Figma files
-npx @moondesignsystem/solid --coreFileId CORE_FILE_ID --componentsProjectId COMPONENTS_PROJECT_ID
+npx moon-solid --coreFileId CORE_FILE_ID --componentsProjectId COMPONENTS_PROJECT_ID
 
 # Configure for non-Tailwind projects (default is 'tailwindcss')
-npx @moondesignsystem/solid --target css
+npx moon-solid --target css
 
 # Generate vanilla CSS files with browser CSS reset. Not needed with tailwindcss target
 npx @moondesignsystem/ui --target css --preflight
@@ -83,7 +105,7 @@ npx @moondesignsystem/ui --target css --preflight
 ### When installed via package.json
 
 ```typescript
-import { Button } from "@moondesignsystem/solid";
+import { Button } from "@tryfusion-co/moon-solid";
 
 const App = () => <Button>Click me</Button>;
 ```
@@ -91,7 +113,7 @@ const App = () => <Button>Click me</Button>;
 Note: Moon Solid components use the `class` attribute per SolidJS convention.
 
 ```typescript
-import { Button } from "@moondesignsystem/solid";
+import { Button } from "@tryfusion-co/moon-solid";
 
 const App = () => <Button class="my-custom-class">Click me</Button>;
 ```
